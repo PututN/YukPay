@@ -1,5 +1,6 @@
 import phone from "../assets/Images/phone.png";
 import line from "../assets/Images/line.png";
+import check from "../assets/Images/check.png";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -23,73 +24,21 @@ const PinSuccess = () => {
           </div>
         </div>
         {/* container right */}
-        <div className="w-1/2 px-12 py-20 bg-[#FAFCFF] h-screen overflow-y-scroll">
+        <div className="w-1/2 px-12 py-20 bg-[#FAFCFF] h-screen overflow-y-scroll flex flex-col">
+          <div className="flex justify-center items-center w-10 h-10 bg-[#1EC15F] rounded-full mb-7">
+            <Image src={check} alt="check" className="w-5 " />
+          </div>
           <div className="font-bold	text-xl mb-10">
-            Secure Your Account, Your Wallet, and Your Data With 6 Digits PIN
-            That You Created Yourself.
+            Your PIN Was Successfully Created
           </div>
           <div className="text-base	mb-5">
-            Create 6 digits pin to secure all your money and your data in
-            FazzPay app. Keep it secret and don’t tell anyone about your FazzPay
-            account password and the PIN.
+            Your PIN was successfully created and you can now access all the
+            features in YukPay.
           </div>
-          <form>
-            <div className="flex text-center w-full mb-10">
-              <div className="flex-1">
-                <input
-                  type="number"
-                  max="9"
-                  className="w-12 text-center p-5 rounded-md outline-none appearance-none"
-                ></input>
-              </div>
-              <div className="flex-1">
-                <input
-                  type="number"
-                  max="9"
-                  className="w-12 text-center p-5 rounded-md appearance-none	"
-                ></input>
-              </div>
-              <div className="flex-1">
-                <input
-                  type="number"
-                  max="9"
-                  className="w-12 text-center p-5 rounded-md appearance-none	"
-                ></input>
-              </div>
-              <div className="flex-1">
-                <input
-                  type="number"
-                  max="9"
-                  className="w-12 text-center p-5 rounded-md appearance-none"
-                ></input>
-              </div>
-              <div className="flex-1">
-                <input
-                  type="number"
-                  max="9"
-                  className="w-12 text-center p-5 rounded-md appearance-none	"
-                ></input>
-              </div>
-              <div className="flex-1">
-                <input
-                  type="number"
-                  max="9"
-                  className="w-12 text-center p-5 rounded-md appearance-none	"
-                ></input>
-              </div>
-            </div>
 
-            <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold">
-              Confirm
-            </button>
-          </form>
-
-          <div className="text-center text-base	mt-6">
-            Don’t have an account? Let’s{" "}
-            <Link href="#" className="text-[#6379F4]">
-              Sign Up
-            </Link>
-          </div>
+          <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold mt-10 text-white">
+            Go To Dashboard
+          </button>
         </div>
       </div>
     </>

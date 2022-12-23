@@ -60,7 +60,7 @@ const Login = () => {
             >
               Forgot password?
             </Link>
-            <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold">
+            <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white">
               Login
             </button>
           </form>

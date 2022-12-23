@@ -73,15 +73,15 @@ const SignUp = () => {
               ></input>
               <Image src={lock} alt="mail" className="absolute top-[28%]" />
             </div>
-            <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold">
+            <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white">
               Login
             </button>
           </form>
 
           <div className="text-center text-base	mt-6">
-          Already have an account? Let’s{" "}
+            Already have an account? Let’s{" "}
             <Link href="#" className="text-[#6379F4]">
-            Login
+              Login
             </Link>
           </div>
         </div>
