@@ -30,7 +30,7 @@ const Login = () => {
             Start Accessing Banking Needs With All Devices and All Platforms
             With 30.000+ Users
           </div>
-          <div className="text-base	mb-5">
+          <div className="text-base	mb-5 text-[#3A3D4299]">
             Transfering money is eassier than ever, you can access YukPay
             wherever you are. Desktop, laptop, mobile phone? we cover all of
             that for you!

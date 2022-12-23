@@ -2,8 +2,17 @@ import phone from "../assets/Images/phone.png";
 import line from "../assets/Images/line.png";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
 const PinBlank = () => {
+  const inputRef = React.useRef(null);
+  const handleOnChange = (e) => {
+    if (e.target.value.length > 1) {
+      e.target.value = e.target.value.slice(0, 1);
+      inputRef.current.value = e.target.value;
+    }
+  };
+
   return (
     <>
       <div className="flex m-0 h-screen">
@@ -28,7 +37,7 @@ const PinBlank = () => {
             Secure Your Account, Your Wallet, and Your Data With 6 Digits PIN
             That You Created Yourself.
           </div>
-          <div className="text-base	mb-5">
+          <div className="text-base	mb-5 text-base	mb-5">
             Create 6 digits pin to secure all your money and your data in
             FazzPay app. Keep it secret and don’t tell anyone about your FazzPay
             account password and the PIN.
@@ -37,44 +46,50 @@ const PinBlank = () => {
             <div className="flex text-center w-full mb-10">
               <div className="flex-1">
                 <input
+                  ref={inputRef}
                   type="number"
-                  max="9"
-                  className="w-12 text-center p-5 rounded-md text-lg font-bold"
+                  onChange={handleOnChange}
+                  className="w-10 h-10 text-center rounded-md text-lg font-bold"
                 ></input>
               </div>
               <div className="flex-1">
                 <input
+                  ref={inputRef}
                   type="number"
-                  max="9"
-                  className="w-12 text-center p-5 rounded-md text-3xl font-bold	"
+                  onChange={handleOnChange}
+                  className="w-10 h-10 text-center rounded-md text-lg font-bold	"
                 ></input>
               </div>
               <div className="flex-1">
                 <input
+                  ref={inputRef}
                   type="number"
-                  max="9"
-                  className="w-12 text-center p-5 rounded-md text-3xl font-bold	"
+                  onChange={handleOnChange}
+                  className="w-10 h-10 text-center rounded-md text-lg font-bold	"
                 ></input>
               </div>
               <div className="flex-1">
                 <input
+                  ref={inputRef}
                   type="number"
-                  max="9"
-                  className="w-12 text-center p-5 rounded-md text-3xl font-bold"
+                  onChange={handleOnChange}
+                  className="w-10 h-10 text-center rounded-md text-lg font-bold"
                 ></input>
               </div>
               <div className="flex-1">
                 <input
+                  ref={inputRef}
                   type="number"
-                  max="9"
-                  className="w-12 text-center p-5 rounded-md text-3xl font-bold	"
+                  onChange={handleOnChange}
+                  className="w-10 h-10 text-center rounded-md text-lg font-bold	"
                 ></input>
               </div>
               <div className="flex-1">
                 <input
+                  ref={inputRef}
                   type="number"
-                  max="9"
-                  className="w-12 text-center p-5 rounded-md text-3xl font-bold	"
+                  onChange={handleOnChange}
+                  className="w-10 h-10 text-center rounded-md text-lg font-bold	"
                 ></input>
               </div>
             </div>

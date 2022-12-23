@@ -1,10 +1,10 @@
 import phone from "../assets/Images/phone.png";
 import line from "../assets/Images/line.png";
-import check from "../assets/Images/check.png";
+import mail from "../assets/Images/mail.png";
 import Image from "next/image";
 import Link from "next/link";
 
-const PinSuccess = () => {
+const ForgotPassword = () => {
   return (
     <>
       <div className="flex m-0 h-screen">
@@ -25,19 +25,29 @@ const PinSuccess = () => {
         </div>
         {/* container right */}
         <div className="w-1/2 px-12 py-20 bg-[#FAFCFF] h-screen overflow-y-scroll flex flex-col">
-          <div className="flex justify-center items-center w-10 h-10 bg-[#1EC15F] rounded-full mb-7">
-            <Image src={check} alt="check" className="w-5 " />
-          </div>
           <div className="font-bold	text-xl mb-10">
-            Your PIN Was Successfully Created
+            Did You Forgot Your Password? Don’t Worry, You Can Reset Your
+            Password In a Minutes.
           </div>
-          <div className="text-base	mb-5 text-[#3A3D4299]">
-            Your PIN was successfully created and you can now access all the
-            features in YukPay.
+          <div className="text-base text-[#3A3D4299] mb-5">
+            To reset your password, you must type your e-mail and we will send a
+            link to your email and you will be directed to the reset password
+            screens.
           </div>
+          <form>
+            <div className="relative mb-5 border-b border">
+              <input
+                name="email"
+                type="email"
+                className="border-none py-3 px-7 w-full bg-[#FAFCFF] text-base font-semibold"
+                placeholder="Enter your e-mail"
+              ></input>
+              <Image src={mail} alt="mail" className="absolute top-[28%]" />
+            </div>
+          </form>
 
           <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold mt-10 text-white">
-            Go To Dashboard
+            Confirm
           </button>
         </div>
       </div>
@@ -45,4 +55,4 @@ const PinSuccess = () => {
   );
 };
 
-export default PinSuccess;
+export default ForgotPassword;
