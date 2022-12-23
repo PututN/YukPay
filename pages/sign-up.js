@@ -6,7 +6,7 @@ import person from "../assets/Images/Vector.png";
 import Image from "next/image";
 import Link from "next/link";
 
-const login = () => {
+const SignUp = () => {
   return (
     <>
       <div className="flex m-0 h-screen">
@@ -73,22 +73,15 @@ const login = () => {
               ></input>
               <Image src={lock} alt="mail" className="absolute top-[28%]" />
             </div>
-
-            <Link
-              href="#"
-              className="justify-end	flex text-sm font-semibold my-6"
-            >
-              Forgot password?
-            </Link>
             <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold">
               Login
             </button>
           </form>
 
           <div className="text-center text-base	mt-6">
-            Don’t have an account? Let’s{" "}
+          Already have an account? Let’s{" "}
             <Link href="#" className="text-[#6379F4]">
-              Sign Up
+            Login
             </Link>
           </div>
         </div>
@@ -97,4 +90,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default SignUp;

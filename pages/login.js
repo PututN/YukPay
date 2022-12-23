@@ -5,7 +5,7 @@ import line from "../assets/Images/line.png";
 import Image from "next/image";
 import Link from "next/link";
 
-const login = () => {
+const Login = () => {
   return (
     <>
       <div className="flex m-0 h-screen">
@@ -76,4 +76,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
