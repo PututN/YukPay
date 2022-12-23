@@ -2,6 +2,7 @@ import phone from "../assets/Images/phone.png";
 import mail from "../assets/Images/mail.png";
 import lock from "../assets/Images/lock.png";
 import line from "../assets/Images/line.png";
+import person from "../assets/Images/Vector.png";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -38,6 +39,24 @@ const login = () => {
           <form>
             <div className="relative mb-5 border-b border">
               <input
+                name="firstName"
+                type="text"
+                className="border-none py-3 px-7 w-full bg-[#FAFCFF] text-base font-semibold"
+                placeholder="Enter your firstname"
+              ></input>
+              <Image src={person} alt="person" className="absolute top-[28%]" />
+            </div>
+            <div className="relative mb-5 border-b border">
+              <input
+                name="lastName"
+                type="text"
+                className="border-none py-3 px-7 w-full bg-[#FAFCFF] text-base font-semibold"
+                placeholder="Enter your lastname"
+              ></input>
+              <Image src={person} alt="person" className="absolute top-[28%]" />
+            </div>
+            <div className="relative mb-5 border-b border">
+              <input
                 name="email"
                 type="email"
                 className="border-none py-3 px-7 w-full bg-[#FAFCFF] text-base font-semibold"
@@ -50,10 +69,11 @@ const login = () => {
                 name="password"
                 type="password"
                 className="border-none py-3 px-7 w-full bg-[#FAFCFF] text-base font-semibold"
-                placeholder="Enter your password"
+                placeholder="Create your password"
               ></input>
               <Image src={lock} alt="mail" className="absolute top-[28%]" />
             </div>
+
             <Link
               href="#"
               className="justify-end	flex text-sm font-semibold my-6"
@@ -64,6 +84,7 @@ const login = () => {
               Login
             </button>
           </form>
+
           <div className="text-center text-base	mt-6">
             Don’t have an account? Let’s{" "}
             <Link href="#" className="text-[#6379F4]">
