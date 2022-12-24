@@ -1,12 +1,16 @@
 import phone from "../assets/Images/phone.png";
-import mail from "../assets/Images/mail.png";
-import lock from "../assets/Images/lock.png";
 import line from "../assets/Images/line.png";
-import person from "../assets/Images/Vector.png";
+import { Mail, Lock, EyeOff, Eye, User } from "react-feather";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 const SignUp = () => {
+  const [type, setType] = useState("password");
+  const showPassword = () => {
+    type === "password" ? setType("text") : setType("password");
+  };
+
   return (
     <>
       <div className="flex m-0 h-screen">
@@ -37,41 +41,66 @@ const SignUp = () => {
             that for you!
           </div>
           <form>
-            <div className="relative mb-5 border-b border">
+            <div className=" relative mb-5">
               <input
                 name="firstName"
                 type="text"
-                className="border-none py-3 px-7 w-full bg-[#FAFCFF] text-base font-semibold"
+                className="w-full border-b-2 focus:outline-none px-12 py-3 bg-[#FAFCFF]"
                 placeholder="Enter your firstname"
               ></input>
-              <Image src={person} alt="person" className="absolute top-[28%]" />
+              <User
+                style={{ color: "#A9A9A999" }}
+                className="absolute top-[23%]"
+              />
             </div>
-            <div className="relative mb-5 border-b border">
+            <div className=" relative mb-5">
               <input
                 name="lastName"
                 type="text"
-                className="border-none py-3 px-7 w-full bg-[#FAFCFF] text-base font-semibold"
+                className="w-full border-b-2 focus:outline-none px-12 py-3 bg-[#FAFCFF]"
                 placeholder="Enter your lastname"
               ></input>
-              <Image src={person} alt="person" className="absolute top-[28%]" />
+              <User
+                style={{ color: "#A9A9A999" }}
+                className="absolute top-[23%]"
+              />
             </div>
-            <div className="relative mb-5 border-b border">
+            <div className="relative mb-5">
               <input
                 name="email"
                 type="email"
-                className="border-none py-3 px-7 w-full bg-[#FAFCFF] text-base font-semibold"
+                className="w-full border-b-2 focus:outline-none px-12 py-3 bg-[#FAFCFF]"
                 placeholder="Enter your e-mail"
               ></input>
-              <Image src={mail} alt="mail" className="absolute top-[28%]" />
+              <Mail
+                style={{ color: "#A9A9A999" }}
+                className="absolute top-[23%]"
+              />
             </div>
-            <div className="relative border-b border">
+            <div className="relative mb-5">
               <input
                 name="password"
-                type="password"
-                className="border-none py-3 px-7 w-full bg-[#FAFCFF] text-base font-semibold"
-                placeholder="Create your password"
+                type={type}
+                className="py-3 px-12 w-full bg-[#FAFCFF] w-full border-b-2 focus:outline-none"
+                placeholder="Enter your password"
               ></input>
-              <Image src={lock} alt="mail" className="absolute top-[28%]" />
+              <Lock
+                style={{ color: "#A9A9A999" }}
+                className="absolute top-[23%]"
+              />
+              {type === "password" ? (
+                <EyeOff
+                  className="absolute right-0 top-[23%] r cursor-pointer"
+                  style={{ color: "#A9A9A999" }}
+                  onClick={showPassword}
+                />
+              ) : (
+                <Eye
+                  className="absolute right-0 top-[23%] r cursor-pointer"
+                  style={{ color: "#A9A9A999" }}
+                  onClick={showPassword}
+                />
+              )}
             </div>
             <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white">
               Login
