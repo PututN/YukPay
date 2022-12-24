@@ -1,6 +1,4 @@
 import phone from "../assets/Images/phone.png";
-import mail from "../assets/Images/mail.png";
-import lock from "../assets/Images/lock.png";
 import line from "../assets/Images/line.png";
 import { Mail, Lock, EyeOff, Eye } from "react-feather";
 import Image from "next/image";
@@ -72,7 +70,7 @@ const Login = () => {
                   onClick={showPassword}
                 />
               ) : (
-                <EyeOff
+                <Eye
                   className="absolute right-0 top-[23%] r cursor-pointer"
                   style={{ color: "#A9A9A999" }}
                   onClick={showPassword}

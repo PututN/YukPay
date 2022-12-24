@@ -1,10 +1,17 @@
 import phone from "../assets/Images/phone.png";
 import line from "../assets/Images/line.png";
 import lock from "../assets/Images/lock.png";
+import { Mail, Lock, EyeOff, Eye } from "react-feather";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 const ForgotPassword = () => {
+  const [type, setType] = useState("password");
+  const showPassword = () => {
+    type === "password" ? setType("text") : setType("password");
+  };
+
   return (
     <>
       <div className="flex m-0 h-screen">
@@ -30,32 +37,63 @@ const ForgotPassword = () => {
             Password In a Minutes.
           </div>
           <div className="text-base text-[#3A3D4299] mb-5">
-            Now you can create a new password for your FazzPay account. Type
+            Now you can create a new password for your YukPay account. Type
             your password twice so we can confirm your new passsword.
           </div>
           <form>
-            <div className="relative mb-5 border-b border">
+            <div className="relative mb-5">
               <input
                 name="password"
-                type="password"
-                className="border-none py-3 px-7 w-full bg-[#FAFCFF] text-base font-semibold text-[#A9A9A9CC]"
-                placeholder="Create new password"
+                type={type}
+                className="py-3 px-12 w-full bg-[#FAFCFF] w-full border-b-2 focus:outline-none"
+                placeholder="Enter your password"
               ></input>
-              <Image src={lock} alt="lock" className="absolute top-[28%]" />
+              <Lock
+                style={{ color: "#A9A9A999" }}
+                className="absolute top-[23%]"
+              />
+              {type === "password" ? (
+                <EyeOff
+                  className="absolute right-0 top-[23%] r cursor-pointer"
+                  style={{ color: "#A9A9A999" }}
+                  onClick={showPassword}
+                />
+              ) : (
+                <Eye
+                  className="absolute right-0 top-[23%] r cursor-pointer"
+                  style={{ color: "#A9A9A999" }}
+                  onClick={showPassword}
+                />
+              )}
             </div>
-            <div className="relative mb-5 border-b border">
+            <div className="relative mb-5">
               <input
                 name="confirmPassword"
-                type="password"
-                className="border-none py-3 px-7 w-full bg-[#FAFCFF] text-base font-semibold text-[#A9A9A9CC]"
-                placeholder="Create new password"
+                type={type}
+                className="py-3 px-12 w-full bg-[#FAFCFF] w-full border-b-2 focus:outline-none"
+                placeholder="Enter your confirm password"
               ></input>
-              <Image src={lock} alt="lock" className="absolute top-[28%]" />
+              <Lock
+                style={{ color: "#A9A9A999" }}
+                className="absolute top-[23%]"
+              />
+              {type === "password" ? (
+                <EyeOff
+                  className="absolute right-0 top-[23%] r cursor-pointer"
+                  style={{ color: "#A9A9A999" }}
+                  onClick={showPassword}
+                />
+              ) : (
+                <Eye
+                  className="absolute right-0 top-[23%] r cursor-pointer"
+                  style={{ color: "#A9A9A999" }}
+                  onClick={showPassword}
+                />
+              )}
             </div>
           </form>
-
           <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold mt-10 text-white">
-          Reset Password
+            Reset Password
           </button>
         </div>
       </div>

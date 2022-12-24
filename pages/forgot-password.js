@@ -1,6 +1,7 @@
 import phone from "../assets/Images/phone.png";
 import line from "../assets/Images/line.png";
 import mail from "../assets/Images/mail.png";
+import { Mail } from "react-feather";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -35,14 +36,17 @@ const ForgotPassword = () => {
             screens.
           </div>
           <form>
-            <div className="relative mb-5 border-b border">
+            <div className="relative mb-5">
               <input
                 name="email"
                 type="email"
-                className="border-none py-3 px-7 w-full bg-[#FAFCFF] text-base font-semibold"
+                className="w-full border-b-2 focus:outline-none px-12 py-3 bg-[#FAFCFF]"
                 placeholder="Enter your e-mail"
               ></input>
-              <Image src={mail} alt="mail" className="absolute top-[28%]" />
+              <Mail
+                style={{ color: "#A9A9A999" }}
+                className="absolute top-[23%]"
+              />
             </div>
           </form>
 
