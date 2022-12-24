@@ -30,7 +30,7 @@ const Login = () => {
         </div>
         {/* container right */}
         <div className="w-full md:w-1/2 md:px-12 px-0 md:py-20 pb-0 pt-20 bg-[#FAFCFF] h-screen overflow-y-scroll ">
-          <div className="lg:block md:hidden text-xl font-bold text-center text-[#B1B2FF] mb-10">
+          <div className="block md:hidden text-xl font-bold text-center text-[#B1B2FF] mb-10">
             YukPay
           </div>
           <div className="bg-white rounded-t-3xl md:bg-[#FAFCFF] md:text-left text-center md:px-0 px-2 md:py-0 py-5">
