@@ -35,8 +35,17 @@ const SignUp = () => {
             YukPay
           </div>
           <div className="bg-white rounded-t-3xl md:bg-[#FAFCFF] md:text-left text-center md:px-0 px-2 md:py-0 py-5">
-            <div className="font-bold	text-xl mb-10">Sign Up</div>
-            <div className="text-base	mb-5 text-[#3A3D4299]">
+            <div className="font-bold	text-xl mb-10 hidden md:block">
+              Start Accessing Banking Needs With All Devices and All Platforms
+              With 30.000+ Users
+            </div>
+            <div className="font-bold	text-xl mb-10 block md:hidden">Sign Up</div>
+            <div className="text-base	mb-5 text-[#3A3D4299] hidden md:block">
+              Transfering money is eassier than ever, you can access YukPay
+              wherever you are. Desktop, laptop, mobile phone? we cover all of
+              that for you!
+            </div>
+            <div className="text-base	mb-5 text-[#3A3D4299] block md:hidden">
               Create your account to access YukPay.
             </div>
             <form>
