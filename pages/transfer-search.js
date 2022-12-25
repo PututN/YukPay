@@ -52,10 +52,10 @@ const Transfer_Search = () => {
               </Link>
             </div>
             <div>
-              <div className="px-6 flex mb-16">
+              <Link href="/topup-search" className="px-6 flex mb-16">
                 <Plus className="mr-6" />
                 <div className="text-lg font-bold	text-[#3A3D42CC]">Top Up</div>
-              </div>
+              </Link>
             </div>
             <div>
               <div className="px-6 flex mb-16">
