@@ -38,12 +38,12 @@ const Home = () => {
       <section className="bg-[#FAFCFF] px-16 py-8 flex">
         <div className="w-1/4 bg-white flex justify-between h-screen flex-col py-9 rounded-3xl mr-4">
           <div>
-            <div className="flex w-full">
+            <Link href="/home" className="flex w-full">
               <div className="px-6 flex mb-16 border-l-4 focus:outline-none border-[#6379F4]">
                 <Grid className="mr-6" style={{color:"#6379F4"}} />
                 <div className="text-lg font-bold	text-[#6379F4]">Dashboard</div>
               </div>
-            </div>
+            </Link>
             <div>
               <div className="px-6 flex mb-16">
                 <ArrowUp className="mr-6" />
@@ -70,7 +70,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="w-3/4 flex flex-col">
+        <div className="w-3/4 flex flex-col h-screen">
           <div className="h-1/4 bg-[#6379F4] flex rounded-3xl p-6 text-white mb-4">
             <div className="flex-1 flex justify-center flex-col">
               <div className="text-lg">Balance</div>
@@ -117,9 +117,9 @@ const Home = () => {
                 <div className="flex-1 text-[#3A3D42] text-lg font-bold">
                   Transaction History
                 </div>
-                <div className="text-[#6379F4] font-semibold text-sm">
+                <Link href="/history" className="text-[#6379F4] font-semibold text-sm">
                   See All
-                </div>
+                </Link>
               </div>
               <div className="flex mb-8">
                 <div className="flex-1">
@@ -143,7 +143,7 @@ const Home = () => {
                     <Image src={logo_Netflix} alt="netflix" />
                     <div className="flex flex-col justify-center">
                       <div className="text-[#4D4B57] text-base font-bold">
-                        Samuel Suhi
+                        Netflix
                       </div>
                       <div className="text-[#7A7886] text-sm">Transfer</div>
                     </div>
@@ -175,7 +175,7 @@ const Home = () => {
                     <Image src={logo_Adobe} alt="profile" />
                     <div className="flex flex-col justify-center">
                       <div className="text-[#4D4B57] text-base font-bold">
-                        Samuel Suhi
+                      Robert Chandler
                       </div>
                       <div className="text-[#7A7886] text-sm">Topup</div>
                     </div>
