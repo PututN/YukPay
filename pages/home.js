@@ -31,7 +31,52 @@ const Home = () => {
               </div>
               <div className="text-sm">+62 8139 3877 7946</div>
             </div>
-            <Bell />
+            <div className="dropdown dropdown-end">
+              <div tabIndex={0} className="btn btn-ghost rounded-btn">
+                <Bell />
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content py-2 bg-base-100 rounded-box w-52 mt-4 shadow-lg"
+              >
+                <li>
+                  <div className="relative flex flex-col pl-10 items-start">
+                    <div className="text-[#7A7A7A] text-sm">Accept from Joshua Lee</div>
+                    <div className="text-lg font-bold text-[#43484F]">Rp220.000</div>
+                    <ArrowDown style={{color:"#4CEDB3"}} className="absolute top-[35%] left-[5%]"/>
+                  </div>
+                </li>
+                <li>
+                  <div className="relative flex flex-col pl-10 items-start">
+                    <div className="text-[#7A7A7A] text-sm">Transfer to Deni</div>
+                    <div className="text-lg font-bold text-[#43484F]">Rp149.000</div>
+                    <ArrowUp style={{color:"#FF5B37"}} className="absolute top-[35%] left-[5%]"/>
+                  </div>
+                </li>
+                <li>
+                  <div className="relative flex flex-col pl-10 items-start">
+                    <div className="text-[#7A7A7A] text-sm">Transfer to Deni</div>
+                    <div className="text-lg font-bold text-[#43484F]">Rp149.000</div>
+                    <ArrowUp style={{color:"#FF5B37"}} className="absolute top-[35%] left-[5%]"/>
+                  </div>
+                </li>
+                <li>
+                  <div className="relative flex flex-col pl-10 items-start">
+                    <div className="text-[#7A7A7A] text-sm">Transfer to Jessica Lee</div>
+                    <div className="text-lg font-bold text-[#43484F]">Rp100.000</div>
+                    <ArrowUp style={{color:"#FF5B37"}} className="absolute top-[35%] left-[5%]"/>
+                  </div>
+                </li>
+                <li>
+                  <div className="relative flex flex-col pl-10 items-start">
+                    <div className="text-[#7A7A7A] text-sm">Top up</div>
+                    <div className="text-lg font-bold text-[#43484F]">Rp300.000</div>
+                    <ArrowDown style={{color:"#4CEDB3"}} className="absolute top-[35%] left-[5%]"/>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
           </div>
         </div>
       </nav>
@@ -80,14 +125,14 @@ const Home = () => {
               </div>
             </div>
             <div>
-              <div className="flex bg-[#8294F6] p-3 rounded-lg border-white border border-solid">
+              <Link href="/transfer-search" className="flex bg-[#8294F6] p-3 rounded-lg border-white border border-solid">
                 <ArrowUp />
                 <div className="ml-2">Transfer</div>
-              </div>
-              <div className="flex bg-[#8294F6] p-3 rounded-lg border-white border border-solid mt-3">
+              </Link>
+              <Link href="/topup-search" className="flex bg-[#8294F6] p-3 rounded-lg border-white border border-solid mt-3">
                 <Plus />
                 <div className="ml-2">Top Up</div>
-              </div>
+              </Link>
             </div>
           </div>
           <div className="flex gap-3">
