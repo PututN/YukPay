@@ -8,6 +8,10 @@ import airbnb from "../assets/Images/airbnb.png";
 import phone_bg from "../assets/Images/phone-bg.png";
 import lock_bg from "../assets/Images/lock-bg.png";
 import download_bg from "../assets/Images/download-bg.png";
+import png_phone1 from "../assets/Images/png_phone1.png";
+import png_phone2 from "../assets/Images/png_phone2.png";
+import { ArrowLeft, ArrowRight } from "react-feather";
+import profile from "../assets/Images/profile.png";
 
 const Home = () => {
   return (
@@ -40,7 +44,7 @@ const Home = () => {
           </div>
           <Link
             href="#"
-            className="text-center bg-white px-5 py-3 rounded-lg text-lg text-[#6379F4]"
+            className="w-1/5 text-center bg-white px-5 py-3 rounded-lg text-lg text-[#6379F4]"
           >
             Try It Free
           </Link>
@@ -94,6 +98,98 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <section className="bg-[#EFF0FC] px-16 flex">
+        <div className="w-1/4 mr-10">
+          <Image src={png_phone1} alt="phone1" />
+          <Image src={png_phone2} alt="phone2" />
+        </div>
+        <div className="flex-1">
+          <div className="text-[#3A3D42] text-6xl	font-extrabold my-16">
+            All The <span className="text-[#6379F4]">Great</span> YukPay
+            Features.
+          </div>
+          <div className="bg-white p-6 rounded-3xl w-3/4 mb-7">
+            <div className="text-xl font-bold">
+              <span className="text-[#6379F4]">1.</span> Small Fee
+            </div>
+            <div className="text-[#3A3D42E5] text-lg mt-3">
+              We only charge 5% of every success transaction done in YukPay app.
+            </div>
+          </div>
+          <div className="bg-white p-6 rounded-3xl w-3/4 mb-7">
+            <div className="text-xl font-bold">
+              <span className="text-[#6379F4]">2.</span> Data Secured
+            </div>
+            <div className="text-[#3A3D42E5] text-lg mt-3">
+              All your data is secured properly in our system and it’s
+              encrypted..
+            </div>
+          </div>
+          <div className="bg-white p-6 rounded-3xl w-3/4 mb-7">
+            <div className="text-xl font-bold">
+              <span className="text-[#6379F4]">3.</span> User Friendly
+            </div>
+            <div className="text-[#3A3D42E5] text-lg mt-3">
+              YukPay come up with modern and sleek design and not complicated..
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="bg-[#FAFCFF] px-16 py-28 flex flex-col items-center justify-center">
+        <div className="text-[#3A3D42] text-6xl	font-extrabold">
+          What Users are <span className="text-[#6379F4]">Saying.</span>
+        </div>
+        <div className="text-[#3A3D42E5] text-lg my-12 w-1/2 text-center">
+          We have some great features from the application and it’s totally free
+          to use by all users around the world.
+        </div>
+        <div className="flex-row flex">
+          <div className="flex items-center">
+            <div className="bg-white p-3 rounded-2xl">
+              <ArrowLeft />
+            </div>
+          </div>
+          <div className="bg-white rounded-xl p-10 flex flex-col items-center justify-center mx-5">
+            <Image src={profile} alt="profile" />
+            <div className="font-bold text-2xl text-[#373C46] my-5">
+              Alex Hansinburg
+            </div>
+            <div className="text-[#56585B] text-xl">Designer</div>
+            <div className="text-center text-[#676A71] text-lg mt-8">
+              “This is the most outstanding app that I’ve ever try in my live,
+              this app is such an amazing masterpiece and it’s suitable for you
+              who is bussy with their bussiness and must transfer money to
+              another person aut there. Just try this app and see the power!”
+            </div>
+          </div>
+          <div className="flex items-center">
+            <div className="bg-white p-3 rounded-2xl">
+              <ArrowRight />
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer className="bg-[#B1B2FF] px-24 py-20 lg:px-9">
+        <Link href="/" className="text-white text-3xl">
+          YukPay
+        </Link>
+        <div className="w-60 text-white mt-10">
+          <p>
+            Simplify financial needs and saving much time in banking needs with
+            one single app.
+          </p>
+        </div>
+        <div className="border-0 border-b mt-10"></div>
+        <div className="flex mt-7">
+          <div className="flex-1 text-white">
+            <p>2022 YukPay. All right reserved.</p>
+          </div>
+          <div className="flex gap-6 text-white ">
+            <p>+62 8954-2148-3102</p>
+            <Link href="/">contact@YukPay.com</Link>
+          </div>
+        </div>
+      </footer>
     </>
   );
 };
