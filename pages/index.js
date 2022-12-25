@@ -13,7 +13,7 @@ import png_phone2 from "../assets/Images/png_phone2.png";
 import { ArrowLeft, ArrowRight } from "react-feather";
 import profile from "../assets/Images/profile.png";
 
-const Home = () => {
+const Index = () => {
   return (
     <>
       <nav className="flex bg-[#B1B2FF] px-16 py-8">
@@ -194,4 +194,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Index;
