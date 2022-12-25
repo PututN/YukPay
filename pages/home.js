@@ -38,35 +38,35 @@ const Home = () => {
       <section className="bg-[#FAFCFF] px-16 py-8 flex">
         <div className="w-1/4 bg-white flex justify-between h-screen flex-col py-9 rounded-3xl mr-4">
           <div>
-            <div className="flex border-l-3 focus:outline-none border-[#6379F4] w-full">
-              <div className="px-6 flex mb-16">
-                <Grid className="mr-6" />
-                <div>Dashboard</div>
+            <div className="flex w-full">
+              <div className="px-6 flex mb-16 border-l-4 focus:outline-none border-[#6379F4]">
+                <Grid className="mr-6" style={{color:"#6379F4"}} />
+                <div className="text-lg font-bold	text-[#6379F4]">Dashboard</div>
               </div>
             </div>
             <div>
               <div className="px-6 flex mb-16">
                 <ArrowUp className="mr-6" />
-                <div>Transfer</div>
+                <div className="text-lg font-bold	text-[#3A3D42CC]">Transfer</div>
               </div>
             </div>
             <div>
               <div className="px-6 flex mb-16">
                 <Plus className="mr-6" />
-                <div>Top Up</div>
+                <div className="text-lg font-bold	text-[#3A3D42CC]">Top Up</div>
               </div>
             </div>
             <div>
               <div className="px-6 flex mb-16">
                 <User className="mr-6" />
-                <div>Profile</div>
+                <div className="text-lg font-bold	text-[#3A3D42CC]">Profile</div>
               </div>
             </div>
           </div>
           <div>
             <div className="flex px-6">
               <LogOut className="mr-6" />
-              <div>Logout</div>
+              <div className="text-lg font-bold	text-[#3A3D42CC]">Logout</div>
             </div>
           </div>
         </div>
@@ -189,7 +189,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <footer className="bg-[#B1B2FF] px-24 py-5">
+      <footer className="bg-[#6379F4] px-24 py-5">
         <div className="hidden">
           <Link href="/" className="text-white text-3xl">
             YukPay
