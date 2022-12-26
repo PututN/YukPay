@@ -155,7 +155,7 @@ const History = () => {
             </div>
           </div>
         </div>
-        <div className="w-full md:w-3/4 bg-[#FAFCFF] md:bg-white h-screen rounded-3xl p-6 overflow-y-scroll md:overflow-y-hidden">
+        <div className="w-full md:w-3/4 bg-[#FAFCFF] md:bg-white h-screen rounded-3xl p-6 overflow-y-scroll">
           <Link
             href="/home"
             className="items-center mb-12 flex md:hidden relative"
