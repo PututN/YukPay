@@ -15,7 +15,7 @@ const SignUp = () => {
     <>
       <div className="flex m-0 h-screen">
         {/* container left */}
-        <div className="w-1/2 bg-[#B1B2FF] px-12 py-5 h-screen text-white relative h-screen overflow-y-scroll hidden md:block">
+        <div className="w-1/2 bg-[#B1B2FF] px-12 py-5 h-screen text-white relative overflow-y-scroll hidden md:block">
           <div className="font-bold	text-3xl">YukPay</div>
           <Image src={line} alt="line" className="absolute top-[0] left-[0]" />
           <Image src={phone} alt="Image"></Image>
@@ -53,7 +53,7 @@ const SignUp = () => {
                 <input
                   name="userName"
                   type="text"
-                  className="w-full border-b-2 focus:outline-none px-12 py-3 md:bg-[#FAFCFF] bg-white"
+                  className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] px-12 py-3 md:bg-[#FAFCFF] bg-white"
                   placeholder="Enter your username"
                 ></input>
                 <User
@@ -67,7 +67,7 @@ const SignUp = () => {
                   <input
                     name="firstName"
                     type="text"
-                    className="w-full border-b-2 focus:outline-none px-12 py-3 bg-[#FAFCFF]"
+                    className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] px-12 py-3 bg-[#FAFCFF]"
                     placeholder="Enter your firstname"
                   ></input>
                   <User
@@ -79,7 +79,7 @@ const SignUp = () => {
                   <input
                     name="lastName"
                     type="text"
-                    className="w-full border-b-2 focus:outline-none px-12 py-3 bg-[#FAFCFF]"
+                    className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] px-12 py-3 bg-[#FAFCFF]"
                     placeholder="Enter your lastname"
                   ></input>
                   <User
@@ -92,7 +92,7 @@ const SignUp = () => {
                 <input
                   name="email"
                   type="email"
-                  className="w-full border-b-2 focus:outline-none px-12 py-3 md:bg-[#FAFCFF] bg-white"
+                  className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] px-12 py-3 md:bg-[#FAFCFF] bg-white"
                   placeholder="Enter your e-mail"
                 ></input>
                 <Mail
@@ -104,7 +104,7 @@ const SignUp = () => {
                 <input
                   name="password"
                   type={type}
-                  className="py-3 px-12 w-full md:bg-[#FAFCFF] bg-white w-full border-b-2 focus:outline-none"
+                  className="py-3 px-12 md:bg-[#FAFCFF] bg-white w-full border-b-2 focus:outline-none focus:border-[#6379F4]"
                   placeholder="Enter your password"
                 ></input>
                 <Lock

@@ -17,7 +17,7 @@ const PinBlank = () => {
     <>
       <div className="flex m-0 h-screen">
         {/* container left */}
-        <div className="w-1/2 bg-[#B1B2FF] px-12 py-5 h-screen text-white relative h-screen overflow-y-scroll hidden md:block">
+        <div className="w-1/2 bg-[#B1B2FF] px-12 py-5 text-white relative h-screen overflow-y-scroll hidden md:block">
           <div className="font-bold	text-3xl">YukPay</div>
           <Image src={line} alt="line" className="absolute top-[0] left-[0]" />
           <Image src={phone} alt="Image"></Image>
@@ -44,7 +44,7 @@ const PinBlank = () => {
             <div className="font-bold	text-xl mb-10 block md:hidden">
               Create Security PIN
             </div>
-            <div className="text-base	mb-5 text-base	mb-5 hidden md:block">
+            <div className="text-base	mb-5 hidden md:block">
               Create 6 digits pin to secure all your money and your data in
               FazzPay app. Keep it secret and don’t tell anyone about your
               FazzPay account password and the PIN.
@@ -60,7 +60,7 @@ const PinBlank = () => {
                     ref={inputRef}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]"
+                    className="w-10 h-10 text-center rounded-md text-lg shadow-lg font-bold border-2 border-[#A9A9A999]"
                   ></input>
                 </div>
                 <div className="flex-1">
@@ -68,7 +68,7 @@ const PinBlank = () => {
                     ref={inputRef}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]	"
+                    className="w-10 h-10 text-center rounded-md text-lg shadow-lg font-bold border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
                 <div className="flex-1">
@@ -76,7 +76,7 @@ const PinBlank = () => {
                     ref={inputRef}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]	"
+                    className="w-10 h-10 text-center rounded-md text-lg shadow-lg font-bold  border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
                 <div className="flex-1">
@@ -84,7 +84,7 @@ const PinBlank = () => {
                     ref={inputRef}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]"
+                    className="w-10 h-10 text-center rounded-md text-lg shadow-lg font-bold  border-2 border-[#A9A9A999]"
                   ></input>
                 </div>
                 <div className="flex-1">
@@ -92,7 +92,7 @@ const PinBlank = () => {
                     ref={inputRef}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]	"
+                    className="w-10 h-10 text-center rounded-md text-lg shadow-lg font-bold  border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
                 <div className="flex-1">
@@ -100,7 +100,7 @@ const PinBlank = () => {
                     ref={inputRef}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]	"
+                    className="w-10 h-10 text-center rounded-md text-lg shadow-lg font-bold border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
               </div>
