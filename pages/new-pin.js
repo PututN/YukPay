@@ -267,7 +267,7 @@ import {
                       ref={inputRef}
                       type="number"
                       onChange={handleOnChange}
-                      className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]"
+                      className="w-10 h-10 text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]"
                     ></input>
                   </div>
                   <div className="flex-1 shadow-lg">
@@ -275,7 +275,7 @@ import {
                       ref={inputRef}
                       type="number"
                       onChange={handleOnChange}
-                      className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]	"
+                      className="w-10 h-10 text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                     ></input>
                   </div>
                   <div className="flex-1 shadow-lg">
@@ -283,7 +283,7 @@ import {
                       ref={inputRef}
                       type="number"
                       onChange={handleOnChange}
-                      className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]	"
+                      className="w-10 h-10 text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                     ></input>
                   </div>
                   <div className="flex-1 shadow-lg">
@@ -291,7 +291,7 @@ import {
                       ref={inputRef}
                       type="number"
                       onChange={handleOnChange}
-                      className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]"
+                      className="w-10 h-10 text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]"
                     ></input>
                   </div>
                   <div className="flex-1 shadow-lg">
@@ -299,7 +299,7 @@ import {
                       ref={inputRef}
                       type="number"
                       onChange={handleOnChange}
-                      className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]	"
+                      className="w-10 h-10 text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                     ></input>
                   </div>
                   <div className="flex-1 shadow-lg">
@@ -307,7 +307,7 @@ import {
                       ref={inputRef}
                       type="number"
                       onChange={handleOnChange}
-                      className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]	"
+                      className="w-10 h-10 text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                     ></input>
                   </div>
                 </div>

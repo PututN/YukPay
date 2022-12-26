@@ -6,7 +6,13 @@ import {
   Bell,
   LogOut,
   ArrowDown,
-  Search,
+  Eye,
+  ArrowRight,
+  Edit2,
+  Lock,
+  EyeOff,
+  Mail,
+  Phone,
 } from "react-feather";
 import Image from "next/image";
 import profile_nav from "../assets/Images/profile_nav.png";
@@ -17,10 +23,9 @@ import profile4 from "../assets/Images/profile4.png";
 import profile5 from "../assets/Images/profile5.png";
 import ModalTopUp from "../components/ModalTopUp";
 import { useState } from "react";
+import React from "react";
 
-const Topup_Search = () => {
-  const [showModal, setShowModal] = useState(false);
-
+const Edit_PhoneNumber = () => {
   return (
     <>
       <nav>
@@ -44,40 +49,72 @@ const Topup_Search = () => {
               >
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Accept from Joshua Lee</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp220.000</div>
-                    <ArrowDown style={{color:"#4CEDB3"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-[#7A7A7A] text-sm">
+                      Accept from Joshua Lee
+                    </div>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp220.000
+                    </div>
+                    <ArrowDown
+                      style={{ color: "#4CEDB3" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Transfer to Deni</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp149.000</div>
-                    <ArrowUp style={{color:"#FF5B37"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-[#7A7A7A] text-sm">
+                      Transfer to Deni
+                    </div>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp149.000
+                    </div>
+                    <ArrowUp
+                      style={{ color: "#FF5B37" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Transfer to Deni</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp149.000</div>
-                    <ArrowUp style={{color:"#FF5B37"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-[#7A7A7A] text-sm">
+                      Transfer to Deni
+                    </div>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp149.000
+                    </div>
+                    <ArrowUp
+                      style={{ color: "#FF5B37" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Transfer to Jessica Lee</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp100.000</div>
-                    <ArrowUp style={{color:"#FF5B37"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-[#7A7A7A] text-sm">
+                      Transfer to Jessica Lee
+                    </div>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp100.000
+                    </div>
+                    <ArrowUp
+                      style={{ color: "#FF5B37" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
                     <div className="text-[#7A7A7A] text-sm">Top up</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp300.000</div>
-                    <ArrowDown style={{color:"#4CEDB3"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp300.000
+                    </div>
+                    <ArrowDown
+                      style={{ color: "#4CEDB3" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
-
               </ul>
             </div>
           </div>
@@ -103,19 +140,19 @@ const Topup_Search = () => {
               </Link>
             </div>
             <div>
-              <Link
-                href="/topup-search"
-                className="px-6 flex mb-16 border-l-4 focus:outline-none border-[#6379F4]"
-              >
-                <Plus className="mr-6" style={{ color: "#6379F4" }} />
-                <div className="text-lg font-bold	text-[#6379F4]">Top Up</div>
+              <Link href="/topup-search" className="px-6 flex mb-16">
+                <Plus className="mr-6" />
+                <div className="text-lg font-bold 	text-[#3A3D42CC]">Top Up</div>
               </Link>
             </div>
             <div>
-              <div className="px-6 flex mb-16">
-                <User className="mr-6" />
-                <div className="text-lg font-bold	text-[#3A3D42CC]">Profile</div>
-              </div>
+              <Link
+                href="/profile"
+                className="px-6 flex mb-16 border-l-4 focus:outline-none border-[#6379F4]"
+              >
+                <User className="mr-6" style={{ color: "#6379F4" }} />
+                <div className="text-lg font-bold text-[#6379F4]">Profile</div>
+              </Link>
             </div>
           </div>
           <div>
@@ -125,19 +162,37 @@ const Topup_Search = () => {
             </div>
           </div>
         </div>
-        <div className="w-3/4 bg-white h-screen rounded-3xl p-6">
-          <div className="flex flex-col mb-5 gap-10">
-            <div className="text-[#3A3D42] font-bold text-lg">Top Up</div>
-            <div className="text-[#7A7886] text-sm w-1/2">
-              Come on, top up immediately to Yukpay, so you can enjoy the
-              facilities and features provided
+        <div className="w-3/4 bg-white h-screen rounded-3xl p-6 overflow-y-scroll">
+          <div className="flex items-center mb-5">
+            <div className="flex-1 text-[#3A3D42] font-bold text-lg">
+              Edit Phone Number
             </div>
-            <button
-              className="bg-[#6379F4] px-7 py-2 rounded-md text-lg font-bold text-white"
-              onClick={() => setShowModal(true)}
-            >
-              Top Up
-            </button>
+          </div>
+          <div className="text-[#7A7886] text-sm mb-8 w-1/2">
+            Add at least one phone number for the transfer ID so you can start
+            transfering your money to another user.
+          </div>
+          <div className="flex justify-center">
+            <form className="w-1/2 flex flex-col justify-center gap-12">
+              <div className="flex relative border-b-2 border-[#A9A9A999] py-3 pl-8 focus:outline-none">
+                <Phone
+                  style={{ color: "#A9A9A999" }}
+                  className="absolute left-[0]"
+                />
+                <div className="mr-3 text-[#3A3D42] font-semibold text-base">
+                  +62
+                </div>
+                <input
+                  type="number"
+                  placeholder="Enter your phone number"
+                  className="focus:outline-none text-[#3A3D42] font-semibold text-base"
+                ></input>
+              </div>
+
+              <button className="w-full bg-[#B1B2FF] rounded-xl py-3 text-lg font-bold text-white">
+              Edit Phone Number
+              </button>
+            </form>
           </div>
         </div>
       </section>
@@ -165,9 +220,8 @@ const Topup_Search = () => {
           </div>
         </div>
       </footer>
-      <ModalTopUp isVisible={showModal} onClose={() => setShowModal(false)} />
     </>
   );
 };
 
-export default Topup_Search;
+export default Edit_PhoneNumber;

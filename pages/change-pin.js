@@ -263,52 +263,52 @@ const Change_Pin = () => {
             </form> */}
             <form className="w-1/2 flex flex-col justify-center gap-12">
               <div className="flex text-center w-full mb-10">
-                <div className="flex-1 shadow-lg">
+                <div className="flex-1 ">
                   <input
                     ref={inputRef}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]"
+                    className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]"
                   ></input>
                 </div>
-                <div className="flex-1 shadow-lg">
+                <div className="flex-1 ">
                   <input
                     ref={inputRef}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]	"
+                    className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
-                <div className="flex-1 shadow-lg">
+                <div className="flex-1 ">
                   <input
                     ref={inputRef}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]	"
+                    className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
-                <div className="flex-1 shadow-lg">
+                <div className="flex-1 ">
                   <input
                     ref={inputRef}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]"
+                    className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]"
                   ></input>
                 </div>
-                <div className="flex-1 shadow-lg">
+                <div className="flex-1 ">
                   <input
                     ref={inputRef}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]	"
+                    className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
-                <div className="flex-1 shadow-lg">
+                <div className="flex-1 ">
                   <input
                     ref={inputRef}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg font-bold border border-2 border-[#A9A9A999]	"
+                    className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
               </div>
