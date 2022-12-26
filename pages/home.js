@@ -221,7 +221,7 @@ const Home = () => {
                 <Image src={graphic} alt="graphic" />
               </div>
             </div>
-            <div className="rounded-3xl p-3 w-full md:w-auto md:bg-white bg-[#FAFCFF]">
+            <div className="rounded-3xl p-3 w-full md:w-1/2 md:bg-white bg-[#FAFCFF]">
               <div className="flex mb-8 md:mt-0 mt-8 items-center">
                 <div className="flex-1 text-[#3A3D42] text-lg font-bold">
                   Transaction History

@@ -53,35 +53,35 @@ const Login = () => {
                 <input
                   name="email"
                   type="email"
-                  className="w-full border-b-2 focus:outline-none px-12 py-3 md:bg-[#FAFCFF] bg-white"
+                  className="w-full border-b-2 focus:outline-none px-12 py-3 md:bg-[#FAFCFF] bg-white focus:border-[#6379F4] peer"
                   placeholder="Enter your e-mail"
                 ></input>
                 <Mail
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%]"
+                  // style={{ color: "#A9A9A999" }}
+                  className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
                 />
               </div>
               <div className="relative">
                 <input
                   name="password"
                   type={type}
-                  className="py-3 px-12 w-full md:bg-[#FAFCFF] bg-white border-b-2 focus:outline-none "
+                  className="py-3 px-12 w-full md:bg-[#FAFCFF] bg-white border-b-2 focus:outline-none focus:border-[#6379F4] peer"
                   placeholder="Enter your password"
                 ></input>
                 <Lock
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%]"
+                  // style={{ color: "#A9A9A999" }}
+                  className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
                 />
                 {type === "password" ? (
                   <EyeOff
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
+                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
+                    // style={{ color: "#A9A9A999" }}
                     onClick={showPassword}
                   />
                 ) : (
                   <Eye
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
+                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
+                    // style={{ color: "#A9A9A999" }}
                     onClick={showPassword}
                   />
                 )}

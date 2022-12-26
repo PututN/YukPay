@@ -16,7 +16,7 @@ const ForgotPassword = () => {
     <>
       <div className="flex m-0 h-screen">
         {/* container left */}
-        <div className="w-1/2 bg-[#B1B2FF] px-12 py-5 h-screen text-white relative h-screen overflow-y-scroll hidden md:block">
+        <div className="w-1/2 bg-[#B1B2FF] px-12 py-5 h-screen text-white relative overflow-y-scroll hidden md:block">
           <div className="font-bold	text-3xl">YukPay</div>
           <Image src={line} alt="line" className="absolute top-[0] left-[0]" />
           <Image src={phone} alt="Image"></Image>
@@ -55,23 +55,23 @@ const ForgotPassword = () => {
                 <input
                   name="password"
                   type={type}
-                  className="py-3 px-12 w-full bg-white md:bg-[#FAFCFF] w-full border-b-2 focus:outline-none"
+                  className="py-3 px-12 w-full bg-white md:bg-[#FAFCFF] border-b-2 focus:outline-none focus:border-[#6379F4] peer"
                   placeholder="Enter your password"
                 ></input>
                 <Lock
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%]"
+                  // style={{ color: "#A9A9A999" }}
+                  className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
                 />
                 {type === "password" ? (
                   <EyeOff
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
+                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
+                    // style={{ color: "#A9A9A999" }}
                     onClick={showPassword}
                   />
                 ) : (
                   <Eye
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
+                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
+                    // style={{ color: "#A9A9A999" }}
                     onClick={showPassword}
                   />
                 )}
@@ -80,23 +80,23 @@ const ForgotPassword = () => {
                 <input
                   name="confirmPassword"
                   type={type}
-                  className="py-3 px-12 w-full bg-white md:bg-[#FAFCFF] w-full border-b-2 focus:outline-none"
+                  className="py-3 px-12 w-full bg-white md:bg-[#FAFCFF] border-b-2 focus:outline-none focus:border-[#6379F4] peer"
                   placeholder="Enter your confirm password"
                 ></input>
                 <Lock
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%]"
+                  // style={{ color: "#A9A9A999" }}
+                  className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
                 />
                 {type === "password" ? (
                   <EyeOff
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
+                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
+                    // style={{ color: "#A9A9A999" }}
                     onClick={showPassword}
                   />
                 ) : (
                   <Eye
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
+                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
+                    // style={{ color: "#A9A9A999" }}
                     onClick={showPassword}
                   />
                 )}

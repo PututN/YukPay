@@ -10,7 +10,7 @@ const ForgotPassword = () => {
     <>
       <div className="flex m-0 h-screen">
         {/* container left */}
-        <div className="w-1/2 bg-[#B1B2FF] px-12 py-5 h-screen text-white relative h-screen overflow-y-scroll hidden md:block">
+        <div className="w-1/2 bg-[#B1B2FF] px-12 py-5 h-screen text-white relative overflow-y-scroll hidden md:block">
           <div className="font-bold	text-3xl">YukPay</div>
           <Image src={line} alt="line" className="absolute top-[0] left-[0]" />
           <Image src={phone} alt="Image"></Image>
@@ -50,12 +50,13 @@ const ForgotPassword = () => {
                 <input
                   name="email"
                   type="email"
-                  className="w-full border-b-2 focus:outline-none px-12 py-3 bg-white md:bg-[#FAFCFF]"
+                  className="w-full border-b-2 focus:outline-none px-12 py-3 bg-white md:bg-[#FAFCFF] focus:border-[#6379F4] peer
+                  "
                   placeholder="Enter your e-mail"
                 ></input>
                 <Mail
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%]"
+                  // style={{ color: "#A9A9A999" }}
+                  className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
                 />
               </div>
             </form>

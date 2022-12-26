@@ -39,7 +39,9 @@ const SignUp = () => {
               Start Accessing Banking Needs With All Devices and All Platforms
               With 30.000+ Users
             </div>
-            <div className="font-bold	text-xl mb-10 block md:hidden">Sign Up</div>
+            <div className="font-bold	text-xl mb-10 block md:hidden">
+              Sign Up
+            </div>
             <div className="text-base	mb-5 text-[#3A3D4299] hidden md:block">
               Transfering money is eassier than ever, you can access YukPay
               wherever you are. Desktop, laptop, mobile phone? we cover all of
@@ -53,12 +55,12 @@ const SignUp = () => {
                 <input
                   name="userName"
                   type="text"
-                  className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] px-12 py-3 md:bg-[#FAFCFF] bg-white"
+                  className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] peer  px-12 py-3 md:bg-[#FAFCFF] bg-white"
                   placeholder="Enter your username"
                 ></input>
                 <User
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%]"
+                  // style={{ color: "#A9A9A999" }}
+                  className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
                 />
               </div>
 
@@ -67,24 +69,24 @@ const SignUp = () => {
                   <input
                     name="firstName"
                     type="text"
-                    className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] px-12 py-3 bg-[#FAFCFF]"
+                    className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] peer  px-12 py-3 bg-[#FAFCFF]"
                     placeholder="Enter your firstname"
                   ></input>
                   <User
-                    style={{ color: "#A9A9A999" }}
-                    className="absolute top-[23%]"
+                    // style={{ color: "#A9A9A999" }}
+                    className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
                   />
                 </div>
                 <div className=" relative mb-5">
                   <input
                     name="lastName"
                     type="text"
-                    className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] px-12 py-3 bg-[#FAFCFF]"
+                    className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] peer px-12 py-3 bg-[#FAFCFF]"
                     placeholder="Enter your lastname"
                   ></input>
                   <User
-                    style={{ color: "#A9A9A999" }}
-                    className="absolute top-[23%]"
+                    // style={{ color: "#A9A9A999" }}
+                    className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
                   />
                 </div>
               </div>
@@ -92,35 +94,35 @@ const SignUp = () => {
                 <input
                   name="email"
                   type="email"
-                  className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] px-12 py-3 md:bg-[#FAFCFF] bg-white"
+                  className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] peer px-12 py-3 md:bg-[#FAFCFF] bg-white"
                   placeholder="Enter your e-mail"
                 ></input>
                 <Mail
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%]"
+                  // style={{ color: "#A9A9A999" }}
+                  className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
                 />
               </div>
               <div className="relative mb-5">
                 <input
                   name="password"
                   type={type}
-                  className="py-3 px-12 md:bg-[#FAFCFF] bg-white w-full border-b-2 focus:outline-none focus:border-[#6379F4]"
+                  className="py-3 px-12 md:bg-[#FAFCFF] bg-white w-full border-b-2 focus:outline-none focus:border-[#6379F4] peer"
                   placeholder="Enter your password"
                 ></input>
                 <Lock
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%]"
+                  // style={{ color: "#A9A9A999" }}
+                  className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
                 />
                 {type === "password" ? (
                   <EyeOff
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
+                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
+                    // style={{ color: "#A9A9A999" }}
                     onClick={showPassword}
                   />
                 ) : (
                   <Eye
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
+                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
+                    // style={{ color: "#A9A9A999" }}
                     onClick={showPassword}
                   />
                 )}
