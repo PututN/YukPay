@@ -25,6 +25,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
+import Navbar from "../components/Navbar";
 
 
 const Change_Password = () => {
@@ -42,98 +43,7 @@ const Change_Password = () => {
 
   return (
     <>
-      <nav>
-        <div className="px-16 py-8 flex items-center justify-center rounded-b-2xl">
-          <div className="flex-1 text-[#6379F4] text-3xl font-bold">YukPay</div>
-          <div className="flex gap-5 justify-center items-center">
-            <Image src={profile_nav} alt="profile" />
-            <div>
-              <div className="text-[#3A3D42] text-lg font-bold">
-                Robert Chandler
-              </div>
-              <div className="text-sm">+62 8139 3877 7946</div>
-            </div>
-            <div className="dropdown dropdown-end">
-              <div tabIndex={0} className="btn btn-ghost rounded-btn">
-                <Bell />
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu dropdown-content py-2 bg-base-100 rounded-box w-52 mt-4 shadow-lg"
-              >
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Accept from Joshua Lee
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp220.000
-                    </div>
-                    <ArrowDown
-                      style={{ color: "#4CEDB3" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Transfer to Deni
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp149.000
-                    </div>
-                    <ArrowUp
-                      style={{ color: "#FF5B37" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Transfer to Deni
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp149.000
-                    </div>
-                    <ArrowUp
-                      style={{ color: "#FF5B37" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Transfer to Jessica Lee
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp100.000
-                    </div>
-                    <ArrowUp
-                      style={{ color: "#FF5B37" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Top up</div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp300.000
-                    </div>
-                    <ArrowDown
-                      style={{ color: "#4CEDB3" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <Navbar />
       <section className="bg-[#FAFCFF] px-16 py-8 flex">
         <div className="w-1/4 bg-white flex justify-between h-screen flex-col py-9 rounded-3xl mr-4">
           <div>

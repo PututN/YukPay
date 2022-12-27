@@ -18,6 +18,7 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
+import NavbarHidden from "../components/NavbarHidden"
 
 const History = () => {
   const dispatch = useDispatch();
@@ -29,105 +30,7 @@ const History = () => {
 
   return (
     <>
-      <nav className="hidden md:block">
-        <div className="md:justify-center md:px-16 px-3 py-8 flex items-center justify-start rounded-b-2xl md:bg-white bg-[#FAFCFF]">
-          <div className="flex-1 text-[#6379F4] text-3xl font-bold md:block hidden">
-            YukPay
-          </div>
-          <div className="flex gap-5 items-center w-full md:w-auto">
-            <div className="flex gap-3 flex-1">
-              <Image src={profile_nav} alt="profile" />
-              <div className=" ">
-                <div className="text-sm block md:hidden">Hello,</div>
-                <div className="text-[#3A3D42] text-lg font-bold">
-                  Robert Chandler
-                </div>
-                <div className="text-sm hidden md:block">
-                  +62 8139 3877 7946
-                </div>
-              </div>
-            </div>
-            <div className="dropdown dropdown-end">
-              <div tabIndex={0} className="btn btn-ghost rounded-btn">
-                <Bell style={{ color: "#4D4B57" }} />
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu dropdown-content py-2 bg-base-100 rounded-box w-52 mt-4 shadow-lg"
-              >
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Accept from Joshua Lee
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp220.000
-                    </div>
-                    <ArrowDown
-                      style={{ color: "#4CEDB3" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Transfer to Deni
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp149.000
-                    </div>
-                    <ArrowUp
-                      style={{ color: "#FF5B37" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Transfer to Deni
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp149.000
-                    </div>
-                    <ArrowUp
-                      style={{ color: "#FF5B37" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Transfer to Jessica Lee
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp100.000
-                    </div>
-                    <ArrowUp
-                      style={{ color: "#FF5B37" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Top up</div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp300.000
-                    </div>
-                    <ArrowDown
-                      style={{ color: "#4CEDB3" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <NavbarHidden />
       <section className="bg-[#FAFCFF] lg:px-16 md:px-5 px-3 py-8 flex">
         <div className="w-1/4 bg-white justify-between h-screen flex-col py-9 rounded-3xl mr-4 hidden md:flex">
           <div>

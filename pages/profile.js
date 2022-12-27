@@ -18,11 +18,14 @@ import profile2 from "../assets/Images/profile2.png";
 import profile4 from "../assets/Images/profile4.png";
 import profile5 from "../assets/Images/profile5.png";
 import ModalTopUp from "../components/ModalTopUp";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
-
+import axiosHelper from "../helper/axios.helper";
+import jwt_decode from "jwt-decode";
+import user from "../assets/Images/user.png";
+import Navbar from "../components/Navbar";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -31,101 +34,30 @@ const Profile = () => {
     dispatch(logout());
     router.push("/login");
   };
+  const [profile, setProfile] = useState({});
+  const token = useSelector((state) => state.auth.token);
+  const decode = jwt_decode(token);
+  const userId = decode.id;
 
+  const fetchProfile = async () => {
+    try {
+      const response = await axiosHelper.get("/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setProfile(response.data.results);
+    } catch (error) {
+      if (error) throw error;
+    }
+  };
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+  console.log(profile.lastName);
   return (
     <>
-      <nav>
-        <div className="px-16 py-8 flex items-center justify-center rounded-b-2xl">
-          <div className="flex-1 text-[#6379F4] text-3xl font-bold">YukPay</div>
-          <div className="flex gap-5 justify-center items-center">
-            <Image src={profile_nav} alt="profile" />
-            <div>
-              <div className="text-[#3A3D42] text-lg font-bold">
-                Robert Chandler
-              </div>
-              <div className="text-sm">+62 8139 3877 7946</div>
-            </div>
-            <div className="dropdown dropdown-end">
-              <div tabIndex={0} className="btn btn-ghost rounded-btn">
-                <Bell />
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu dropdown-content py-2 bg-base-100 rounded-box w-52 mt-4 shadow-lg"
-              >
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Accept from Joshua Lee
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp220.000
-                    </div>
-                    <ArrowDown
-                      style={{ color: "#4CEDB3" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Transfer to Deni
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp149.000
-                    </div>
-                    <ArrowUp
-                      style={{ color: "#FF5B37" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Transfer to Deni
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp149.000
-                    </div>
-                    <ArrowUp
-                      style={{ color: "#FF5B37" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Transfer to Jessica Lee
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp100.000
-                    </div>
-                    <ArrowUp
-                      style={{ color: "#FF5B37" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Top up</div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp300.000
-                    </div>
-                    <ArrowDown
-                      style={{ color: "#4CEDB3" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
       <section className="bg-[#FAFCFF] px-16 py-8 flex">
         <div className="w-1/4 bg-white flex justify-between h-screen flex-col py-9 rounded-3xl mr-4">
           <div>
@@ -170,7 +102,19 @@ const Profile = () => {
         </div>
         <div className="w-3/4 bg-white h-screen rounded-3xl py-10">
           <div className="flex flex-col items-center">
-            <Image src={profile5} alt="profile" />
+            {profile?.picture ? (
+              <Image
+                className="w-[50px] h-[50px] rounded-lg"
+                src={profile?.picture}
+                alt="profile"
+              />
+            ) : (
+              <Image
+                className="w-[50px] h-[50px] rounded-lg"
+                src={user}
+                alt="profile"
+              />
+            )}
             <Link href="/edit-phoneNumber" className="relative mt-3 mb-5">
               <Edit2
                 className="absolute w-4 h-4 top-[20%] left-[-85%]"
@@ -178,10 +122,16 @@ const Profile = () => {
               />
               <div className="text-[#7A7886] text-base">Edit</div>
             </Link>
-            <div className="text-[#4D4B57] font-bold">Robert Chandler</div>
-            <div className="text-[#7A7886] text-base mt-3 mb-10">
-              +62 813-9387-7946
+            <div className="text-[#4D4B57] font-bold">
+              {profile?.firstName} {profile?.lastName}
             </div>
+            {profile?.phoneNumber ? (
+              <div className="text-[#7A7886] text-base mt-3 mb-10">
+                {profile?.phoneNumber}
+              </div>
+            ) : (
+              <div className="mt-3 mb-10"></div>
+            )}
             <Link
               href="/personal-info"
               className="bg-[#E5E8ED] rounded-lg flex items-center justify-center w-1/2 px-5 py-3 mb-5"
