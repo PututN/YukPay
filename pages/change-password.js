@@ -22,11 +22,12 @@ import profile4 from "../assets/Images/profile4.png";
 import profile5 from "../assets/Images/profile5.png";
 import ModalTopUp from "../components/ModalTopUp";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
-
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const Change_Password = () => {
   const [type, setType] = useState("password");
@@ -40,10 +41,32 @@ const Change_Password = () => {
     router.push("/login");
   };
 
+  const token = useSelector((state) => state.auth.token);
+  const decode = jwt_decode(token);
+  console;
+
+  const [currentPassword, setCurrentPassword] = useState(null);
+  const [newPassword, setNewPassword] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState(null);
+
+  const changePassword = async (e) => {
+    e.preventDefault();
+    //axios post have 3 parameter (endpoint, data post, token)
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_URL}/profile/change-password`,
+      { currentPassword, newPassword, confirmPassword },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(data);
+  };
 
   return (
     <>
-    <Navbar />
+      <Navbar />
       <section className="bg-[#FAFCFF] px-16 py-8 flex">
         <div className="w-1/4 bg-white flex justify-between h-screen flex-col py-9 rounded-3xl mr-4">
           <div>
@@ -72,7 +95,7 @@ const Change_Password = () => {
             <div>
               <Link
                 href="/profile"
-                className="px-6 flex mb-16 border-l-4 focus:outline-none border-[#6379F4]"
+                className="px-6 flex mb-16 border-l-4 focus:outline-none focus:border-[#6379F4] peer border-[#6379F4]"
               >
                 <User className="mr-6" style={{ color: "#6379F4" }} />
                 <div className="text-lg font-bold text-[#6379F4]">Profile</div>
@@ -80,7 +103,7 @@ const Change_Password = () => {
             </div>
           </div>
           <div>
-          <button onClick={handleLogout} className="flex px-6">
+            <button onClick={handleLogout} className="flex px-6">
               <LogOut className="mr-6" />
               <div className="text-lg font-bold	text-[#3A3D42CC]">Logout</div>
             </button>
@@ -100,50 +123,42 @@ const Change_Password = () => {
             <form className="w-3/4 flex flex-col justify-center gap-12">
               <div className="relative">
                 <input
-                  name="password"
+                  name="currentPassword"
                   type={type}
-                  className="py-3 px-12  w-full border-b-2 focus:outline-none"
+                  className="py-3 px-12  w-full border-b-2 focus:outline-none focus:border-[#6379F4] peer"
                   placeholder="Current password"
+                  onChange={(e) => setCurrentPassword(e.target.value)}
                 ></input>
-                <Lock
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%]"
-                />
+                <Lock className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]" />
                 {type === "password" ? (
                   <EyeOff
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
+                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
                     onClick={showPassword}
                   />
                 ) : (
                   <Eye
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
+                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
                     onClick={showPassword}
                   />
                 )}
               </div>
               <div className="relative">
                 <input
-                  name="password"
+                  name="newPassword"
                   type={type}
-                  className="py-3 px-12  w-full border-b-2 focus:outline-none"
+                  className="py-3 px-12  w-full border-b-2 focus:outline-none focus:border-[#6379F4] peer"
                   placeholder="New password"
+                  onChange={(e) => setNewPassword(e.target.value)}
                 ></input>
-                <Lock
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%]"
-                />
+                <Lock className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]" />
                 {type === "password" ? (
                   <EyeOff
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
+                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
                     onClick={showPassword}
                   />
                 ) : (
                   <Eye
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
+                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
                     onClick={showPassword}
                   />
                 )}
@@ -151,30 +166,29 @@ const Change_Password = () => {
 
               <div className="relative">
                 <input
-                  name="password"
+                  name="confirmPassword"
                   type={type}
-                  className="py-3 px-12  w-full border-b-2 focus:outline-none"
+                  className="py-3 px-12  w-full border-b-2 focus:outline-none focus:border-[#6379F4] peer"
                   placeholder="Repeat new password"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                 ></input>
-                <Lock
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%]"
-                />
+                <Lock className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]" />
                 {type === "password" ? (
                   <EyeOff
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
+                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
                     onClick={showPassword}
                   />
                 ) : (
                   <Eye
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
+                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
                     onClick={showPassword}
                   />
                 )}
               </div>
-              <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white shadow-lg">
+              <button
+                onClick={changePassword}
+                className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white shadow-lg"
+              >
                 Change Password
               </button>
             </form>

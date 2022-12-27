@@ -124,8 +124,7 @@ const addPhoneNumber = async (e) => {
             <form className="w-1/2 flex flex-col justify-center gap-12">
               <div className="flex relative border-b-2 border-[#A9A9A999] py-3 pl-8 focus:outline-none">
                 <Phone
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute left-[0]"
+                  className="absolute left-[0] peer-focus:text-[#6379F4] text-[#A9A9A999]"
                 />
                 {/* <div className="mr-3 text-[#3A3D42] font-semibold text-base">
                   +62
@@ -133,7 +132,7 @@ const addPhoneNumber = async (e) => {
                 <input
                   type="number"
                   placeholder="Enter your phone number"
-                  className="focus:outline-none text-[#3A3D42] font-semibold text-base"
+                  className="focus:outline-none text-[#3A3D42] font-semibold text-base focus:border-[#6379F4] peer"
                   name="phoneNumber"
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 ></input>
