@@ -4,8 +4,25 @@ import { Mail, Lock, EyeOff, Eye } from "react-feather";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import * as Yup from "yup";
+import YupPassword from "yup-password";
+import { Formik, Form, Field } from "formik";
+
+YupPassword(Yup);
+
+const LoginSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string()
+    .password()
+    .min(6, "Min lenght 6")
+    .minLowercase(1, "Min lowercase 1")
+    .minUppercase(1, "Min uppercase 1")
+    .minNumbers(1, "Min numbers 1")
+    .minSymbols(1, "Min symbol 1"),
+});
 
 const Login = () => {
+  // const dispatch = useDis
   const [type, setType] = useState("password");
   const showPassword = () => {
     type === "password" ? setType("text") : setType("password");
@@ -48,57 +65,67 @@ const Login = () => {
               Login to your existing account to access all the features in
               YukPay.
             </div>
-            <form>
-              <div className="relative mb-5 bg-[#FAFCFF] focus:border-[#6379F4]">
-                <input
-                  name="email"
-                  type="email"
-                  className="w-full border-b-2 focus:outline-none px-12 py-3 md:bg-[#FAFCFF] bg-white focus:border-[#6379F4] peer"
-                  placeholder="Enter your e-mail"
-                ></input>
-                <Mail
-                  // style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
-                />
-              </div>
-              <div className="relative">
-                <input
-                  name="password"
-                  type={type}
-                  className="py-3 px-12 w-full md:bg-[#FAFCFF] bg-white border-b-2 focus:outline-none focus:border-[#6379F4] peer"
-                  placeholder="Enter your password"
-                ></input>
-                <Lock
-                  // style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
-                />
-                {type === "password" ? (
-                  <EyeOff
-                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
-                    // style={{ color: "#A9A9A999" }}
-                    onClick={showPassword}
-                  />
-                ) : (
-                  <Eye
-                    className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
-                    // style={{ color: "#A9A9A999" }}
-                    onClick={showPassword}
-                  />
-                )}
-              </div>
-              <Link
-                href="#"
-                className="justify-end	flex text-sm font-semibold my-6"
-              >
-                Forgot password?
-              </Link>
-              <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white">
-                Login
-              </button>
-            </form>
+            <Formik
+              initialValues={{
+                email: "",
+                password: "",
+              }}
+              validationSchema={LoginSchema}
+            >
+              {({ errors, touched, dirty }) => (
+                <Form>
+                  <div className="relative mb-5 bg-[#FAFCFF] focus:border-[#6379F4]">
+                    <Field
+                      name="email"
+                      type="email"
+                      className="w-full border-b-2 focus:outline-none px-12 py-3 md:bg-[#FAFCFF] bg-white focus:border-[#6379F4] peer"
+                      placeholder="Enter your e-mail"
+                    ></Field>
+                    {errors.email && touched.email ? (
+                      <div className="text-red-900">{errors.email}</div>
+                    ) : null}
+                    <Mail className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]" />
+                  </div>
+                  <div className="relative">
+                    <Field
+                      name="password"
+                      type={type}
+                      className="py-3 px-12 w-full md:bg-[#FAFCFF] bg-white border-b-2 focus:outline-none focus:border-[#6379F4] peer"
+                      placeholder="Enter your password"
+                    ></Field>
+                    {errors.password && touched.password ? (
+                      <div className="text-red-900">{errors.password}</div>
+                    ) : null}
+                    <Lock className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]" />
+                    {type === "password" ? (
+                      <EyeOff
+                        className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
+                        // style={{ color: "#A9A9A999" }}
+                        onClick={showPassword}
+                      />
+                    ) : (
+                      <Eye
+                        className="absolute right-0 top-[23%] r cursor-pointer peer-focus:text-[#6379F4] text-[#A9A9A999]"
+                        // style={{ color: "#A9A9A999" }}
+                        onClick={showPassword}
+                      />
+                    )}
+                  </div>
+                  <Link
+                    href="#"
+                    className="justify-end	flex text-sm font-semibold my-6"
+                  >
+                    Forgot password?
+                  </Link>
+                  <button type="submit" disabled={!dirty} className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white">
+                    Login
+                  </button>
+                </Form>
+              )}
+            </Formik>
             <div className="text-center text-base	mt-6">
               Don’t have an account? Let’s{" "}
-              <Link href="#" className="text-[#6379F4]">
+              <Link href="/sign-up" className="text-[#6379F4]">
                 Sign Up
               </Link>
             </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { X } from "react-feather";
 
-const Modal = ({ isVisible, onClose }) => {
+const Modal = ({ onClose }) => {
   const inputRef = React.useRef(null);
   const handleOnChange = (e) => {
     if (e.target.value.length > 1) {
@@ -9,9 +9,12 @@ const Modal = ({ isVisible, onClose }) => {
       inputRef.current.value = e.target.value;
     }
   };
-  if (!isVisible) {
-    return null;
-  }
+  React.useEffect(() => {
+    document.body.className = 'overflow-hidden'
+    return () => {
+      document.body.className = null
+    }
+  },[])
 
   return (
     <>
@@ -36,7 +39,7 @@ const Modal = ({ isVisible, onClose }) => {
                   ref={inputRef}
                   type="number"
                   onChange={handleOnChange}
-                  className="w-10 h-10 text-center rounded-md text-lg font-bold border-[#A9A9A999]"
+                  className="w-10 h-10 text-center rounded-md text-lg border-2 font-bold border-[#A9A9A999]"
                 ></input>
               </div>
               <div className="flex-1">
@@ -44,7 +47,7 @@ const Modal = ({ isVisible, onClose }) => {
                   ref={inputRef}
                   type="number"
                   onChange={handleOnChange}
-                  className="w-10 h-10 text-center rounded-md text-lg font-bold border-[#A9A9A999]	"
+                  className="w-10 h-10 text-center rounded-md text-lg border-2 font-bold border-[#A9A9A999]	"
                 ></input>
               </div>
               <div className="flex-1">
@@ -52,7 +55,7 @@ const Modal = ({ isVisible, onClose }) => {
                   ref={inputRef}
                   type="number"
                   onChange={handleOnChange}
-                  className="w-10 h-10 text-center rounded-md text-lg font-bold border-[#A9A9A999]	"
+                  className="w-10 h-10 text-center rounded-md text-lg border-2 font-bold border-[#A9A9A999]	"
                 ></input>
               </div>
               <div className="flex-1">
@@ -60,7 +63,7 @@ const Modal = ({ isVisible, onClose }) => {
                   ref={inputRef}
                   type="number"
                   onChange={handleOnChange}
-                  className="w-10 h-10 text-center rounded-md text-lg font-bold border-[#A9A9A999]"
+                  className="w-10 h-10 text-center rounded-md text-lg border-2 font-bold border-[#A9A9A999]"
                 ></input>
               </div>
               <div className="flex-1">
@@ -68,7 +71,7 @@ const Modal = ({ isVisible, onClose }) => {
                   ref={inputRef}
                   type="number"
                   onChange={handleOnChange}
-                  className="w-10 h-10 text-center rounded-md text-lg font-bold border-[#A9A9A999]	"
+                  className="w-10 h-10 text-center rounded-md text-lg border-2 font-bold border-[#A9A9A999]	"
                 ></input>
               </div>
               <div className="flex-1">
@@ -76,7 +79,7 @@ const Modal = ({ isVisible, onClose }) => {
                   ref={inputRef}
                   type="number"
                   onChange={handleOnChange}
-                  className="w-10 h-10 text-center rounded-md text-lg font-bold border-[#A9A9A999]	"
+                  className="w-10 h-10 text-center rounded-md text-lg border-2 font-bold border-[#A9A9A999]	"
                 ></input>
               </div>
             </div>

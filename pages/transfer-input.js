@@ -19,7 +19,9 @@ import { useState } from "react";
 
 const Transfer_Input = () => {
   const [showModal, setShowModal] = useState(false);
-
+  const handleSubmit = (event) => {
+event.preventDefault()
+  }
   return (
     <>
       <nav className="hidden md:block">
@@ -189,7 +191,7 @@ const Transfer_Input = () => {
             Type the amount you want to transfer and then press continue to the
             next steps.
           </div>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col items-center justify-center gap-10 mt-10 mb-24">
               <input
                 type="number"
@@ -214,7 +216,8 @@ const Transfer_Input = () => {
             <div className="flex justify-end">
               <button
                 className="bg-[#6379F4] px-7 py-2 rounded-md text-lg font-bold text-white"
-                onClick={() => setShowModal(true)}
+                onClick={() => setShowModal(!showModal)}
+                type="submit"
               >
                 Continue
               </button>
@@ -222,7 +225,7 @@ const Transfer_Input = () => {
           </form>
         </div>
       </section>
-
+      {showModal && <Modal onClose={() => setShowModal(!showModal)} /> }
       <footer className="bg-[#6379F4] px-24 py-5 md:block hidden">
         <div className="hidden">
           <Link href="/" className="text-white text-3xl">
@@ -246,9 +249,8 @@ const Transfer_Input = () => {
           </div>
         </div>
       </footer>
-      <Modal isVisible={showModal} onClose={() => setShowModal(false)} />
     </>
-  );
+  ); 
 };
 
 export default Transfer_Input;
