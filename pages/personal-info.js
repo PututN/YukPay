@@ -18,11 +18,13 @@ import profile2 from "../assets/Images/profile2.png";
 import profile4 from "../assets/Images/profile4.png";
 import profile5 from "../assets/Images/profile5.png";
 import ModalTopUp from "../components/ModalTopUp";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
+import axiosHelper from "../helper/axios.helper";
+import jwt_decode from "jwt-decode";
 
 const Personal_Info = () => {
   const dispatch = useDispatch();
@@ -31,10 +33,30 @@ const Personal_Info = () => {
     dispatch(logout());
     router.push("/login");
   };
+  const [profile, setProfile] = useState({});
+  const token = useSelector((state) => state.auth.token);
+  const decode = jwt_decode(token);
+  const userId = decode.id;
+
+  const fetchProfile = async () => {
+    try {
+      const response = await axiosHelper.get("/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setProfile(response.data.results);
+    } catch (error) {
+      if (error) throw error;
+    }
+  };
+  useEffect(() => {
+    fetchProfile();
+  }, []);
 
   return (
     <>
-    <Navbar />
+      <Navbar />
       <section className="bg-[#FAFCFF] px-16 py-8 flex">
         <div className="w-1/4 bg-white flex justify-between h-screen flex-col py-9 rounded-3xl mr-4">
           <div>
@@ -90,25 +112,31 @@ const Personal_Info = () => {
           <div className="flex mb-5 shadow-md p-3">
             <div className="flex gap-3">
               <div className="flex flex-col justify-center">
-                <div className=" text-[#7A7886] text-sm">First Name</div>
-                <div className="text-[#4D4B57] text-xl font-bold">Robert</div>
+                <div className=" text-[#7A7886] text-sm mb-3">First Name</div>
+                <div className="text-[#4D4B57] text-xl font-bold">
+                  {profile?.firstName}
+                </div>
               </div>
             </div>
           </div>
           <div className="flex mb-5 shadow-md p-3">
             <div className="flex gap-3">
               <div className="flex flex-col justify-center">
-                <div className=" text-[#7A7886] text-sm">Last Name</div>
-                <div className="text-[#4D4B57] text-xl font-bold">Chandler</div>
+                <div className=" text-[#7A7886] text-sm mb-3">Last Name</div>
+                <div className="text-[#4D4B57] text-xl font-bold">
+                  {profile?.lastName}
+                </div>
               </div>
             </div>
           </div>
           <div className="flex mb-5 shadow-md p-3">
             <div className="flex gap-3">
               <div className="flex flex-col justify-center">
-                <div className=" text-[#7A7886] text-sm">Verified E-mail</div>
+                <div className=" text-[#7A7886] text-sm mb-3">
+                  Verified E-mail
+                </div>
                 <div className="text-[#7A7886] text-xl font-bold">
-                  pewdiepie1@gmail.com
+                  {profile?.email}
                 </div>
               </div>
             </div>
@@ -116,12 +144,18 @@ const Personal_Info = () => {
           <div className="flex mb-5 shadow-md p-3">
             <div className="flex gap-3 justify-between w-full items-center">
               <div className="flex flex-col justify-center">
-                <div className=" text-[#7A7886] text-sm">Phone Number</div>
-                <div className="text-[#4D4B57] text-xl font-bold">
-                  +62 813-9387-7946
-                </div>
+                <div className=" text-[#7A7886] text-sm mb-3">Phone Number</div>
+                {profile?.phoneNumber ? (
+                  <div className="text-[#4D4B57] text-xl font-bold">
+                    {profile?.phoneNumber}
+                  </div>
+                ) : (
+                  <div className="text-[#4D4B57] text-xl font-bold">
+                    Not registered
+                  </div>
+                )}
               </div>
-              <Link href="#" className="font-semibold text-[#6379F4]">
+              <Link href="/edit-phoneNumber" className="font-semibold text-[#6379F4]">
                 Manage
               </Link>
             </div>

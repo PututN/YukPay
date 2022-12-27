@@ -57,16 +57,16 @@ const Transfer_Input = () => {
               </Link>
             </div>
             <div>
-              <div className="px-6 flex mb-16">
+              <Link href="/topup-search" className="px-6 flex mb-16">
                 <Plus className="mr-6" />
                 <div className="text-lg font-bold	text-[#3A3D42CC]">Top Up</div>
-              </div>
+              </Link>
             </div>
             <div>
-              <div className="px-6 flex mb-16">
+              <Link href="/profile" className="px-6 flex mb-16">
                 <User className="mr-6" />
                 <div className="text-lg font-bold	text-[#3A3D42CC]">Profile</div>
-              </div>
+              </Link>
             </div>
           </div>
           <div>

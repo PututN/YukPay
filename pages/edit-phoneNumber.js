@@ -24,10 +24,12 @@ import profile5 from "../assets/Images/profile5.png";
 import ModalTopUp from "../components/ModalTopUp";
 import { useState } from "react";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 
 const Edit_PhoneNumber = () => {
@@ -37,6 +39,31 @@ const Edit_PhoneNumber = () => {
     dispatch(logout());
     router.push("/login");
   };
+//add phone number
+const token = useSelector((state) => state.auth.token);
+const decode = jwt_decode(token);
+console
+
+const [phoneNumber, setPhoneNumber] = useState(null)
+const addPhoneNumber = async (e) => {
+  e.preventDefault()
+  //axios post have 3 parameter (endpoint, data post, token)
+  const{data} = await axios.post(
+    `${process.env.NEXT_PUBLIC_URL}/profile/phone-number`, {phoneNumber}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+  console.log(data)
+}
+
+// const [error, setError] = useState(false)
+// const errorHandler = () => {
+
+// }
+
+
 
   return (
     <>
@@ -100,17 +127,18 @@ const Edit_PhoneNumber = () => {
                   style={{ color: "#A9A9A999" }}
                   className="absolute left-[0]"
                 />
-                <div className="mr-3 text-[#3A3D42] font-semibold text-base">
+                {/* <div className="mr-3 text-[#3A3D42] font-semibold text-base">
                   +62
-                </div>
+                </div> */}
                 <input
                   type="number"
                   placeholder="Enter your phone number"
                   className="focus:outline-none text-[#3A3D42] font-semibold text-base"
+                  name="phoneNumber"
+                  onChange={(e) => setPhoneNumber(e.target.value)}
                 ></input>
               </div>
-
-              <button className="w-full bg-[#B1B2FF] rounded-xl py-3 text-lg font-bold text-white">
+              <button onClick={addPhoneNumber} className="w-full bg-[#B1B2FF] rounded-xl py-3 text-lg font-bold text-white">
                 Edit Phone Number
               </button>
             </form>
