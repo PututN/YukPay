@@ -21,7 +21,7 @@ const Index = () => {
         <div className="flex-row">
           <Link
             href="/login"
-            className="font-bold text-lg px-4 py-3 border-2 border border-white text-white rounded-lg"
+            className="font-bold text-lg px-4 py-3 border-2 border-white text-white rounded-lg"
           >
             Login
           </Link>

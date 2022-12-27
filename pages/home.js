@@ -16,8 +16,18 @@ import profile3 from "../assets/Images/profile3.png";
 import logo_Adobe from "../assets/Images/logo_Adobe.png";
 import Image from "next/image";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/reducers/authReducers";
+import { useRouter } from "next/router";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/login");
+  };
+
   return (
     <>
       <nav className="">
@@ -150,10 +160,10 @@ const Home = () => {
             </div>
           </div>
           <div>
-            <div className="flex px-6">
+            <button onClick={handleLogout} className="flex px-6">
               <LogOut className="mr-6" />
               <div className="text-lg font-bold	text-[#3A3D42CC]">Logout</div>
-            </div>
+            </button>
           </div>
         </div>
         <div className="w-full md:w-3/4 flex flex-col">

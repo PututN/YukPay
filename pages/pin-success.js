@@ -9,7 +9,7 @@ const PinSuccess = () => {
     <>
       <div className="flex m-0 h-screen">
         {/* container left */}
-        <div className="w-1/2 bg-[#B1B2FF] px-12 py-5 h-screen text-white relative h-screen overflow-y-scroll hidden md:block">
+        <div className="w-1/2 bg-[#B1B2FF] px-12 py-5 text-white relative h-screen overflow-y-scroll hidden md:block">
           <div className="font-bold	text-3xl">YukPay</div>
           <Image src={line} alt="line" className="absolute top-[0] left-[0]" />
           <Image src={phone} alt="Image"></Image>

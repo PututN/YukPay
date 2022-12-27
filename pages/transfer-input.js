@@ -16,12 +16,22 @@ import Link from "next/link";
 import profile2 from "../assets/Images/profile2.png";
 import Modal from "../components/Modal";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/reducers/authReducers";
+import { useRouter } from "next/router";
 
 const Transfer_Input = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/login");
+  };
+
   const [showModal, setShowModal] = useState(false);
   const handleSubmit = (event) => {
-event.preventDefault()
-  }
+    event.preventDefault();
+  };
   return (
     <>
       <nav className="hidden md:block">
@@ -150,10 +160,10 @@ event.preventDefault()
             </div>
           </div>
           <div>
-            <div className="flex px-6">
+            <button onClick={handleLogout} className="flex px-6">
               <LogOut className="mr-6" />
               <div className="text-lg font-bold	text-[#3A3D42CC]">Logout</div>
-            </div>
+            </button>
           </div>
         </div>
         <div className="w-full md:w-3/4 bg-[#FAFCFF] md:bg-white h-screen rounded-3xl p-6 overflow-y-scroll">
@@ -163,7 +173,7 @@ event.preventDefault()
           >
             <ArrowLeft className="mr-5 text-[#4D4B57]" />
             <div className="flex-1 text-[#3A3D42] font-bold text-lg">
-            Transfer
+              Transfer
             </div>
           </Link>
           <div className="items-center mb-5 hidden md:flex">
@@ -186,7 +196,9 @@ event.preventDefault()
               </div>
             </div>
           </div>
-          <div className="text-[#7C7895] font-bold text-base block md:hidden text-center">Rp120.000 Available</div>
+          <div className="text-[#7C7895] font-bold text-base block md:hidden text-center">
+            Rp120.000 Available
+          </div>
           <div className="text-[#7A7886] text-sm mb-5 w-1/2 md:block hidden">
             Type the amount you want to transfer and then press continue to the
             next steps.
@@ -225,7 +237,7 @@ event.preventDefault()
           </form>
         </div>
       </section>
-      {showModal && <Modal onClose={() => setShowModal(!showModal)} /> }
+      {showModal && <Modal onClose={() => setShowModal(!showModal)} />}
       <footer className="bg-[#6379F4] px-24 py-5 md:block hidden">
         <div className="hidden">
           <Link href="/" className="text-white text-3xl">
@@ -250,7 +262,7 @@ event.preventDefault()
         </div>
       </footer>
     </>
-  ); 
+  );
 };
 
 export default Transfer_Input;

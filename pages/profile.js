@@ -19,8 +19,19 @@ import profile4 from "../assets/Images/profile4.png";
 import profile5 from "../assets/Images/profile5.png";
 import ModalTopUp from "../components/ModalTopUp";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/reducers/authReducers";
+import { useRouter } from "next/router";
+
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/login");
+  };
+
   return (
     <>
       <nav>
@@ -151,10 +162,10 @@ const Profile = () => {
             </div>
           </div>
           <div>
-            <div className="flex px-6">
+            <button onClick={handleLogout} className="flex px-6">
               <LogOut className="mr-6" />
               <div className="text-lg font-bold	text-[#3A3D42CC]">Logout</div>
-            </div>
+            </button>
           </div>
         </div>
         <div className="w-3/4 bg-white h-screen rounded-3xl py-10">
@@ -165,36 +176,39 @@ const Profile = () => {
                 className="absolute w-4 h-4 top-[20%] left-[-85%]"
                 style={{ color: "#7A7886" }}
               />
-              <div className="text-[#7A7886] text-base">
-                Edit
-              </div>
+              <div className="text-[#7A7886] text-base">Edit</div>
             </Link>
             <div className="text-[#4D4B57] font-bold">Robert Chandler</div>
             <div className="text-[#7A7886] text-base mt-3 mb-10">
               +62 813-9387-7946
             </div>
-            <Link href="/personal-info" className="bg-[#E5E8ED] rounded-lg flex items-center justify-center w-1/2 px-5 py-3 mb-5">
+            <Link
+              href="/personal-info"
+              className="bg-[#E5E8ED] rounded-lg flex items-center justify-center w-1/2 px-5 py-3 mb-5"
+            >
               <div className="text-[#4D4B57] font-bold flex-1">
                 Personal Information
               </div>
               <ArrowRight style={{ color: "#7E7D84" }} />
             </Link>
-            <Link href="/change-password" className="bg-[#E5E8ED] rounded-lg flex items-center justify-center w-1/2 px-5 py-3 mb-5">
+            <Link
+              href="/change-password"
+              className="bg-[#E5E8ED] rounded-lg flex items-center justify-center w-1/2 px-5 py-3 mb-5"
+            >
               <div className="text-[#4D4B57] font-bold flex-1">
-              Change Password
+                Change Password
               </div>
               <ArrowRight style={{ color: "#7E7D84" }} />
             </Link>
-            <Link href="/change-pin" className="bg-[#E5E8ED] rounded-lg flex items-center justify-center w-1/2 px-5 py-3 mb-5">
-              <div className="text-[#4D4B57] font-bold flex-1">
-              Change PIN
-              </div>
+            <Link
+              href="/change-pin"
+              className="bg-[#E5E8ED] rounded-lg flex items-center justify-center w-1/2 px-5 py-3 mb-5"
+            >
+              <div className="text-[#4D4B57] font-bold flex-1">Change PIN</div>
               <ArrowRight style={{ color: "#7E7D84" }} />
             </Link>
             <div className="bg-[#E5E8ED] rounded-lg flex items-center justify-center w-1/2 px-5 py-3 mb-5">
-              <div className="text-[#4D4B57] font-bold flex-1">
-                Logout
-              </div>
+              <div className="text-[#4D4B57] font-bold flex-1">Logout</div>
             </div>
           </div>
         </div>

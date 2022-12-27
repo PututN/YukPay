@@ -15,8 +15,18 @@ import logo_Netflix from "../assets/Images/logo_Netflix.png";
 import profile3 from "../assets/Images/profile3.png";
 import logo_Adobe from "../assets/Images/logo_Adobe.png";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/reducers/authReducers";
+import { useRouter } from "next/router";
 
 const History = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/login");
+  };
+
   return (
     <>
       <nav className="hidden md:block">
@@ -149,10 +159,10 @@ const History = () => {
             </div>
           </div>
           <div>
-            <div className="flex px-6">
+            <button onClick={handleLogout} className="flex px-6">
               <LogOut className="mr-6" />
               <div className="text-lg font-bold	text-[#3A3D42CC]">Logout</div>
-            </div>
+            </button>
           </div>
         </div>
         <div className="w-full md:w-3/4 bg-[#FAFCFF] md:bg-white h-screen rounded-3xl p-6 overflow-y-scroll">
@@ -278,12 +288,14 @@ const History = () => {
           </div>
           <div className="flex md:hidden gap-3 items-center justify-center">
             <div className="bg-white rounded-md p-3 shadow-lg">
-              <ArrowUp className="text-[#FF5B37]"/>
+              <ArrowUp className="text-[#FF5B37]" />
             </div>
             <div className="bg-white rounded-md p-3 shadow-lg">
               <ArrowDown className="text-[#1EC15F]" />
             </div>
-            <div className="bg-white rounded-md py-3 px-6 shadow-lg text-[#6379F4] text-lg font-bold">Filter by Date</div>
+            <div className="bg-white rounded-md py-3 px-6 shadow-lg text-[#6379F4] text-lg font-bold">
+              Filter by Date
+            </div>
           </div>
         </div>
       </section>

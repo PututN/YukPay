@@ -104,7 +104,7 @@ const SignUp = () => {
                       placeholder="Enter your username"
                     ></Field>
                     {/* {errors.userName && touched.userName ? (
-                      <div className="text-red-500 text-sm">
+                      <div className="text-[#FF5B37] font-semibold">
                         {errors.userName}
                       </div>
                     ) : null} */}
@@ -123,7 +123,7 @@ const SignUp = () => {
                         placeholder="Enter your firstname"
                       ></Field>
                       {errors.firstName && touched.firstName ? (
-                        <div className="text-red-500 text-sm">
+                        <div className="text-[#FF5B37] font-semibold">
                           {errors.firstName}
                         </div>
                       ) : null}
@@ -140,7 +140,7 @@ const SignUp = () => {
                         placeholder="Enter your lastname"
                       ></Field>
                       {errors.lastName && touched.lastName ? (
-                        <div className="text-red-500 text-sm">
+                        <div className="text-[#FF5B37] font-semibold">
                           {errors.lastName}
                         </div>
                       ) : null}
@@ -158,7 +158,7 @@ const SignUp = () => {
                       placeholder="Enter your e-mail"
                     ></Field>
                     {errors.email && touched.email ? (
-                      <div className="text-red-500 text-sm">{errors.email}</div>
+                      <div className="text-[#FF5B37] font-semibold">{errors.email}</div>
                     ) : null}
                     <Mail
                       // style={{ color: "#A9A9A999" }}
@@ -173,7 +173,7 @@ const SignUp = () => {
                       placeholder="Enter your password"
                     ></Field>
                     {errors.password && touched.password ? (
-                      <div className="text-red-500 text-sm">
+                      <div className="text-[#FF5B37] font-semibold">
                         {errors.password}
                       </div>
                     ) : null}

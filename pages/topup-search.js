@@ -17,9 +17,18 @@ import profile4 from "../assets/Images/profile4.png";
 import profile5 from "../assets/Images/profile5.png";
 import ModalTopUp from "../components/ModalTopUp";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/reducers/authReducers";
+import { useRouter } from "next/router";
 
 const Topup_Search = () => {
   const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/login");
+  };
 
   return (
     <>
@@ -44,40 +53,72 @@ const Topup_Search = () => {
               >
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Accept from Joshua Lee</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp220.000</div>
-                    <ArrowDown style={{color:"#4CEDB3"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-[#7A7A7A] text-sm">
+                      Accept from Joshua Lee
+                    </div>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp220.000
+                    </div>
+                    <ArrowDown
+                      style={{ color: "#4CEDB3" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Transfer to Deni</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp149.000</div>
-                    <ArrowUp style={{color:"#FF5B37"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-[#7A7A7A] text-sm">
+                      Transfer to Deni
+                    </div>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp149.000
+                    </div>
+                    <ArrowUp
+                      style={{ color: "#FF5B37" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Transfer to Deni</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp149.000</div>
-                    <ArrowUp style={{color:"#FF5B37"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-[#7A7A7A] text-sm">
+                      Transfer to Deni
+                    </div>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp149.000
+                    </div>
+                    <ArrowUp
+                      style={{ color: "#FF5B37" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Transfer to Jessica Lee</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp100.000</div>
-                    <ArrowUp style={{color:"#FF5B37"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-[#7A7A7A] text-sm">
+                      Transfer to Jessica Lee
+                    </div>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp100.000
+                    </div>
+                    <ArrowUp
+                      style={{ color: "#FF5B37" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
                     <div className="text-[#7A7A7A] text-sm">Top up</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp300.000</div>
-                    <ArrowDown style={{color:"#4CEDB3"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp300.000
+                    </div>
+                    <ArrowDown
+                      style={{ color: "#4CEDB3" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
-
               </ul>
             </div>
           </div>
@@ -119,10 +160,10 @@ const Topup_Search = () => {
             </div>
           </div>
           <div>
-            <div className="flex px-6">
+            <button onClick={handleLogout} className="flex px-6">
               <LogOut className="mr-6" />
               <div className="text-lg font-bold	text-[#3A3D42CC]">Logout</div>
-            </div>
+            </button>
           </div>
         </div>
         <div className="w-3/4 bg-white h-screen rounded-3xl p-6">

@@ -11,7 +11,7 @@ export const LoginAction = createAsyncThunk(
         },
       };
       const res = await axios.post(
-        "https://68xkph-8888.preview.csb.app/auth/login",
+        `${process.env.NEXT_PUBLIC_URL}/auth/login`,
         { email, password },
         config
       );
@@ -41,7 +41,7 @@ export const SignupAction = createAsyncThunk(
         },
       };
       const res = await axios.post(
-        "https://68xkph-8888.preview.csb.app/auth/register",
+        `${process.env.NEXT_PUBLIC_URL}/auth/register`,
         { firstName, email, password, lastName },
         config
       );

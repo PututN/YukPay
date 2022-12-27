@@ -99,7 +99,7 @@ const Login = () => {
                       placeholder="Enter your e-mail"
                     ></Field>
                     {errors.email && touched.email ? (
-                      <div className="text-red-900">{errors.email}</div>
+                      <div className="text-[#FF5B37] font-semibold">{errors.email}</div>
                     ) : null}
                     <Mail className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]" />
                   </div>
@@ -111,7 +111,7 @@ const Login = () => {
                       placeholder="Enter your password"
                     ></Field>
                     {errors.password && touched.password ? (
-                      <div className="text-red-900">{errors.password}</div>
+                      <div className="text-[#FF5B37] font-semibold">{errors.password}</div>
                     ) : null}
                     <Lock className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]" />
                     {type === "password" ? (
