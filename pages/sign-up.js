@@ -7,11 +7,15 @@ import { useState } from "react";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 import { Formik, Form, Field } from "formik";
+import {SignupAction} from "../redux/actions/authAction"
+import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from "react-redux";
+
 
 YupPassword(Yup);
 
 const RegisterEmployeeSchema = Yup.object().shape({
-  userName: Yup.string().required("Required"),
+  // userName: Yup.string().required("Required"),
   firstName: Yup.string().required("Required"),
   lastName: Yup.string().required("Required"),
   email: Yup.string().email("Email not valid").required("Email must filled"),
@@ -28,6 +32,17 @@ const SignUp = () => {
   const [type, setType] = useState("password");
   const showPassword = () => {
     type === "password" ? setType("text") : setType("password");
+  };
+  const router = useRouter()
+  const dispatch = useDispatch();
+  const { error, loading } = useSelector((state) => state.auth);
+  const handleSubmit = (value) => {
+    const firstName = value.firstName;
+    const lastName = value.lastName;
+    const email = value.email;
+    const password = value.password;
+    dispatch(SignupAction({ firstName, lastName, email, password, cb: () => router.push("/home")
+    }));
   };
 
   return (
@@ -78,7 +93,7 @@ const SignUp = () => {
                 password: "",
               }}
               validationSchema={RegisterEmployeeSchema}
-            >
+              onSubmit={handleSubmit}>
               {({ errors, touched, dirty }) => (
                 <Form>
                   <div className="md:hidden block relative mb-5">
@@ -88,11 +103,11 @@ const SignUp = () => {
                       className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] peer  px-12 py-3 md:bg-[#FAFCFF] bg-white"
                       placeholder="Enter your username"
                     ></Field>
-                    {errors.userName && touched.userName ? (
+                    {/* {errors.userName && touched.userName ? (
                       <div className="text-red-500 text-sm">
                         {errors.userName}
                       </div>
-                    ) : null}
+                    ) : null} */}
                     <User
                       // style={{ color: "#A9A9A999" }}
                       className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
@@ -180,7 +195,13 @@ const SignUp = () => {
                       />
                     )}
                   </div>
-                  <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white">
+                  {error && (
+                  <div className="text-[#FF5B37] font-semibold text-lg text-center my-3">
+                    {error}
+                  </div>
+                  )}
+
+                  <button disabled={!dirty || loading} className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white">
                     Sign Up
                   </button>
                 </Form>

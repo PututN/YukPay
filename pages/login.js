@@ -7,6 +7,10 @@ import { useState } from "react";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 import { Formik, Form, Field } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import {useRouter} from "next/router"
+import {LoginAction} from "../redux/actions/authAction"
+
 
 YupPassword(Yup);
 
@@ -22,11 +26,23 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login = () => {
-  // const dispatch = useDis
   const [type, setType] = useState("password");
   const showPassword = () => {
     type === "password" ? setType("text") : setType("password");
   };
+  const router = useRouter()
+  const dispatch = useDispatch();
+  const { error, loading, token } = useSelector((state) => state.auth);
+  console.log(token)
+  const handleSubmit = (value) => {
+    const firstName = value.firstName;
+    const lastName = value.lastName;
+    const email = value.email;
+    const password = value.password;
+    dispatch(LoginAction({ firstName, lastName, email, password, cb: () => router.push("/home")
+    }));
+  };
+
   return (
     <>
       <div className="flex m-0 h-screen">
@@ -71,6 +87,7 @@ const Login = () => {
                 password: "",
               }}
               validationSchema={LoginSchema}
+              onSubmit={handleSubmit}
             >
               {({ errors, touched, dirty }) => (
                 <Form>
@@ -117,7 +134,16 @@ const Login = () => {
                   >
                     Forgot password?
                   </Link>
-                  <button type="submit" disabled={!dirty} className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white">
+                  {error && (
+                  <div className="text-[#FF5B37] font-semibold text-lg text-center my-3">
+                    {error}
+                  </div>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={!dirty ||loading}
+                    className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white"
+                  >
                     Login
                   </button>
                 </Form>
