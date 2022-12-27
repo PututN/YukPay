@@ -154,7 +154,7 @@ const Transfer_Search = () => {
             </div>
           </div>
         </div>
-        <div className="w-full md:w-3/4 bg-[#FAFCFF] md:bg-white h-screen rounded-3xl pl-6 overflow-y-scroll">
+        <div className="w-full md:w-3/4 bg-[#FAFCFF] md:bg-white h-screen rounded-3xl p-6 overflow-y-scroll">
           <Link
             href="/home"
             className="items-center mb-12 flex md:hidden relative"
@@ -184,34 +184,34 @@ const Transfer_Search = () => {
             Quick Access
           </div>
           <div className="gap-3 flex md:hidden">
-            <div className="flex mb-8 shadow-md rounded-lg p-3 w-1/3 items-center justify-center flex-col bg-white">
+            <Link href="/transfer-input" className="flex mb-8 shadow-md rounded-lg p-3 w-1/3 items-center justify-center flex-col bg-white">
               <Image src={profile3} alt="profile" />
               <div className="flex flex-col justify-center">
                 <div className="text-[#4D4B57] text-base font-bold">Michi</div>
                 <div className="text-[#7A7886] text-sm">-9994</div>
               </div>
-            </div>
-            <div className="flex mb-8 shadow-md rounded-lg p-3 w-1/3 items-center justify-center flex-col bg-white">
+            </Link>
+            <Link href="/transfer-input" className="flex mb-8 shadow-md rounded-lg p-3 w-1/3 items-center justify-center flex-col bg-white">
               <Image src={profile2} alt="profile" />
               <div className="flex flex-col justify-center">
                 <div className="text-[#4D4B57] text-base font-bold">Dody</div>
                 <div className="text-[#7A7886] text-sm">-3561</div>
               </div>
-            </div>
-            <div className="flex mb-8 shadow-md rounded-lg p-3 w-1/3 items-center justify-center flex-col bg-white">
+            </Link>
+            <Link href="/transfer-input" className="flex mb-8 shadow-md rounded-lg p-3 w-1/3 items-center justify-center flex-col bg-white">
               <Image src={profile6} alt="profile" />
               <div className="flex flex-col justify-center">
                 <div className="text-[#4D4B57] text-base font-bold">Rian</div>
                 <div className="text-[#7A7886] text-sm">-3822</div>
               </div>
-            </div>
+            </Link>
           </div>
           <div className="block md:hidden text-[#514F5B] text-lg font-bold mb-3">
             All Contacts{" "}
           </div>
           <div className="text-[#8F8F8F] text-sm	block md:hidden mb-3">17 Contact Founds</div>
 
-          <div className="flex mb-8 shadow-md p-3 bg-white rounded-lg">
+          <Link href="/transfer-input" className="flex mb-8 shadow-md p-3 bg-white rounded-lg">
             <div className="flex-1">
               <div className="flex gap-3">
                 <Image src={profile2} alt="profile" />
@@ -225,8 +225,8 @@ const Transfer_Search = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="flex mb-8 shadow-md p-3 bg-white rounded-lg">
+          </Link>
+          <Link href="/transfer-input" className="flex mb-8 shadow-md p-3 bg-white rounded-lg">
             <div className="flex-1">
               <div className="flex gap-3">
                 <Image src={profile4} alt="profile" />
@@ -240,8 +240,8 @@ const Transfer_Search = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="flex mb-8 shadow-md p-3 bg-white rounded-lg">
+          </Link>
+          <Link href="/transfer-input" className="flex mb-8 shadow-md p-3 bg-white rounded-lg">
             <div className="flex-1">
               <div className="flex gap-3">
                 <Image src={profile5} alt="profile" />
@@ -255,8 +255,8 @@ const Transfer_Search = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="flex mb-8 shadow-md p-3 bg-white rounded-lg">
+          </Link>
+          <Link href="/transfer-input" className="flex mb-8 shadow-md p-3 bg-white rounded-lg">
             <div className="flex-1">
               <div className="flex gap-3">
                 <Image src={profile1} alt="profile" />
@@ -270,7 +270,7 @@ const Transfer_Search = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       </section>
 

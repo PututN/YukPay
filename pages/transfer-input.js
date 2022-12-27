@@ -7,7 +7,8 @@ import {
   LogOut,
   Edit2,
   Search,
-  ArrowDown
+  ArrowDown,
+  ArrowLeft,
 } from "react-feather";
 import Image from "next/image";
 import profile_nav from "../assets/Images/profile_nav.png";
@@ -21,7 +22,7 @@ const Transfer_Input = () => {
 
   return (
     <>
-      <nav>
+      <nav className="hidden md:block">
         <div className="px-16 py-8 flex items-center justify-center rounded-b-2xl">
           <div className="flex-1 text-[#6379F4] text-3xl font-bold">YukPay</div>
           <div className="flex gap-5 justify-center items-center">
@@ -42,47 +43,79 @@ const Transfer_Input = () => {
               >
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Accept from Joshua Lee</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp220.000</div>
-                    <ArrowDown style={{color:"#4CEDB3"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-[#7A7A7A] text-sm">
+                      Accept from Joshua Lee
+                    </div>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp220.000
+                    </div>
+                    <ArrowDown
+                      style={{ color: "#4CEDB3" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Transfer to Deni</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp149.000</div>
-                    <ArrowUp style={{color:"#FF5B37"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-[#7A7A7A] text-sm">
+                      Transfer to Deni
+                    </div>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp149.000
+                    </div>
+                    <ArrowUp
+                      style={{ color: "#FF5B37" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Transfer to Deni</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp149.000</div>
-                    <ArrowUp style={{color:"#FF5B37"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-[#7A7A7A] text-sm">
+                      Transfer to Deni
+                    </div>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp149.000
+                    </div>
+                    <ArrowUp
+                      style={{ color: "#FF5B37" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Transfer to Jessica Lee</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp100.000</div>
-                    <ArrowUp style={{color:"#FF5B37"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-[#7A7A7A] text-sm">
+                      Transfer to Jessica Lee
+                    </div>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp100.000
+                    </div>
+                    <ArrowUp
+                      style={{ color: "#FF5B37" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
                 <li>
                   <div className="relative flex flex-col pl-10 items-start">
                     <div className="text-[#7A7A7A] text-sm">Top up</div>
-                    <div className="text-lg font-bold text-[#43484F]">Rp300.000</div>
-                    <ArrowDown style={{color:"#4CEDB3"}} className="absolute top-[35%] left-[5%]"/>
+                    <div className="text-lg font-bold text-[#43484F]">
+                      Rp300.000
+                    </div>
+                    <ArrowDown
+                      style={{ color: "#4CEDB3" }}
+                      className="absolute top-[35%] left-[5%]"
+                    />
                   </div>
                 </li>
-
               </ul>
             </div>
           </div>
         </div>
       </nav>
-      <section className="bg-[#FAFCFF] px-16 py-8 flex">
-        <div className="w-1/4 bg-white flex justify-between h-screen flex-col py-9 rounded-3xl mr-4">
+      <section className="bg-[#FAFCFF] lg:px-16 md:px-5 px-3 py-8 flex">
+        <div className="w-1/4 bg-white hidden md:flex justify-between h-screen flex-col py-9 rounded-3xl mr-4">
           <div>
             <Link href="/home" className="flex w-full">
               <div className="px-6 flex mb-16">
@@ -121,13 +154,22 @@ const Transfer_Input = () => {
             </div>
           </div>
         </div>
-        <div className="w-3/4 bg-white h-screen rounded-3xl p-6 overflow-y-scroll">
-          <div className="flex items-center mb-5">
+        <div className="w-full md:w-3/4 bg-[#FAFCFF] md:bg-white h-screen rounded-3xl p-6 overflow-y-scroll">
+          <Link
+            href="/transfer-search"
+            className="items-center mb-12 flex md:hidden relative"
+          >
+            <ArrowLeft className="mr-5 text-[#4D4B57]" />
+            <div className="flex-1 text-[#3A3D42] font-bold text-lg">
+            Transfer
+            </div>
+          </Link>
+          <div className="items-center mb-5 hidden md:flex">
             <div className="flex-1 text-[#3A3D42] font-bold text-lg">
               Transfer Money
             </div>
           </div>
-          <div className="flex mb-8 shadow-md p-3">
+          <div className="flex mb-8 shadow-md p-3 bg-white">
             <div className="flex-1">
               <div className="flex gap-3">
                 <Image src={profile2} alt="profile" />
@@ -142,17 +184,31 @@ const Transfer_Input = () => {
               </div>
             </div>
           </div>
-          <div className="text-[#7A7886] text-sm mb-5 w-1/2">
+          <div className="text-[#7C7895] font-bold text-base block md:hidden text-center">Rp120.000 Available</div>
+          <div className="text-[#7A7886] text-sm mb-5 w-1/2 md:block hidden">
             Type the amount you want to transfer and then press continue to the
             next steps.
           </div>
           <form>
             <div className="flex flex-col items-center justify-center gap-10 mt-10 mb-24">
-              <input type="number" placeholder="0.00" className="text-center text-4xl font-bold text-[#B5BDCC]"></input>
-              <div className="text-base font-bold text-[#3A3D42]">Rp120.000 Available</div>
-              <div className="relative w-1/2">
-                <Edit2 style={{color:"#A9A9A999"}} className="absolute top-[24%]"/>
-                <input className="text-[#A9A9A999] w-full py-3 px-9 border-[#A9A9A999] border-b-2 text-base" type="text" placeholder="Add some notes"></input>
+              <input
+                type="number"
+                placeholder="0.00"
+                className="text-center text-4xl font-bold text-[#B5BDCC] bg-[#FAFCFF] md:bg-white"
+              ></input>
+              <div className="text-base font-bold text-[#3A3D42] hidden md:block">
+                Rp120.000 Available
+              </div>
+              <div className="relative md:w-1/2 w-full bg-[#FAFCFF] md:bg-white">
+                <Edit2
+                  style={{ color: "#A9A9A999" }}
+                  className="absolute top-[24%]"
+                />
+                <input
+                  className="text-[#A9A9A999] w-full py-3 px-9 border-[#A9A9A999] border-b-2 text-base bg-[#FAFCFF] md:bg-white"
+                  type="text"
+                  placeholder="Add some notes"
+                ></input>
               </div>
             </div>
             <div className="flex justify-end">
@@ -167,7 +223,7 @@ const Transfer_Input = () => {
         </div>
       </section>
 
-      <footer className="bg-[#6379F4] px-24 py-5">
+      <footer className="bg-[#6379F4] px-24 py-5 md:block hidden">
         <div className="hidden">
           <Link href="/" className="text-white text-3xl">
             YukPay
