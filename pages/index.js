@@ -16,7 +16,7 @@ import profile from "../assets/Images/profile.png";
 const Index = () => {
   return (
     <>
-      <nav>
+      <nav className="flex bg-[#B1B2FF] px-16 py-8">
         <div className="font-bold	text-3xl flex-1 text-white">YukPay</div>
         <div className="flex-row">
           <Link
