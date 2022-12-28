@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Grid,
   ArrowUp,
@@ -20,13 +21,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const NavbarHidden = () => {
-  // const dispatch = useDispatch();
-  // const router = useRouter();
   const [profile, setProfile] = useState({});
   const token = useSelector((state) => state.auth.token);
-  const decode = jwt_decode(token);
-  // const userId = decode.id;
-//get profile
+  //get profile
   const fetchProfile = async () => {
     try {
       const response = await axiosHelper.get("/profile", {
@@ -42,6 +39,29 @@ const NavbarHidden = () => {
   useEffect(() => {
     fetchProfile();
   }, []);
+
+  //get notfication
+  const [notif, setNotif] = useState([]);
+  const fetchNotif = async () => {
+    try {
+      const response = await axiosHelper.get(
+        "/transactions/notification?page=1&limit=5",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setNotif(response.data.results);
+    } catch (error) {
+      if (error) throw error;
+    }
+  };
+  useEffect(() => {
+    fetchNotif();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  console.log(notif);
 
   return (
     <>
@@ -90,74 +110,29 @@ const NavbarHidden = () => {
                 tabIndex={0}
                 className="menu dropdown-content py-2 bg-base-100 rounded-box w-52 mt-4 shadow-lg"
               >
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Accept from Joshua Lee
+                {notif?.map((user) => (
+                  <li key={user.id}>
+                    <div className="relative flex flex-col pl-10 items-start">
+                      <div className="text-[#7A7A7A] text-sm">
+                        {user?.notes}
+                      </div>
+                      <div className="text-lg font-bold text-[#43484F]">
+                        Rp{user?.amount}
+                      </div>
+                      {user?.type === "CREDIT" ? (
+                        <ArrowDown
+                          style={{ color: "#4CEDB3" }}
+                          className="absolute top-[35%] left-[5%]"
+                        />
+                      ) : (
+                        <ArrowUp
+                          style={{ color: "#FF5B37" }}
+                          className="absolute top-[35%] left-[5%]"
+                        />
+                      )}
                     </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp220.000
-                    </div>
-                    <ArrowDown
-                      style={{ color: "#4CEDB3" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Transfer to Deni
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp149.000
-                    </div>
-                    <ArrowUp
-                      style={{ color: "#FF5B37" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Transfer to Deni
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp149.000
-                    </div>
-                    <ArrowUp
-                      style={{ color: "#FF5B37" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">
-                      Transfer to Jessica Lee
-                    </div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp100.000
-                    </div>
-                    <ArrowUp
-                      style={{ color: "#FF5B37" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className="relative flex flex-col pl-10 items-start">
-                    <div className="text-[#7A7A7A] text-sm">Top up</div>
-                    <div className="text-lg font-bold text-[#43484F]">
-                      Rp300.000
-                    </div>
-                    <ArrowDown
-                      style={{ color: "#4CEDB3" }}
-                      className="absolute top-[35%] left-[5%]"
-                    />
-                  </div>
-                </li>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
