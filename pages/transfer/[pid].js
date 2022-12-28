@@ -11,16 +11,19 @@ import {
   ArrowLeft,
 } from "react-feather";
 import Image from "next/image";
-import profile_nav from "../assets/Images/profile_nav.png";
 import Link from "next/link";
-import profile2 from "../assets/Images/profile2.png";
-import Modal from "../components/Modal";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { logout } from "../redux/reducers/authReducers";
+import profile2 from "../../assets/Images/profile2.png";
+import Modal from "../../components/Modal";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/reducers/authReducers";
 import { useRouter } from "next/router";
-import NavbarHidden from "../components/NavbarHidden";
-import withAuth from "../components/hoc/withAuth";
+import NavbarHidden from "../../components/NavbarHidden";
+import withAuth from "../../components/hoc/withAuth";
+import axiosHelper from "../../helper/axios.helper";
+import jwt_decode from "jwt-decode";
+import { useParams } from "react-router-dom";
+import profileUser from "../../assets/Images/user.png";
 
 const Transfer_Input = () => {
   const dispatch = useDispatch();
@@ -29,14 +32,60 @@ const Transfer_Input = () => {
     dispatch(logout());
     router.push("/login");
   };
+  //get profile
+  const [profile, setProfile] = useState({});
+  const token = useSelector((state) => state.auth.token);
+  const decode = jwt_decode(token);
+  const { pid } = router.query;
 
+  // console.log(`/transactions/recipient/${pid}`)
+
+  const fetchProfile = async () => {
+    try {
+      const response = await axiosHelper.get(`/transactions/recipient/${pid}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setProfile(response.data.results);
+    } catch (error) {
+      if (error) throw error;
+    }
+  };
+  useEffect(() => {
+    if (pid) {
+      fetchProfile();
+    }
+  }, [pid]);
+  // console.log(profile)
+
+  //show balance from profile
+  const [balanced, setBalanced] = useState({});
+  const fetchBalance = async () => {
+    try {
+      const response = await axiosHelper.get("/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setBalanced(response.data.results);
+    } catch (error) {
+      if (error) throw error;
+    }
+  };
+  useEffect(() => {
+    fetchBalance();
+  }, []);
+  console.log(balanced);
+
+  //shoemodal
   const [showModal, setShowModal] = useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
   };
   return (
     <>
-    <NavbarHidden />
+      <NavbarHidden />
       <section className="bg-[#FAFCFF] lg:px-16 md:px-5 px-3 py-8 flex">
         <div className="w-1/4 bg-white hidden md:flex justify-between h-screen flex-col py-9 rounded-3xl mr-4">
           <div>
@@ -95,20 +144,37 @@ const Transfer_Input = () => {
           <div className="flex mb-8 shadow-md p-3 bg-white">
             <div className="flex-1">
               <div className="flex gap-3">
-                <Image src={profile2} alt="profile" />
+                {profile?.picture ? (
+                  <Image
+                    src={
+                      `${process.env.NEXT_PUBLIC_URL}/upload/` +
+                      profile?.picture
+                    }
+                    width={50}
+                    height={50}
+                    alt="profile"
+                  />
+                ) : (
+                  <Image
+                    src={profileUser}
+                    width={50}
+                    height={50}
+                    alt="profile"
+                  />
+                )}
                 <div className="flex flex-col justify-center">
                   <div className="text-[#4D4B57] text-base font-bold">
-                    Momo Taro
+                    {profile?.firstName} {profile?.lastName}
                   </div>
                   <div className="text-[#7A7886] text-sm">
-                    +62 812-4343-6731
+                    {profile?.phoneNumber}
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div className="text-[#7C7895] font-bold text-base block md:hidden text-center">
-            Rp120.000 Available
+            Rp{balanced?.balance} Available
           </div>
           <div className="text-[#7A7886] text-sm mb-5 w-1/2 md:block hidden">
             Type the amount you want to transfer and then press continue to the
@@ -122,7 +188,7 @@ const Transfer_Input = () => {
                 className="text-center text-4xl font-bold text-[#B5BDCC] bg-[#FAFCFF] md:bg-white"
               ></input>
               <div className="text-base font-bold text-[#3A3D42] hidden md:block">
-                Rp120.000 Available
+                Rp{balanced?.balance} Available
               </div>
               <div className="relative md:w-1/2 w-full bg-[#FAFCFF] md:bg-white">
                 <Edit2

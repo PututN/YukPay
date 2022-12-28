@@ -171,7 +171,7 @@ const Transfer_Search = () => {
           {transaction?.map((user) => (
             <Link
               key={user.id}
-              href={"/transfer-input" + user.id}
+              href={"/transfer/" + user.id}
               className="flex mb-8 shadow-md p-3 bg-white rounded-lg"
             >
               <div className="flex-1">
