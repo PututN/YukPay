@@ -63,7 +63,7 @@ const PinBlank = () => {
         },
       }
     );
-    console.log(data);
+    router.push('/home')
   };
 
   return (

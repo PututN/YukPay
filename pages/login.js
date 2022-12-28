@@ -3,7 +3,7 @@ import line from "../assets/Images/line.png";
 import { Mail, Lock, EyeOff, Eye } from "react-feather";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 import { Formik, Form, Field } from "formik";
@@ -33,7 +33,6 @@ const Login = () => {
   const router = useRouter()
   const dispatch = useDispatch();
   const { error, loading, token } = useSelector((state) => state.auth);
-  console.log(token)
   const handleSubmit = (value) => {
     const firstName = value.firstName;
     const lastName = value.lastName;
@@ -42,7 +41,11 @@ const Login = () => {
     dispatch(LoginAction({ firstName, lastName, email, password, cb: () => router.push("/home")
     }));
   };
-
+React.useEffect (() => {
+  if(token) {
+    router.replace('/home')
+  }
+},[token, router])
   return (
     <>
       <div className="flex m-0 h-screen">

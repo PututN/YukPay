@@ -18,11 +18,14 @@ import profile4 from "../assets/Images/profile4.png";
 import profile5 from "../assets/Images/profile5.png";
 import profile3 from "../assets/Images/profile3.png";
 import profile6 from "../assets/Images/profile6.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import NavbarHidden from "../components/NavbarHidden";
 import withAuth from "../components/hoc/withAuth";
+import { useEffect, useState } from "react";
+import axiosHelper from "../helper/axios.helper";
+import profileuser from "../assets/Images/user.png";
 
 const Transfer_Search = () => {
   const dispatch = useDispatch();
@@ -32,9 +35,32 @@ const Transfer_Search = () => {
     router.push("/login");
   };
 
+  //get all transaction
+  const token = useSelector((state) => state.auth.token);
+  const [transaction, setTransaction] = useState([]);
+  const fetchTransaction = async () => {
+    try {
+      const res = await axiosHelper.get(
+        "/transactions/recipient?page=1&limit=5",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setTransaction(res.data.results);
+    } catch (error) {
+      if (error) throw error;
+    }
+  };
+  useEffect(() => {
+    fetchTransaction();
+  }, []);
+  console.log(transaction);
+
   return (
     <>
-    <NavbarHidden />
+      <NavbarHidden />
       <section className="bg-[#FAFCFF] lg:px-16 md:px-5 px-3 py-8 flex">
         <div className="w-1/4 bg-white justify-between h-screen flex-col py-9 rounded-3xl mr-4 hidden md:flex">
           <div>
@@ -109,7 +135,7 @@ const Transfer_Search = () => {
               href="/transfer-input"
               className="flex mb-8 shadow-md rounded-lg p-3 w-1/3 items-center justify-center flex-col bg-white"
             >
-              <Image src={profile3} alt="profile" />
+              <Image width={56} height={56} src={profile3} alt="profile" />
               <div className="flex flex-col justify-center">
                 <div className="text-[#4D4B57] text-base font-bold">Michi</div>
                 <div className="text-[#7A7886] text-sm">-9994</div>
@@ -119,7 +145,7 @@ const Transfer_Search = () => {
               href="/transfer-input"
               className="flex mb-8 shadow-md rounded-lg p-3 w-1/3 items-center justify-center flex-col bg-white"
             >
-              <Image src={profile2} alt="profile" />
+              <Image width={56} height={56} src={profile2} alt="profile" />
               <div className="flex flex-col justify-center">
                 <div className="text-[#4D4B57] text-base font-bold">Dody</div>
                 <div className="text-[#7A7886] text-sm">-3561</div>
@@ -129,7 +155,7 @@ const Transfer_Search = () => {
               href="/transfer-input"
               className="flex mb-8 shadow-md rounded-lg p-3 w-1/3 items-center justify-center flex-col bg-white"
             >
-              <Image src={profile6} alt="profile" />
+              <Image width={56} height={56} src={profile6} alt="profile" />
               <div className="flex flex-col justify-center">
                 <div className="text-[#4D4B57] text-base font-bold">Rian</div>
                 <div className="text-[#7A7886] text-sm">-3822</div>
@@ -142,32 +168,48 @@ const Transfer_Search = () => {
           <div className="text-[#8F8F8F] text-sm	block md:hidden mb-3">
             17 Contact Founds
           </div>
-
-          <Link
-            href="/transfer-input"
-            className="flex mb-8 shadow-md p-3 bg-white rounded-lg"
-          >
-            <div className="flex-1">
-              <div className="flex gap-3">
-                <Image src={profile2} alt="profile" />
-                <div className="flex flex-col justify-center">
-                  <div className="text-[#4D4B57] text-base font-bold">
-                    Momo Taro
-                  </div>
-                  <div className="text-[#7A7886] text-sm">
-                    +62 812-4343-6731
+          {transaction?.map((user) => (
+            <Link
+              key={user.id}
+              href={"/transfer-input" + user.id}
+              className="flex mb-8 shadow-md p-3 bg-white rounded-lg"
+            >
+              <div className="flex-1">
+                <div className="flex gap-3">
+                  {user?.picture ? (
+                    <Image
+                      width={56}
+                      height={56}
+                      src={
+                        `${process.env.NEXT_PUBLIC_URL}/upload/` + user?.picture
+                      }
+                      alt="profile"
+                    />
+                  ) : (
+                    <Image
+                      width={56}
+                      height={56}
+                      src={profileuser}
+                      alt="profile"
+                    />
+                  )}
+                  <div className="flex flex-col justify-center">
+                    <div className="text-[#4D4B57] text-base font-bold">
+                      {user?.firstName} {user?.lastName}
+                    </div>
+                    <div className="text-[#7A7886] text-sm">{user?.phoneNumber}</div>
                   </div>
                 </div>
               </div>
-            </div>
-          </Link>
-          <Link
+            </Link>
+          ))}
+          {/* <Link
             href="/transfer-input"
             className="flex mb-8 shadow-md p-3 bg-white rounded-lg"
           >
             <div className="flex-1">
               <div className="flex gap-3">
-                <Image src={profile4} alt="profile" />
+                <Image width={56} height={56} src={profile4} alt="profile" />
                 <div className="flex flex-col justify-center">
                   <div className="text-[#4D4B57] text-base font-bold">
                     Jessica Keen
@@ -185,7 +227,7 @@ const Transfer_Search = () => {
           >
             <div className="flex-1">
               <div className="flex gap-3">
-                <Image src={profile5} alt="profile" />
+                <Image width={56} height={56} src={profile5} alt="profile" />
                 <div className="flex flex-col justify-center">
                   <div className="text-[#4D4B57] text-base font-bold">
                     Michael Le
@@ -203,7 +245,7 @@ const Transfer_Search = () => {
           >
             <div className="flex-1">
               <div className="flex gap-3">
-                <Image src={profile1} alt="profile" />
+                <Image width={56} height={56} src={profile1} alt="profile" />
                 <div className="flex flex-col justify-center">
                   <div className="text-[#4D4B57] text-base font-bold">
                     Samuel Suhi
@@ -214,7 +256,7 @@ const Transfer_Search = () => {
                 </div>
               </div>
             </div>
-          </Link>
+          </Link> */}
         </div>
       </section>
 

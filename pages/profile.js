@@ -27,6 +27,7 @@ import jwt_decode from "jwt-decode";
 import user from "../assets/Images/user.png";
 import Navbar from "../components/Navbar";
 import withAuth from "../components/hoc/withAuth";
+import axios from "axios";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -35,10 +36,11 @@ const Profile = () => {
     dispatch(logout());
     router.push("/login");
   };
+
+  //get profile
   const [profile, setProfile] = useState({});
   const token = useSelector((state) => state.auth.token);
   const decode = jwt_decode(token);
-  const userId = decode.id;
 
   const fetchProfile = async () => {
     try {
@@ -55,7 +57,29 @@ const Profile = () => {
   useEffect(() => {
     fetchProfile();
   }, []);
-  console.log(profile.lastName);
+
+  //upload picture
+  const [picture, setPicture] = useState([]);
+  console.log(picture);
+
+  const uploadPicture = async (e) => {
+    e.preventDefault();
+    const file = e.target.picture.files[0]
+    const formData = new FormData();
+    formData.append("picture", file);
+    //axios post have 3 parameter (endpoint, data post, token)
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_URL}/profile`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(data);
+  };
+
   return (
     <>
       <Navbar />
@@ -106,7 +130,9 @@ const Profile = () => {
             {profile?.picture ? (
               <Image
                 className="w-[50px] h-[50px] rounded-lg"
-                src={profile?.picture}
+                width={50}
+                height={50}
+                src={`${process.env.NEXT_PUBLIC_URL}/upload/` + profile?.picture}
                 alt="profile"
               />
             ) : (
@@ -116,13 +142,20 @@ const Profile = () => {
                 alt="profile"
               />
             )}
-            <Link href="/edit-phoneNumber" className="relative mt-3 mb-5">
-              <Edit2
-                className="absolute w-4 h-4 top-[20%] left-[-85%]"
-                style={{ color: "#7A7886" }}
-              />
-              <div className="text-[#7A7886] text-base">Edit</div>
-            </Link>
+            <form onSubmit={uploadPicture} encType="multipart/form-data" className="flex flex-col">
+              <input
+                type="file"
+                name="picture"
+                // onChange={(file) => setPicture(file)}
+              ></input>
+              <button type="submit" className="relative mt-3 mb-5">
+                <Edit2
+                  className="absolute w-4 h-4 top-[20%] left-[25%]"
+                  style={{ color: "#7A7886" }}
+                />
+                <div className="text-[#7A7886] text-base">Upload Image</div>
+              </button>
+            </form>
             <div className="text-[#4D4B57] font-bold">
               {profile?.firstName} {profile?.lastName}
             </div>
@@ -131,7 +164,9 @@ const Profile = () => {
                 {profile?.phoneNumber}
               </div>
             ) : (
-              <div className="mt-3 mb-10"></div>
+              <Link href="/edit-phoneNumber" className="mt-3 mb-10">
+                Add Phone Number
+              </Link>
             )}
             <Link
               href="/personal-info"

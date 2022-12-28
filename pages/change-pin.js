@@ -75,7 +75,6 @@ const Change_Pin = () => {
     router.push("/login");
   };
   const token = useSelector((state) => state.auth.token);
-  const decode = jwt_decode(token);
 
   console.log(newPin);
   const changeNewPin = async (e) => {

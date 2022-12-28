@@ -3,7 +3,7 @@ import line from "../assets/Images/line.png";
 import { Mail, Lock, EyeOff, Eye, User } from "react-feather";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 import { Formik, Form, Field } from "formik";
@@ -35,15 +35,21 @@ const SignUp = () => {
   };
   const router = useRouter()
   const dispatch = useDispatch();
-  const { error, loading } = useSelector((state) => state.auth);
+  const { error, loading, token } = useSelector((state) => state.auth);
   const handleSubmit = (value) => {
     const firstName = value.firstName;
     const lastName = value.lastName;
     const email = value.email;
     const password = value.password;
-    dispatch(SignupAction({ firstName, lastName, email, password, cb: () => router.push("/home")
+    dispatch(SignupAction({ firstName, lastName, email, password, cb: () => router.push("/pin-blank")
     }));
   };
+  React.useEffect (() => {
+    if(token) {
+      router.replace('/home')
+    }
+  },[token, router])
+  
 
   return (
     <>
@@ -103,13 +109,7 @@ const SignUp = () => {
                       className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] peer  px-12 py-3 md:bg-[#FAFCFF] bg-white"
                       placeholder="Enter your username"
                     ></Field>
-                    {/* {errors.userName && touched.userName ? (
-                      <div className="text-[#FF5B37] font-semibold">
-                        {errors.userName}
-                      </div>
-                    ) : null} */}
                     <User
-                      // style={{ color: "#A9A9A999" }}
                       className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
                     />
                   </div>

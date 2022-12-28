@@ -20,12 +20,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Navbar = () => {
-  // const dispatch = useDispatch();
-  // const router = useRouter();
   const [profile, setProfile] = useState({});
   const token = useSelector((state) => state.auth.token);
-  const decode = jwt_decode(token);
-  // const userId = decode.id;
 
   const fetchProfile = async () => {
     try {
@@ -52,12 +48,16 @@ const Navbar = () => {
             {profile?.picture ? (
               <Image
                 className="w-[50px] h-[50px] rounded-lg"
-                src={profile?.picture}
+                width={50}
+                height={50}
+                src={`${process.env.NEXT_PUBLIC_URL}/upload/` + profile?.picture}
                 alt="profile"
               />
             ) : (
               <Image
                 className="w-[50px] h-[50px] rounded-lg"
+                width={50}
+                height={50}
                 src={user}
                 alt="profile"
               />
@@ -71,7 +71,7 @@ const Navbar = () => {
               ) : (
                 <Link href="/edit-phoneNumber" className="relative mt-3 mb-5">
                   <div className="text-[#7A7886] text-base text-center">
-                    Edit
+                    Add Phone Number
                   </div>
                 </Link>
               )}

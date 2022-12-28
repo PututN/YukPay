@@ -16,11 +16,14 @@ import profile3 from "../assets/Images/profile3.png";
 import logo_Adobe from "../assets/Images/logo_Adobe.png";
 import Image from "next/image";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
 import withAuth from "../components/hoc/withAuth";
+import axiosHelper from "../helper/axios.helper";
+import { useState, useEffect } from "react";
+import jwt_decode from "jwt-decode"
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -29,6 +32,26 @@ const Home = () => {
     dispatch(logout());
     router.push("/login");
   };
+  const [profile, setProfile] = useState({});
+  console.log(profile)
+  const token = useSelector((state) => state.auth.token);
+
+  const fetchProfile = async () => {
+    try {
+      const response = await axiosHelper.get("/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setProfile(response.data.results);
+    } catch (error) {
+      if (error) throw error;
+    }
+  };
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
 
   return (
     <>
@@ -74,10 +97,12 @@ const Home = () => {
           <div className="h-1/4 bg-[#6379F4] flex rounded-3xl p-6 text-white mb-4">
             <div className="flex-1 flex justify-center flex-col">
               <div className="text-lg">Balance</div>
-              <div className="text-4xl font-bold mt-5 mb-2">Rp120.000</div>
-              <div className="text-sm font-semibold text-[#DFDCDC]">
-                +62 813-9387-7946
-              </div>
+              <div className="text-4xl font-bold mt-5 mb-2">Rp {profile?.balance}</div>
+              {profile?.phoneNumber ? (<div className="text-sm font-semibold text-[#DFDCDC]">
+                {profile.phoneNumber}
+              </div>):(<Link href="/edit-phoneNumber" className="text-sm font-semibold text-[#DFDCDC]">
+                Add Phone Number
+              </Link>)}
             </div>
             <div className="md:block hidden">
               <Link

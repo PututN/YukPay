@@ -12,8 +12,22 @@ import png_phone1 from "../assets/Images/png_phone1.png";
 import png_phone2 from "../assets/Images/png_phone2.png";
 import { ArrowLeft, ArrowRight } from "react-feather";
 import profile from "../assets/Images/profile.png";
+import React,{ useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 const Index = () => {
+  const token = useSelector((state) => state.auth.token);
+
+  const router= useRouter()
+  
+  React.useEffect (() => {
+    if(token) {
+      router.replace('/home')
+    }
+  },[token, router])
+  
+
   return (
     <>
       <nav className="flex bg-[#B1B2FF] px-16 py-8">
