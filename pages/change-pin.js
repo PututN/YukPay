@@ -21,14 +21,14 @@ import profile2 from "../assets/Images/profile2.png";
 import profile4 from "../assets/Images/profile4.png";
 import profile5 from "../assets/Images/profile5.png";
 import ModalTopUp from "../components/ModalTopUp";
-import { useState } from "react";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import withAuth from "../components/hoc/withAuth";
 
 const Change_Pin = () => {
   const [newPin, setNewPin] = useState([]);
@@ -245,4 +245,4 @@ const Change_Pin = () => {
   );
 };
 
-export default Change_Pin;
+export default withAuth(Change_Pin);

@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import NavbarHidden from "../components/NavbarHidden"
+import withAuth from "../components/hoc/withAuth";
 
 const History = () => {
   const dispatch = useDispatch();
@@ -229,4 +230,4 @@ const History = () => {
   );
 };
 
-export default History;
+export default withAuth(History);

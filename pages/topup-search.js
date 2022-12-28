@@ -21,6 +21,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
+import withAuth from "../components/hoc/withAuth";
 
 const Topup_Search = () => {
   const [showModal, setShowModal] = useState(false);
@@ -121,4 +122,4 @@ const Topup_Search = () => {
   );
 };
 
-export default Topup_Search;
+export default withAuth(Topup_Search);

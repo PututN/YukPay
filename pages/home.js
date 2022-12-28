@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
+import withAuth from "../components/hoc/withAuth";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -241,4 +242,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withAuth(Home);

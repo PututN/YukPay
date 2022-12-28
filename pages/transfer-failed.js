@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
+import withAuth from "../components/hoc/withAuth";
 
 const Transfer_Failed = () => {
   const dispatch = useDispatch();
@@ -178,4 +179,4 @@ const Transfer_Failed = () => {
   );
 };
 
-export default Transfer_Failed;
+export default withAuth(Transfer_Failed);

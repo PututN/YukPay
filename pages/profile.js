@@ -26,6 +26,7 @@ import axiosHelper from "../helper/axios.helper";
 import jwt_decode from "jwt-decode";
 import user from "../assets/Images/user.png";
 import Navbar from "../components/Navbar";
+import withAuth from "../components/hoc/withAuth";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -191,4 +192,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);

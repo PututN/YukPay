@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import NavbarHidden from "../components/NavbarHidden";
+import withAuth from "../components/hoc/withAuth";
 
 const Transfer_Search = () => {
   const dispatch = useDispatch();
@@ -244,4 +245,4 @@ const Transfer_Search = () => {
   );
 };
 
-export default Transfer_Search;
+export default withAuth(Transfer_Search);

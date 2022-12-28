@@ -30,6 +30,7 @@ import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import withAuth from "../components/hoc/withAuth";
 
 
 const Edit_PhoneNumber = () => {
@@ -42,9 +43,9 @@ const Edit_PhoneNumber = () => {
 //add phone number
 const token = useSelector((state) => state.auth.token);
 const decode = jwt_decode(token);
-console
 
 const [phoneNumber, setPhoneNumber] = useState(null)
+console.log(phoneNumber)
 const addPhoneNumber = async (e) => {
   e.preventDefault()
   //axios post have 3 parameter (endpoint, data post, token)
@@ -172,4 +173,4 @@ const addPhoneNumber = async (e) => {
   );
 };
 
-export default Edit_PhoneNumber;
+export default withAuth(Edit_PhoneNumber);

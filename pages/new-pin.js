@@ -27,6 +27,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
+import withAuth from "../components/hoc/withAuth";
 
 
 const New_Pin = () => {
@@ -185,4 +186,4 @@ const New_Pin = () => {
   );
 };
 
-export default New_Pin;
+export default withAuth(New_Pin);

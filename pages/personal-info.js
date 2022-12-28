@@ -25,6 +25,7 @@ import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
 import axiosHelper from "../helper/axios.helper";
 import jwt_decode from "jwt-decode";
+import withAuth from "../components/hoc/withAuth";
 
 const Personal_Info = () => {
   const dispatch = useDispatch();
@@ -190,4 +191,4 @@ const Personal_Info = () => {
   );
 };
 
-export default Personal_Info;
+export default withAuth(Personal_Info);

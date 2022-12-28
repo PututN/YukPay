@@ -2,15 +2,68 @@ import phone from "../assets/Images/phone.png";
 import line from "../assets/Images/line.png";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, {useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
+
 
 const PinBlank = () => {
-  const inputRef = React.useRef(null);
+  const router = useRouter()
+  const [pin, setNewPin] = useState([]);
+  console.log(pin);
+  const inputRef1 = React.useRef(null);
+  const inputRef2 = React.useRef(null);
+  const inputRef3 = React.useRef(null);
+  const inputRef4 = React.useRef(null);
+  const inputRef5 = React.useRef(null);
+  const inputRef6 = React.useRef(null);
   const handleOnChange = (e) => {
     if (e.target.value.length > 1) {
       e.target.value = e.target.value.slice(0, 1);
-      inputRef.current.value = e.target.value;
     }
+    const pinInput = {
+      1: inputRef1,
+      2: inputRef2,
+      3: inputRef3,
+      4: inputRef4,
+      5: inputRef5,
+      6: inputRef6,
+    };
+    const currentInput = Number(e.target.name);
+    if (e.target.value.length) {
+      pinInput[currentInput + 1]?.current?.focus();
+    } else {
+      pinInput[currentInput - 1]?.current?.focus();
+      if (currentInput < 6) {
+        for (let i = currentInput; i <= 6; i++) {
+          pinInput[i].current.value = "";
+        }
+      }
+    }
+    let setPin = "";
+    for (let i = 1; i <= 6; i++) {
+      setPin += pinInput[i].current.value;
+      setNewPin(setPin);
+    }
+  };
+  const token = useSelector((state) => state.auth.token);
+  const decode = jwt_decode(token);
+  const userId = decode.id
+  const changeNewPin = async (e) => {
+    e.preventDefault();
+    //axios post have 3 parameter (endpoint, data post, token)
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_URL}/auth/set-pin`,
+      { userId, pin },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(data);
   };
 
   return (
@@ -55,57 +108,66 @@ const PinBlank = () => {
             </div>
             <form>
               <div className="flex text-center w-full mb-10">
-                <div className="flex-1">
+                <div className="flex-1 ">
                   <input
-                    ref={inputRef}
+                    ref={inputRef1}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg shadow-lg font-bold border-2 border-[#A9A9A999]"
+                    name="1"
+                    className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]"
                   ></input>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 ">
                   <input
-                    ref={inputRef}
+                    ref={inputRef2}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg shadow-lg font-bold border-2 border-[#A9A9A999]	"
+                    name="2"
+                    className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 ">
                   <input
-                    ref={inputRef}
+                    ref={inputRef3}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg shadow-lg font-bold  border-2 border-[#A9A9A999]	"
+                    name="3"
+                    className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 ">
                   <input
-                    ref={inputRef}
+                    ref={inputRef4}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg shadow-lg font-bold  border-2 border-[#A9A9A999]"
+                    name="4"
+                    className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]"
                   ></input>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 ">
                   <input
-                    ref={inputRef}
+                    ref={inputRef5}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg shadow-lg font-bold  border-2 border-[#A9A9A999]	"
+                    name="5"
+                    className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 ">
                   <input
-                    ref={inputRef}
+                    ref={inputRef6}
                     type="number"
                     onChange={handleOnChange}
-                    className="w-10 h-10 text-center rounded-md text-lg shadow-lg font-bold border-2 border-[#A9A9A999]	"
+                    name="6"
+                    className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
               </div>
 
-              <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white">
+              <button
+                onClick={changeNewPin}
+                className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white"
+              >
                 Confirm
               </button>
             </form>

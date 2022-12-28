@@ -28,6 +28,8 @@ import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import withAuth from "../components/hoc/withAuth";
+
 
 const Change_Password = () => {
   const [type, setType] = useState("password");
@@ -222,4 +224,4 @@ const Change_Password = () => {
   );
 };
 
-export default Change_Password;
+export default withAuth(Change_Password);

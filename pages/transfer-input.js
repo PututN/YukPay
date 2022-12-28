@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import NavbarHidden from "../components/NavbarHidden";
+import withAuth from "../components/hoc/withAuth";
 
 const Transfer_Input = () => {
   const dispatch = useDispatch();
@@ -175,4 +176,4 @@ const Transfer_Input = () => {
   );
 };
 
-export default Transfer_Input;
+export default withAuth(Transfer_Input);
