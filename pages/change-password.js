@@ -43,7 +43,6 @@ const Change_Password = () => {
 
   const token = useSelector((state) => state.auth.token);
   const decode = jwt_decode(token);
-  console;
 
   const [currentPassword, setCurrentPassword] = useState(null);
   const [newPassword, setNewPassword] = useState(null);

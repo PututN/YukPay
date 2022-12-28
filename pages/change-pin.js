@@ -23,17 +23,49 @@ import profile5 from "../assets/Images/profile5.png";
 import ModalTopUp from "../components/ModalTopUp";
 import { useState } from "react";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const Change_Pin = () => {
-  const inputRef = React.useRef(null);
+  const [newPin, setNewPin] = useState([]);
+  console.log(newPin);
+  const inputRef1 = React.useRef(null);
+  const inputRef2 = React.useRef(null);
+  const inputRef3 = React.useRef(null);
+  const inputRef4 = React.useRef(null);
+  const inputRef5 = React.useRef(null);
+  const inputRef6 = React.useRef(null);
   const handleOnChange = (e) => {
     if (e.target.value.length > 1) {
       e.target.value = e.target.value.slice(0, 1);
-      inputRef.current.value = e.target.value;
+    }
+    const pinInput = {
+      1: inputRef1,
+      2: inputRef2,
+      3: inputRef3,
+      4: inputRef4,
+      5: inputRef5,
+      6: inputRef6,
+    };
+    const currentInput = Number(e.target.name);
+    if (e.target.value.length) {
+      pinInput[currentInput + 1]?.current?.focus();
+    } else {
+      pinInput[currentInput - 1]?.current?.focus();
+      if (currentInput < 6) {
+        for (let i = currentInput; i <= 6; i++) {
+          pinInput[i].current.value = "";
+        }
+      }
+    }
+    let pin = "";
+    for (let i = 1; i <= 6; i++) {
+      pin += pinInput[i].current.value;
+      setNewPin(pin);
     }
   };
   const dispatch = useDispatch();
@@ -42,10 +74,28 @@ const Change_Pin = () => {
     dispatch(logout());
     router.push("/login");
   };
+  const token = useSelector((state) => state.auth.token);
+  const decode = jwt_decode(token);
+
+  console.log(newPin);
+  const changeNewPin = async (e) => {
+    e.preventDefault();
+    //axios post have 3 parameter (endpoint, data post, token)
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_URL}/profile/change-pin`,
+      { newPin },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(data);
+  };
 
   return (
     <>
-<Navbar />
+      <Navbar />
       <section className="bg-[#FAFCFF] px-16 py-8 flex">
         <div className="w-1/4 bg-white flex justify-between h-screen flex-col py-9 rounded-3xl mr-4">
           <div>
@@ -99,140 +149,68 @@ const Change_Pin = () => {
             steps.
           </div>
           <div className="flex justify-center">
-            {/* <form className="w-3/4 flex flex-col justify-center gap-12">
-              <div className="relative">
-                <input
-                  name="password"
-                  type={type}
-                  className="py-3 px-12  w-full border-b-2 focus:outline-none"
-                  placeholder="Current password"
-                ></input>
-                <Lock
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%]"
-                />
-                {type === "password" ? (
-                  <EyeOff
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
-                    onClick={showPassword}
-                  />
-                ) : (
-                  <Eye
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
-                    onClick={showPassword}
-                  />
-                )}
-              </div>
-              <div className="relative">
-                <input
-                  name="password"
-                  type={type}
-                  className="py-3 px-12  w-full border-b-2 focus:outline-none"
-                  placeholder="New password"
-                ></input>
-                <Lock
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%]"
-                />
-                {type === "password" ? (
-                  <EyeOff
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
-                    onClick={showPassword}
-                  />
-                ) : (
-                  <Eye
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
-                    onClick={showPassword}
-                  />
-                )}
-              </div>
-
-              <div className="relative">
-                <input
-                  name="password"
-                  type={type}
-                  className="py-3 px-12  w-full border-b-2 focus:outline-none"
-                  placeholder="Repeat new password"
-                ></input>
-                <Lock
-                  style={{ color: "#A9A9A999" }}
-                  className="absolute top-[23%]"
-                />
-                {type === "password" ? (
-                  <EyeOff
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
-                    onClick={showPassword}
-                  />
-                ) : (
-                  <Eye
-                    className="absolute right-0 top-[23%] r cursor-pointer"
-                    style={{ color: "#A9A9A999" }}
-                    onClick={showPassword}
-                  />
-                )}
-              </div>
-              <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white shadow-lg">
-                Change Password
-              </button>
-            </form> */}
             <form className="w-1/2 flex flex-col justify-center gap-12">
               <div className="flex text-center w-full mb-10">
                 <div className="flex-1 ">
                   <input
-                    ref={inputRef}
+                    ref={inputRef1}
                     type="number"
                     onChange={handleOnChange}
+                    name="1"
                     className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]"
                   ></input>
                 </div>
                 <div className="flex-1 ">
                   <input
-                    ref={inputRef}
+                    ref={inputRef2}
                     type="number"
                     onChange={handleOnChange}
+                    name="2"
                     className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
                 <div className="flex-1 ">
                   <input
-                    ref={inputRef}
+                    ref={inputRef3}
                     type="number"
                     onChange={handleOnChange}
+                    name="3"
                     className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
                 <div className="flex-1 ">
                   <input
-                    ref={inputRef}
+                    ref={inputRef4}
                     type="number"
                     onChange={handleOnChange}
+                    name="4"
                     className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]"
                   ></input>
                 </div>
                 <div className="flex-1 ">
                   <input
-                    ref={inputRef}
+                    ref={inputRef5}
                     type="number"
                     onChange={handleOnChange}
+                    name="5"
                     className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
                 <div className="flex-1 ">
                   <input
-                    ref={inputRef}
+                    ref={inputRef6}
                     type="number"
                     onChange={handleOnChange}
+                    name="6"
                     className="w-10 h-10 shadow-lg text-center rounded-md text-lg font-bold border-2 border-[#A9A9A999]	"
                   ></input>
                 </div>
               </div>
 
-              <button className="w-full bg-[#B1B2FF] rounded-xl py-3 text-lg font-bold text-white">
+              <button
+                onClick={changeNewPin}
+                className="w-full bg-[#B1B2FF] rounded-xl py-3 text-lg font-bold text-white"
+              >
                 Continue
               </button>
             </form>
