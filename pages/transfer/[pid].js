@@ -24,6 +24,7 @@ import axiosHelper from "../../helper/axios.helper";
 import jwt_decode from "jwt-decode";
 import { useParams } from "react-router-dom";
 import profileUser from "../../assets/Images/user.png";
+import { transferInput } from "../../redux/reducers/transferReducers";
 
 const Transfer_Input = () => {
   const dispatch = useDispatch();
@@ -57,7 +58,10 @@ const Transfer_Input = () => {
       fetchProfile();
     }
   }, [pid]);
-  // console.log(profile)
+
+  //input transfer
+  const [money, setMoney] = useState(null);
+  const [text, setText] = useState("");
 
   //show balance from profile
   const [balanced, setBalanced] = useState({});
@@ -76,12 +80,15 @@ const Transfer_Input = () => {
   useEffect(() => {
     fetchBalance();
   }, []);
-  console.log(balanced);
 
   //shoemodal
   const [showModal, setShowModal] = useState(false);
+
+  const newAmount = parseInt(money)
+  
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch(transferInput ({amount:newAmount, notes:text, recipientId:pid}))
   };
   return (
     <>
@@ -185,6 +192,8 @@ const Transfer_Input = () => {
               <input
                 type="number"
                 placeholder="0.00"
+                name="amount"
+                onChange={(e) => setMoney(e.target.value)}
                 className="text-center text-4xl font-bold text-[#B5BDCC] bg-[#FAFCFF] md:bg-white"
               ></input>
               <div className="text-base font-bold text-[#3A3D42] hidden md:block">
@@ -198,6 +207,8 @@ const Transfer_Input = () => {
                 <input
                   className="text-[#A9A9A999] w-full py-3 px-9 border-[#A9A9A999] border-b-2 text-base bg-[#FAFCFF] md:bg-white"
                   type="text"
+                  name="notes"
+                  onChange={(e) => setText(e.target.value)}
                   placeholder="Add some notes"
                 ></input>
               </div>
