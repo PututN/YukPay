@@ -42,7 +42,6 @@ const Edit_PhoneNumber = () => {
   };
 //add phone number
 const token = useSelector((state) => state.auth.token);
-const decode = jwt_decode(token);
 
 const [phoneNumber, setPhoneNumber] = useState(null)
 console.log(phoneNumber)
@@ -58,13 +57,6 @@ const addPhoneNumber = async (e) => {
   )
   console.log(data)
 }
-
-// const [error, setError] = useState(false)
-// const errorHandler = () => {
-
-// }
-
-
 
   return (
     <>

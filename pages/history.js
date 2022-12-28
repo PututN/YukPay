@@ -35,32 +35,32 @@ const History = () => {
       <section className="bg-[#FAFCFF] lg:px-16 md:px-5 px-3 py-8 flex">
         <div className="w-1/4 bg-white justify-between h-screen flex-col py-9 rounded-3xl mr-4 hidden md:flex">
           <div>
-            <div className="flex w-full">
+            <Link href="/home" className="flex w-full">
               <div className="px-6 flex mb-16 border-l-4 focus:outline-none border-[#6379F4]">
                 <Grid className="mr-6" style={{ color: "#6379F4" }} />
                 <div className="text-lg font-bold	text-[#6379F4]">Dashboard</div>
               </div>
-            </div>
-            <div>
+            </Link>
+            <Link href="/transfer-search">
               <div className="px-6 flex mb-16">
                 <ArrowUp className="mr-6" />
                 <div className="text-lg font-bold	text-[#3A3D42CC]">
                   Transfer
                 </div>
               </div>
-            </div>
-            <div>
+            </Link>
+            <Link href="/topup-search">
               <div className="px-6 flex mb-16">
                 <Plus className="mr-6" />
                 <div className="text-lg font-bold	text-[#3A3D42CC]">Top Up</div>
               </div>
-            </div>
-            <div>
+            </Link>
+            <Link href="/profile">
               <div className="px-6 flex mb-16">
                 <User className="mr-6" />
                 <div className="text-lg font-bold	text-[#3A3D42CC]">Profile</div>
               </div>
-            </div>
+            </Link>
           </div>
           <div>
             <button onClick={handleLogout} className="flex px-6">
