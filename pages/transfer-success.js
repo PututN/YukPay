@@ -14,11 +14,14 @@ import Image from "next/image";
 import profile_nav from "../assets/Images/profile_nav.png";
 import Link from "next/link";
 import profile2 from "../assets/Images/profile2.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
 import withAuth from "../components/hoc/withAuth";
+import React, { useState, useEffect } from "react";
+import jwt_decode from "jwt-decode";
+import axiosHelper from "../helper/axios.helper";
 
 const Transfer_Success = () => {
   const dispatch = useDispatch();
@@ -27,10 +30,34 @@ const Transfer_Success = () => {
     dispatch(logout());
     router.push("/login");
   };
+  const [profile, setProfile] = useState([]);
+  const token = useSelector((state) => state.auth.token);
+  const decode = jwt_decode(token);
+  // const { amount, recipientId, notes } = useSelector(
+  //   (state) => state.transaction
+  // );
 
+  const fetchProfile = async () => {
+    try {
+      const response = await axiosHelper.get("/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setProfile(response.data.results);
+    } catch (error) {
+      if (error) throw error;
+    }
+  };
+  useEffect(() => {
+    fetchProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log(profile);
   return (
     <>
-    <Navbar />
+      <Navbar />
       <section className="bg-[#FAFCFF] px-16 py-8 flex">
         <div className="w-1/4 bg-white flex justify-between h-screen flex-col py-9 rounded-3xl mr-4">
           <div>

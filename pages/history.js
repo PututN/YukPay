@@ -57,6 +57,7 @@ const History = () => {
         if (error) throw error;
       }
     };
+    fetchTransactionHistory();
   }, [page]);
 
   // //Handle page
