@@ -2,15 +2,14 @@ import phone from "../assets/Images/phone.png";
 import line from "../assets/Images/line.png";
 import Image from "next/image";
 import Link from "next/link";
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-
 const PinBlank = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [pin, setNewPin] = useState([]);
   console.log(pin);
   const inputRef1 = React.useRef(null);
@@ -50,7 +49,7 @@ const PinBlank = () => {
   };
   const token = useSelector((state) => state.auth.token);
   const decode = jwt_decode(token);
-  const userId = decode.id
+  const userId = decode.id;
   const changeNewPin = async (e) => {
     e.preventDefault();
     //axios post have 3 parameter (endpoint, data post, token)
@@ -63,8 +62,14 @@ const PinBlank = () => {
         },
       }
     );
-    router.push('/home')
+    router.push("/pin-success");
   };
+
+  React.useEffect(() => {
+    if (token) {
+      router.replace("/home");
+    }
+  }, [token, router]);
 
   return (
     <>

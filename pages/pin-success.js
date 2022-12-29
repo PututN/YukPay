@@ -3,8 +3,19 @@ import line from "../assets/Images/line.png";
 import check from "../assets/Images/check.png";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import React, {useEffect} from "react";
+import { useSelector } from "react-redux";
+
 
 const PinSuccess = () => {
+  const router = useRouter()
+  const token = useSelector((state)=>state.auth.token)
+  React.useEffect (() => {
+    if(token) {
+      router.replace('/home')
+    }
+  },[token, router])
   return (
     <>
       <div className="flex m-0 h-screen">
@@ -46,12 +57,18 @@ const PinSuccess = () => {
               Your PIN was successfully created and you can now access all the
               features in YukPay. Login to your new account and start exploring!
             </div>
-            <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold mt-10 text-white hidden md:block">
+            <Link
+              href="/home"
+              className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold mt-10 text-white hidden md:block"
+            >
               Go To Dashboard
-            </button>
-            <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold mt-10 text-white block md:hidden">
-              Login Now
-            </button>
+            </Link>
+            <Link
+              href="/home"
+              className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold mt-10 text-white block md:hidden"
+            >
+              Go To Dashboard
+            </Link>
           </div>
         </div>
       </div>
