@@ -59,48 +59,56 @@ const Navbar = () => {
   };
   useEffect(() => {
     fetchNotif();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       <nav>
-        <div className="px-16 py-8 flex items-center justify-center rounded-b-2xl">
-          <div className="flex-1 text-[#6379F4] text-3xl font-bold">YukPay</div>
-          <div className="flex gap-5 justify-center items-center">
-            {profile?.picture ? (
-              <Image
-                className="w-[50px] h-[50px] rounded-lg"
-                width={50}
-                height={50}
-                src={
-                  `${process.env.NEXT_PUBLIC_URL}/upload/` + profile?.picture
-                }
-                alt="profile"
-              />
-            ) : (
-              <Image
-                className="w-[50px] h-[50px] rounded-lg"
-                width={50}
-                height={50}
-                src={user}
-                alt="profile"
-              />
-            )}
-            <div>
-              <div className="text-[#3A3D42] text-lg font-bold">
-                {profile?.firstName} {profile?.lastName}
-              </div>
-              {profile?.phoneNumber ? (
-                <div className="text-sm">{profile?.phoneNumber}</div>
+        <div className="md:justify-center md:px-16 px-3 py-8 flex items-center justify-start rounded-b-2xl md:bg-white bg-[#FAFCFF]">
+          <div className="flex-1 text-[#6379F4] text-3xl font-bold md:block hidden">
+            YukPay
+          </div>
+          <div className="flex gap-5 items-center w-full md:w-auto">
+            <div className="flex gap-3 flex-1">
+              {profile?.picture ? (
+                <Image
+                  className="w-[50px] h-[50px] rounded-lg"
+                  width={50}
+                  height={50}
+                  src={
+                    `${process.env.NEXT_PUBLIC_URL}/upload/` + profile?.picture
+                  }
+                  alt="profile"
+                />
               ) : (
-                <Link href="/edit-phoneNumber" className="relative mt-3 mb-5">
-                  <div className="text-[#7A7886] text-base text-center">
-                    Add Phone Number
-                  </div>
-                </Link>
+                <Image
+                  className="w-[50px] h-[50px] rounded-lg"
+                  width={50}
+                  height={50}
+                  src={user}
+                  alt="profile"
+                />
               )}
+              <div>
+                <div className="text-sm block md:hidden">Hello,</div>
+                <div className="text-[#3A3D42] text-lg font-bold">
+                  {profile?.firstName} {profile?.lastName}
+                </div>
+                {profile?.phoneNumber ? (
+                  <div className="text-sm hidden md:block">
+                    {profile?.phoneNumber}
+                  </div>
+                ) : (
+                  <Link href="/edit-phoneNumber" className="relative mt-3 mb-5">
+                    <div className="text-[#7A7886] text-base text-center hidden md:block">
+                      Add Phone Number
+                    </div>
+                  </Link>
+                )}
+              </div>
             </div>
+
             <div className="dropdown dropdown-end">
               <div tabIndex={0} className="btn btn-ghost rounded-btn">
                 <Bell />
