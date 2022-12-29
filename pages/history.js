@@ -7,6 +7,7 @@ import {
   LogOut,
   ArrowDown,
   ArrowLeft,
+  ArrowRight,
 } from "react-feather";
 import Image from "next/image";
 import profile_nav from "../assets/Images/profile_nav.png";
@@ -15,11 +16,16 @@ import logo_Netflix from "../assets/Images/logo_Netflix.png";
 import profile3 from "../assets/Images/profile3.png";
 import logo_Adobe from "../assets/Images/logo_Adobe.png";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
-import NavbarHidden from "../components/NavbarHidden"
+import NavbarHidden from "../components/NavbarHidden";
 import withAuth from "../components/hoc/withAuth";
+import FooterYukPay from "../components/FooterYukPay";
+import jwt_decode from "jwt-decode";
+import React, { useState, useEffect } from "react";
+import axiosHelper from "../helper/axios.helper";
+import pictureUser from "../assets/Images/user.png";
 
 const History = () => {
   const dispatch = useDispatch();
@@ -29,9 +35,41 @@ const History = () => {
     router.push("/login");
   };
 
+  const token = useSelector((state) => state.auth.token);
+  const userInfo = jwt_decode(token);
+
+  //get transaction history
+  const [page, setPage] = useState(1);
+  const [transactions, setTransaction] = useState([]);
+  useEffect(() => {
+    const fetchTransactionHistory = async () => {
+      try {
+        const response = await axiosHelper.get(
+          `/transactions?page=${page}&limit=5`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setTransaction(response.data.results);
+      } catch (error) {
+        if (error) throw error;
+      }
+    };
+    fetchTransactionHistory();
+  }, [token,page]);
+
+  // //Handle page
+  const handlePrev = () => {
+    setPage(page - 1);
+  };
+  const handleNext = () => {
+    setPage(page + 1);
+  };
   return (
     <>
-    <NavbarHidden />
+      <NavbarHidden />
       <section className="bg-[#FAFCFF] lg:px-16 md:px-5 px-3 py-8 flex">
         <div className="w-1/4 bg-white justify-between h-screen flex-col py-9 rounded-3xl mr-4 hidden md:flex">
           <div>
@@ -91,103 +129,80 @@ const History = () => {
           <div className="text-[#7A7886] text-base mb-8 block md:hidden">
             This Week
           </div>
-          <div className="flex mb-8 bg-white p-3 md:p-0 shadow-lg md:shadow-none rounded-md md:rounded-none">
-            <div className="flex-1">
-              <div className="flex gap-3">
-                <Image src={profile1} alt="profile" />
-                <div className="flex flex-col justify-center">
-                  <div className="text-[#4D4B57] md:text-base text-sm font-bold">
-                    Samuel Suhi
+          {transactions?.map((transaction) => (
+            <div
+              key={transaction.id}
+              className="flex mb-8 bg-white p-3 md:p-0 shadow-lg md:shadow-none rounded-md md:rounded-none"
+            >
+              <div className="flex-1">
+                <div className="flex gap-3">
+                  {transaction?.recipientPicture ? (
+                    <Image
+                      src={
+                        `${process.env.NEXT_PUBLIC_URL}/upload/` +
+                        transaction?.recipientPicture
+                      }
+                      width={56}
+                      height={56}
+                      alt="profile"
+                    />
+                  ) : (
+                    <Image
+                      src={pictureUser}
+                      width={56}
+                      height={56}
+                      alt="profile"
+                    />
+                  )}
+                  <div className="flex flex-col justify-center">
+                    <div className="text-[#4D4B57] md:text-base text-sm font-bold">
+                      {transaction?.recipientname}
+                    </div>
+                    <div className="text-[#7A7886] text-sm">
+                      {transaction?.notes}
+                    </div>
                   </div>
-                  <div className="text-[#7A7886] text-sm">Accept</div>
                 </div>
               </div>
-            </div>
-            <div className="text-[#1EC15F] font-bold md:text-base text-sm flex items-center">
-              +Rp50.000
-            </div>
-          </div>
-          <div className="flex mb-8 bg-white p-3 md:p-0 shadow-lg md:shadow-none rounded-md md:rounded-none">
-            <div className="flex-1">
-              <div className="flex gap-3">
-                <Image src={logo_Netflix} alt="netflix" />
-                <div className="flex flex-col justify-center">
-                  <div className="text-[#4D4B57] md:text-base text-sm font-bold">
-                    Netflix
-                  </div>
-                  <div className="text-[#7A7886] text-sm">Transfer</div>
+              {transaction?.recipientId === userInfo.id ? (
+                <div className="text-[#1EC15F] font-bold sm:text-base text-sm flex items-center">
+                  Rp.{Number(transaction?.amount).toLocaleString("id")}{" "}
                 </div>
-              </div>
-            </div>
-            <div className="text-[#FF5B37] font-bold md:text-base text-sm flex items-center">
-              -Rp149.000
-            </div>
-          </div>
-          <div className="text-[#7A7886] text-base mb-8 block md:hidden">
-            This Month
-          </div>
-          <div className="flex mb-8 bg-white p-3 md:p-0 shadow-lg md:shadow-none rounded-md md:rounded-none">
-            <div className="flex-1">
-              <div className="flex gap-3">
-                <Image src={profile3} alt="profile" />
-                <div className="flex flex-col justify-center">
-                  <div className="text-[#4D4B57] md:text-base text-sm font-bold">
-                    Christine Mar...
-                  </div>
-                  <div className="text-[#7A7886] text-sm">Accept</div>
+              ) : (
+                <div className="text-[#FF5B37] font-bold sm:text-base text-sm flex items-center">
+                  Rp.{Number(transaction?.amount).toLocaleString("id")}{" "}
                 </div>
-              </div>
+              )}
             </div>
-            <div className="text-[#1EC15F] font-bold md:text-base text-sm flex items-center">
-              +Rp150.000
-            </div>
-          </div>
-          <div className="flex mb-8 bg-white p-3 md:p-0 shadow-lg md:shadow-none rounded-md md:rounded-none">
-            <div className="flex-1">
-              <div className="flex gap-3">
-                <Image src={logo_Adobe} alt="profile" />
-                <div className="flex flex-col justify-center">
-                  <div className="text-[#4D4B57] md:text-base text-sm font-bold">
-                    Robert Chandler
-                  </div>
-                  <div className="text-[#7A7886] text-sm">Topup</div>
-                </div>
-              </div>
-            </div>
-            <div className="text-[#FF5B37] font-bold md:text-base text-sm flex items-center">
-              +Rp249.000
-            </div>
-          </div>
-          <div className="md:flex mb-8 hidden">
-            <div className="flex-1">
-              <div className="flex gap-3">
-                <Image src={profile1} alt="profile" />
-                <div className="flex flex-col justify-center">
-                  <div className="text-[#4D4B57] md:text-base text-sm font-bold">
-                    Samuel Suhi
-                  </div>
-                  <div className="text-[#7A7886] text-sm">Accept</div>
-                </div>
-              </div>
-            </div>
-            <div className="text-[#1EC15F] font-bold md:text-base text-sm flex items-center">
-              +Rp50.000
-            </div>
-          </div>
-          <div className="md:flex mb-8 hidden">
-            <div className="flex-1">
-              <div className="flex gap-3">
-                <Image src={profile1} alt="profile" />
-                <div className="flex flex-col justify-center">
-                  <div className="text-[#4D4B57] md:text-base text-sm font-bold">
-                    Samuel Suhi
-                  </div>
-                  <div className="text-[#7A7886] text-sm">Accept</div>
-                </div>
-              </div>
-            </div>
-            <div className="text-[#1EC15F] font-bold md:text-base text-sm flex items-center">
-              +Rp50.000
+          ))}
+          <div className="flex justify-center items-center">
+            <div className="flex gap-5">
+              {page > 1 ? (
+                <button
+                  onClick={handlePrev}
+                  className="btn btn-primary flex gap-3 py-2 px-4 rounded-lg bg-red shadow-lg justify-center items-center"
+                >
+                  <ArrowLeft className="text-white" />
+                  <div className="text-lg font-bold">Prev</div>
+                </button>
+              ) : (
+                <button
+                  onClick={handlePrev}
+                  disabled={true}
+                  className="btn btn-primary flex gap-3 py-2 px-4 rounded-lg bg-red shadow-lg justify-center items-center"
+                >
+                  <ArrowLeft className="text-white" />
+                  <div className="text-lg font-bold">Prev</div>
+                </button>
+              )}
+              <button
+                onClick={handleNext}
+                disabled={transactions.length < 5}
+                className="btn btn-primary flex gap-3 py-2 px-4 rounded-lg bg-red shadow-lg justify-center items-center"
+              >
+                <div className="text-lg font-bold">Next</div>
+                <ArrowRight className="text-white" />
+              </button>
             </div>
           </div>
           <div className="flex md:hidden gap-3 items-center justify-center">
@@ -197,13 +212,13 @@ const History = () => {
             <div className="bg-white rounded-md p-3 shadow-lg">
               <ArrowDown className="text-[#1EC15F]" />
             </div>
-            <div className="bg-white rounded-md py-3 px-6 shadow-lg text-[#6379F4] text-lg font-bold">
+            <div className="bg-white rounded-md py-3 px-6 shadow-lg text-[#3c4264] text-lg font-bold">
               Filter by Date
             </div>
           </div>
         </div>
       </section>
-      <footer className="bg-[#6379F4] px-24 py-5 md:block hidden">
+      <div className="bg-[#6379F4] px-24 py-5 md:block hidden">
         <div className="hidden">
           <Link href="/" className="text-white text-3xl">
             YukPay
@@ -225,7 +240,7 @@ const History = () => {
             <Link href="/">contact@YukPay.com</Link>
           </div>
         </div>
-      </footer>
+      </div>
     </>
   );
 };

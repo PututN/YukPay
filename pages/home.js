@@ -51,6 +51,7 @@ const Home = () => {
   };
   useEffect(() => {
     fetchProfile();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //get transaction history
@@ -69,6 +70,7 @@ const Home = () => {
   };
   useEffect(() => {
     fetchTransactionHistory();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log(transactions);
