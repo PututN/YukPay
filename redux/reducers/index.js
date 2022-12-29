@@ -3,6 +3,7 @@ import {persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import authReducers from './authReducers'
 import transferReducers from "./transferReducers"
+// import profileReducers from './profileReducers'
 
 const persistConfig = {
   key: "auth",
@@ -10,7 +11,9 @@ const persistConfig = {
 }
 const reducer = combineReducers({
   auth: persistReducer(persistConfig, authReducers),
-  transfer : transferReducers
+  transfer : transferReducers,
+  // profile:profileReducers
+
 })
 
 export default reducer

@@ -23,7 +23,8 @@ import Navbar from "../components/Navbar";
 import withAuth from "../components/hoc/withAuth";
 import axiosHelper from "../helper/axios.helper";
 import { useState, useEffect } from "react";
-import jwt_decode from "jwt-decode"
+import jwt_decode from "jwt-decode";
+import pictureUser from "../assets/Images/user.png";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -33,8 +34,8 @@ const Home = () => {
     router.push("/login");
   };
   const [profile, setProfile] = useState({});
-  console.log(profile)
   const token = useSelector((state) => state.auth.token);
+  const userInfo = jwt_decode(token);
 
   const fetchProfile = async () => {
     try {
@@ -52,10 +53,29 @@ const Home = () => {
     fetchProfile();
   }, []);
 
+  //get transaction history
+  const [transactions, setTransaction] = useState([]);
+  const fetchTransactionHistory = async () => {
+    try {
+      const response = await axiosHelper.get("/transactions?page=1&limit=5", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setTransaction(response.data.results);
+    } catch (error) {
+      if (error) throw error;
+    }
+  };
+  useEffect(() => {
+    fetchTransactionHistory();
+  }, []);
+
+  console.log(transactions);
 
   return (
     <>
-    <Navbar />
+      <Navbar />
       <section className="bg-[#FAFCFF] lg:px-16 md:px-5 px-3 py-8 flex">
         <div className="w-1/4 bg-white justify-between h-screen flex-col py-9 rounded-3xl mr-4 md:flex hidden">
           <div>
@@ -97,12 +117,21 @@ const Home = () => {
           <div className="h-1/4 bg-[#6379F4] flex rounded-3xl p-6 text-white mb-4">
             <div className="flex-1 flex justify-center flex-col">
               <div className="text-lg">Balance</div>
-              <div className="text-4xl font-bold mt-5 mb-2">Rp {profile?.balance}</div>
-              {profile?.phoneNumber ? (<div className="text-sm font-semibold text-[#DFDCDC]">
-                {profile.phoneNumber}
-              </div>):(<Link href="/edit-phoneNumber" className="text-sm font-semibold text-[#DFDCDC]">
-                Add Phone Number
-              </Link>)}
+              <div className="text-4xl font-bold mt-5 mb-2">
+              Rp.{Number(profile?.balance).toLocaleString("id")}{" "}
+              </div>
+              {profile?.phoneNumber ? (
+                <div className="text-sm font-semibold text-[#DFDCDC]">
+                  {profile.phoneNumber}
+                </div>
+              ) : (
+                <Link
+                  href="/edit-phoneNumber"
+                  className="text-sm font-semibold text-[#DFDCDC]"
+                >
+                  Add Phone Number
+                </Link>
+              )}
             </div>
             <div className="md:block hidden">
               <Link
@@ -172,70 +201,52 @@ const Home = () => {
                   See All
                 </Link>
               </div>
-              <div className="flex mb-8 bg-[#FFFFFF] md:p-0 p-3 shadow-lg md:shadow-none rounded-md">
-                <div className="flex-1">
-                  <div className="flex gap-3">
-                    <Image src={profile1} alt="profile" />
-                    <div className="flex flex-col justify-center">
-                      <div className="text-[#4D4B57] sm:text-base text-sm font-bold">
-                        Samuel Suhi
+              {transactions?.map((transaction) => (
+                <div
+                  key={transaction.id}
+                  className="flex mb-8 bg-[#FFFFFF] md:p-0 p-3 shadow-lg md:shadow-none rounded-md"
+                >
+                  <div className="flex-1">
+                    <div className="flex gap-3">
+                      {transaction?.recipientPicture ? (
+                        <Image
+                          src={
+                            `${process.env.NEXT_PUBLIC_URL}/upload/` +
+                            transaction?.recipientPicture
+                          }
+                          width={56}
+                          height={56}
+                          alt="profile"
+                        />
+                      ) : (
+                        <Image
+                          src={pictureUser}
+                          width={56}
+                          height={56}
+                          alt="profile"
+                        />
+                      )}
+                      <div className="flex flex-col justify-center">
+                        <div className="text-[#4D4B57] sm:text-base text-sm font-bold">
+                          {transaction?.recipientname}
+                        </div>
+                        <div className="text-[#7A7886] text-sm">
+                          {transaction?.notes}
+                        </div>
                       </div>
-                      <div className="text-[#7A7886] text-sm">Accept</div>
                     </div>
                   </div>
-                </div>
-                <div className="text-[#1EC15F] font-bold sm:text-base text-sm flex items-center">
-                  +Rp50.000
-                </div>
-              </div>
-              <div className="flex mb-8 bg-[#FFFFFF] md:p-0 p-3 shadow-lg md:shadow-none rounded-md">
-                <div className="flex-1">
-                  <div className="flex gap-3">
-                    <Image src={logo_Netflix} alt="netflix" />
-                    <div className="flex flex-col justify-center">
-                      <div className="text-[#4D4B57] sm:text-base text-sm font-bold">
-                        Netflix
-                      </div>
-                      <div className="text-[#7A7886] text-sm">Transfer</div>
+                  {transaction?.recipientId === userInfo.id ? (
+                    <div className="text-[#1EC15F] font-bold sm:text-base text-sm flex items-center">
+                      Rp.{Number(transaction?.amount).toLocaleString("id")}{" "}
                     </div>
-                  </div>
-                </div>
-                <div className="text-[#FF5B37] font-bold sm:text-base text-sm flex items-center">
-                  -Rp149.000
-                </div>
-              </div>
-              <div className="flex mb-8 bg-[#FFFFFF] md:p-0 p-3 shadow-lg md:shadow-none rounded-md">
-                <div className="flex-1">
-                  <div className="flex gap-3">
-                    <Image src={profile3} alt="profile" />
-                    <div className="flex flex-col justify-center">
-                      <div className="text-[#4D4B57] sm:text-base text-sm font-bold">
-                        Christine Mar...
-                      </div>
-                      <div className="text-[#7A7886] text-sm">Accept</div>
+                  ) : (
+                    <div className="text-[#FF5B37] font-bold sm:text-base text-sm flex items-center">
+                      Rp.{Number(transaction?.amount).toLocaleString("id")}{" "}
                     </div>
-                  </div>
+                  )}
                 </div>
-                <div className="text-[#1EC15F] font-bold sm:text-base text-sm flex items-center">
-                  +Rp150.000
-                </div>
-              </div>
-              <div className="flex mb-8 bg-[#FFFFFF] md:p-0 p-3 shadow-lg md:shadow-none rounded-md">
-                <div className="flex-1">
-                  <div className="flex gap-3">
-                    <Image src={logo_Adobe} alt="profile" />
-                    <div className="flex flex-col justify-center">
-                      <div className="text-[#4D4B57] sm:text-base text-sm font-bold">
-                        Robert Chandler
-                      </div>
-                      <div className="text-[#7A7886] text-sm">Topup</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="text-[#FF5B37] font-bold sm:text-base text-sm flex items-center">
-                  +Rp249.000
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

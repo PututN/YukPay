@@ -200,6 +200,7 @@ const SignUp = () => {
                     {error}
                   </div>
                   )}
+                  
 
                   <button disabled={!dirty || loading} className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white">
                     Sign Up
