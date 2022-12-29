@@ -9,6 +9,7 @@ import {
   ArrowDown,
   Search,
   ArrowLeft,
+  ArrowRight,
 } from "react-feather";
 import Image from "next/image";
 import profile_nav from "../assets/Images/profile_nav.png";
@@ -35,14 +36,14 @@ const Transfer_Search = () => {
     dispatch(logout());
     router.push("/login");
   };
-
+  const [page, setPage] = useState(1);
   //get all transaction
   const token = useSelector((state) => state.auth.token);
   const [transaction, setTransaction] = useState([]);
   const fetchTransaction = async () => {
     try {
       const res = await axiosHelper.get(
-        "/transactions/recipient?page=1&limit=5",
+        `/transactions/recipient?page=${page}&limit=5`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -56,8 +57,15 @@ const Transfer_Search = () => {
   };
   useEffect(() => {
     fetchTransaction();
-  }, []);
-  console.log(transaction);
+  }, [page]);
+
+  // //Handle page
+  const handlePrev = () => {
+    setPage(page - 1);
+  };
+  const handleNext = () => {
+    setPage(page + 1);
+  };
 
   return (
     <>
@@ -198,66 +206,44 @@ const Transfer_Search = () => {
                     <div className="text-[#4D4B57] text-base font-bold">
                       {user?.firstName} {user?.lastName}
                     </div>
-                    <div className="text-[#7A7886] text-sm">{user?.phoneNumber}</div>
+                    <div className="text-[#7A7886] text-sm">
+                      {user?.phoneNumber}
+                    </div>
                   </div>
                 </div>
               </div>
             </Link>
           ))}
-          {/* <Link
-            href="/transfer-input"
-            className="flex mb-8 shadow-md p-3 bg-white rounded-lg"
-          >
-            <div className="flex-1">
-              <div className="flex gap-3">
-                <Image width={56} height={56} src={profile4} alt="profile" />
-                <div className="flex flex-col justify-center">
-                  <div className="text-[#4D4B57] text-base font-bold">
-                    Jessica Keen
-                  </div>
-                  <div className="text-[#7A7886] text-sm">
-                    +62 811-3452-5252
-                  </div>
-                </div>
-              </div>
+          <div className="flex justify-center items-center">
+            <div className="flex gap-5">
+              {page > 1 ? (
+                <button
+                  onClick={handlePrev}
+                  className="btn btn-primary flex gap-3 py-2 px-4 rounded-lg bg-red shadow-lg justify-center items-center"
+                >
+                  <ArrowLeft className="text-white" />
+                  <div className="text-lg font-bold">Prev</div>
+                </button>
+              ) : (
+                <button
+                  onClick={handlePrev}
+                  disabled={true}
+                  className="btn btn-primary flex gap-3 py-2 px-4 rounded-lg bg-red shadow-lg justify-center items-center"
+                >
+                  <ArrowLeft className="text-white" />
+                  <div className="text-lg font-bold">Prev</div>
+                </button>
+              )}
+              <button
+                onClick={handleNext}
+                disabled={transaction.length < 5}
+                className="btn btn-primary flex gap-3 py-2 px-4 rounded-lg bg-red shadow-lg justify-center items-center"
+              >
+                <div className="text-lg font-bold">Next</div>
+                <ArrowRight className="text-white" />
+              </button>
             </div>
-          </Link>
-          <Link
-            href="/transfer-input"
-            className="flex mb-8 shadow-md p-3 bg-white rounded-lg"
-          >
-            <div className="flex-1">
-              <div className="flex gap-3">
-                <Image width={56} height={56} src={profile5} alt="profile" />
-                <div className="flex flex-col justify-center">
-                  <div className="text-[#4D4B57] text-base font-bold">
-                    Michael Le
-                  </div>
-                  <div className="text-[#7A7886] text-sm">
-                    +62 810-4224-4613
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Link>
-          <Link
-            href="/transfer-input"
-            className="flex mb-8 shadow-md p-3 bg-white rounded-lg"
-          >
-            <div className="flex-1">
-              <div className="flex gap-3">
-                <Image width={56} height={56} src={profile1} alt="profile" />
-                <div className="flex flex-col justify-center">
-                  <div className="text-[#4D4B57] text-base font-bold">
-                    Samuel Suhi
-                  </div>
-                  <div className="text-[#7A7886] text-sm">
-                    +62 813-8492-9994
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Link> */}
+          </div>
         </div>
       </section>
 
