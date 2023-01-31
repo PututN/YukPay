@@ -11,6 +11,8 @@ import {
   ArrowDown,
 } from "react-feather";
 import Image from "next/image";
+import moment from "moment";
+import user from "../assets/Images/user.png";
 import profile_nav from "../assets/Images/profile_nav.png";
 import Link from "next/link";
 import profile2 from "../assets/Images/profile2.png";
@@ -33,10 +35,10 @@ const Transfer_Success = () => {
   const [profile, setProfile] = useState([]);
   const token = useSelector((state) => state.auth.token);
   const decode = jwt_decode(token);
-  // const { amount, recipientId, notes } = useSelector(
-  //   (state) => state.transaction
-  // );
 
+  const { amount, recipientId, notes, time } = useSelector(
+    (state) => state.transfer
+  );
   const fetchProfile = async () => {
     try {
       const response = await axiosHelper.get("/profile", {
@@ -49,12 +51,28 @@ const Transfer_Success = () => {
       if (error) throw error;
     }
   };
+
+  const [recipient, setRecipient] = useState({});
+  const fetchRecipient = async () => {
+    try {
+      const response = await axiosHelper.get(
+        `/transactions/recipient/${recipientId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setRecipient(response.data.results);
+    } catch (error) {
+      if (error) throw error;
+    }
+  };
   useEffect(() => {
     fetchProfile();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    fetchRecipient();
+  }, [recipientId]);
 
-  console.log(profile);
   return (
     <>
       <Navbar />
@@ -112,7 +130,7 @@ const Transfer_Success = () => {
               <div className="flex flex-col justify-center">
                 <div className=" text-[#7A7886] text-sm">Amount</div>
                 <div className="text-[#4D4B57] text-xl font-bold">
-                  Rp100.000
+                  Rp{Number(amount).toLocaleString("id")}
                 </div>
               </div>
             </div>
@@ -121,7 +139,9 @@ const Transfer_Success = () => {
             <div className="flex gap-3">
               <div className="flex flex-col justify-center">
                 <div className=" text-[#7A7886] text-sm">Balance Left</div>
-                <div className="text-[#4D4B57] text-xl font-bold">Rp20.000</div>
+                <div className="text-[#4D4B57] text-xl font-bold">
+                  Rp{Number(profile?.balance).toLocaleString("id")}
+                </div>
               </div>
             </div>
           </div>
@@ -129,9 +149,7 @@ const Transfer_Success = () => {
             <div className="flex gap-3">
               <div className="flex flex-col justify-center">
                 <div className=" text-[#7A7886] text-sm">Date & Time</div>
-                <div className="text-[#4D4B57] text-xl font-bold">
-                  May 11, 2020 - 12.20
-                </div>
+                <div className="text-[#4D4B57] text-xl font-bold">{time}</div>
               </div>
             </div>
           </div>
@@ -139,9 +157,7 @@ const Transfer_Success = () => {
             <div className="flex gap-3">
               <div className="flex flex-col justify-center">
                 <div className=" text-[#7A7886] text-sm">Notes</div>
-                <div className="text-[#4D4B57] text-xl font-bold">
-                  For buying some socks
-                </div>
+                <div className="text-[#4D4B57] text-xl font-bold">{notes}</div>
               </div>
             </div>
           </div>
@@ -153,13 +169,31 @@ const Transfer_Success = () => {
           <div className="flex mb-8 shadow-md p-3">
             <div className="flex-1">
               <div className="flex gap-3">
-                <Image src={profile2} alt="profile" />
+                {recipient?.picture ? (
+                  <Image
+                    className="w-[75px] h-[75px] rounded-lg"
+                    width={50}
+                    height={50}
+                    src={
+                      `${process.env.NEXT_PUBLIC_URL}/upload/` +
+                      recipient?.picture
+                    }
+                    alt="profile"
+                  />
+                ) : (
+                  <Image
+                    className="w-[75px] h-[75px] rounded-lg"
+                    src={user}
+                    alt="profile"
+                  />
+                )}
+
                 <div className="flex flex-col justify-center">
                   <div className="text-[#4D4B57] text-base font-bold">
-                    Momo Taro
+                    {recipient?.firstName} {recipient?.lastName}
                   </div>
                   <div className="text-[#7A7886] text-sm">
-                    +62 812-4343-6731
+                    {recipient?.phoneNumber}
                   </div>
                 </div>
               </div>

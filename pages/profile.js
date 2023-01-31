@@ -62,28 +62,41 @@ const Profile = () => {
   const [disabled, setDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-
+  const [errorLimit, setErrorLimit] = useState(false);
   const uploadPicture = async (e) => {
     e.preventDefault();
     setLoading("Loading...");
     const file = e.target.picture.files[0];
-    const formData = new FormData();
-    formData.append("picture", file);
-    const { data } = await axios.post(
-      `${process.env.NEXT_PUBLIC_URL}/profile`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    console.log(file);
+    try {
+      if (file.size <= 50000) {
+        const formData = new FormData();
+        formData.append("picture", file);
+        const { data } = await axios.post(
+          `${process.env.NEXT_PUBLIC_URL}/profile`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setLoading(false);
+        setSuccess("Update Photo Success");
+        setTimeout(() => {
+          setSuccess(false);
+          fetchProfile();
+        }, 3000);
+      } else {
+        setLoading(false);
+        setErrorLimit("Please upload photo less than 5 MB");
+        setTimeout(() => {
+          setErrorLimit(false);
+        }, 3000);
       }
-    );
-    setLoading(false);
-    setSuccess("Update Photo Success");
-    setTimeout(() => {
-      setSuccess(false);
-      fetchProfile();
-    }, 3000);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -135,7 +148,7 @@ const Profile = () => {
           <div className="flex flex-col items-center">
             {profile?.picture ? (
               <Image
-                className="w-[50px] h-[50px] rounded-lg"
+                className="w-[100px] h-[100px] rounded-lg"
                 width={50}
                 height={50}
                 src={
@@ -145,7 +158,7 @@ const Profile = () => {
               />
             ) : (
               <Image
-                className="w-[50px] h-[50px] rounded-lg"
+                className="w-[100px] h-[100px] rounded-lg"
                 src={user}
                 alt="profile"
               />
@@ -158,7 +171,7 @@ const Profile = () => {
               <input
                 type="file"
                 name="picture"
-                onChange={(e) => setDisabled(false)}
+                onChange={() => setDisabled(false)}
                 accept="image/png, image/jpeg, image/jpg"
               ></input>
               <button
@@ -177,6 +190,11 @@ const Profile = () => {
               {success && (
                 <div className="text-lg font-bold text-center text-green-400">
                   {success}
+                </div>
+              )}
+              {errorLimit && (
+                <div className="text-lg font-bold text-center text-red-400">
+                  {errorLimit}
                 </div>
               )}
             </form>

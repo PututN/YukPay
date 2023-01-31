@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { X } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
 import { pinInput } from "../redux/reducers/transferReducers";
 import { transferAction } from "../redux/actions/transferAction";
 import { useRouter } from "next/router";
+import axiosHelper from "../helper/axios.helper";
+import moment from 'moment'
 
 const Modal = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -43,6 +45,27 @@ const Modal = ({ onClose }) => {
       setNewPin(pin);
     }
   };
+  const [profile, setProfile] = useState({});
+  const token = useSelector((state) => state.auth.token);
+
+  const fetchProfile = async () => {
+    try {
+      const response = await axiosHelper.get("/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setProfile(response.data.results);
+    } catch (error) {
+      if (error) throw error;
+    }
+  };
+  const validatedPin = profile?.pin;
+  console.log(validatedPin);
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
   React.useEffect(() => {
     document.body.className = "overflow-hidden";
     return () => {
@@ -53,13 +76,39 @@ const Modal = ({ onClose }) => {
   const { amount, pin, recipientId, notes } = useSelector(
     (state) => state.transfer
   );
+  const time = moment(new Date()).format('LLLL')
 
-  const router = useRouter()
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorPin, setErrorPin] = useState(false);
+  const router = useRouter();
   const submitTransfer = (e) => {
     e.preventDefault();
-    dispatch(transferAction({ amount, pin:newPin, recipientId, notes, cb:() => {
-      router.push("/transfer-success")
-    } }));
+    if (validatedPin == newPin) {
+      setLoading("Loading...");
+      dispatch(pinInput({ pin: validatedPin, time }));
+      dispatch(
+        transferAction({
+          amount,
+          pin: validatedPin,
+          recipientId,
+          notes,
+          cb: () => {
+            router.push("/transfer-success");
+          },
+        })
+      );
+      setLoading(false);
+      setSuccess("Transfer Success!");
+      setTimeout(() => {
+        setSuccess(false);
+      }, 3000);
+    } else {
+      setErrorPin("Wrong pin!");
+      setTimeout(() => {
+        setErrorPin(false);
+      }, 3000);
+    }
   };
 
   return (
@@ -140,6 +189,21 @@ const Modal = ({ onClose }) => {
                 Continue
               </button>
             </div>
+            {loading && (
+              <div className="font-bold text-lg text-center text-blue-400">
+                {loading}
+              </div>
+            )}
+            {success && (
+              <div className="font-bold text-lg text-center text-green-400">
+                {success}
+              </div>
+            )}
+            {errorPin && (
+              <div className="font-bold text-lg text-center text-red-400">
+                {errorPin}
+              </div>
+            )}
           </form>
         </div>
       </div>

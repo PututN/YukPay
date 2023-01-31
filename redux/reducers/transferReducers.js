@@ -7,6 +7,7 @@ const initialState = {
   notes: "",
   recipientId: null,
   pin: "",
+  time: "",
 };
 
 const transactionSlice = createSlice({
@@ -22,10 +23,10 @@ const transactionSlice = createSlice({
       return state;
     },
     pinInput: (state, action) => {
-      const { pin } = action.payload;
+      const { pin, time } = action.payload;
       state = {
         ...state,
-        ...{ pin },
+        ...{ pin, time },
       };
       return state;
     },
