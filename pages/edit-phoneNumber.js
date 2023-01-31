@@ -32,7 +32,6 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import withAuth from "../components/hoc/withAuth";
 
-
 const Edit_PhoneNumber = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -40,27 +39,42 @@ const Edit_PhoneNumber = () => {
     dispatch(logout());
     router.push("/login");
   };
-//add phone number
-const token = useSelector((state) => state.auth.token);
+  //add phone number
+  const token = useSelector((state) => state.auth.token);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-const [phoneNumber, setPhoneNumber] = useState(null)
-console.log(phoneNumber)
-const addPhoneNumber = async (e) => {
-  e.preventDefault()
-  //axios post have 3 parameter (endpoint, data post, token)
-  const{data} = await axios.post(
-    `${process.env.NEXT_PUBLIC_URL}/profile/phone-number`, {phoneNumber}, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  const [phoneNumber, setPhoneNumber] = useState(null);
+  const addPhoneNumber = async (e) => {
+    e.preventDefault();
+    if (!phoneNumber) {
+      setError("Please fill phone number");
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+    } else {
+      setLoading("Loading...");
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_URL}/profile/phone-number`,
+        { phoneNumber },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setLoading(false);
+      setSuccess("Phone number updated");
+      setTimeout(() => {
+        setSuccess(false);
+      }, 3000);
     }
-  )
-  console.log(data)
-}
+  };
 
   return (
     <>
-    <Navbar />
+      <Navbar />
       <section className="bg-[#FAFCFF] px-16 py-8 flex">
         <div className="w-1/4 bg-white flex justify-between h-screen flex-col py-9 rounded-3xl mr-4">
           <div>
@@ -116,12 +130,7 @@ const addPhoneNumber = async (e) => {
           <div className="flex justify-center">
             <form className="w-1/2 flex flex-col justify-center gap-12">
               <div className="flex relative border-b-2 border-[#A9A9A999] py-3 pl-8 focus:outline-none">
-                <Phone
-                  className="absolute left-[0] peer-focus:text-[#6379F4] text-[#A9A9A999]"
-                />
-                {/* <div className="mr-3 text-[#3A3D42] font-semibold text-base">
-                  +62
-                </div> */}
+                <Phone className="absolute left-[0] peer-focus:text-[#6379F4] text-[#A9A9A999]" />
                 <input
                   type="number"
                   placeholder="Enter your phone number"
@@ -130,9 +139,27 @@ const addPhoneNumber = async (e) => {
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 ></input>
               </div>
-              <button onClick={addPhoneNumber} className="w-full bg-[#B1B2FF] rounded-xl py-3 text-lg font-bold text-white">
+              <button
+                onClick={addPhoneNumber}
+                className="w-full btn bg-[#6379F4] rounded-xl text-lg font-bold text-white"
+              >
                 Edit Phone Number
               </button>
+              {error && (
+                <div className="text-lg font-bold text-center text-red-400">
+                  {error}
+                </div>
+              )}
+              {loading && (
+                <div className="text-lg font-bold text-center text-blue-400">
+                  {loading}
+                </div>
+              )}
+              {success && (
+                <div className="text-lg font-bold text-center text-green-400">
+                  {success}
+                </div>
+              )}
             </form>
           </div>
         </div>

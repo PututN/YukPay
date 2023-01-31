@@ -59,16 +59,16 @@ const Profile = () => {
     fetchProfile();
   }, []);
 
-  //upload picture
-  const [picture, setPicture] = useState([]);
-  console.log(picture);
+  const [disabled, setDisabled] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const uploadPicture = async (e) => {
     e.preventDefault();
-    const file = e.target.picture.files[0]
+    setLoading("Loading...");
+    const file = e.target.picture.files[0];
     const formData = new FormData();
     formData.append("picture", file);
-    //axios post have 3 parameter (endpoint, data post, token)
     const { data } = await axios.post(
       `${process.env.NEXT_PUBLIC_URL}/profile`,
       formData,
@@ -78,7 +78,12 @@ const Profile = () => {
         },
       }
     );
-    console.log(data);
+    setLoading(false);
+    setSuccess("Update Photo Success");
+    setTimeout(() => {
+      setSuccess(false);
+      fetchProfile();
+    }, 3000);
   };
 
   return (
@@ -133,7 +138,9 @@ const Profile = () => {
                 className="w-[50px] h-[50px] rounded-lg"
                 width={50}
                 height={50}
-                src={`${process.env.NEXT_PUBLIC_URL}/upload/` + profile?.picture}
+                src={
+                  `${process.env.NEXT_PUBLIC_URL}/upload/` + profile?.picture
+                }
                 alt="profile"
               />
             ) : (
@@ -143,19 +150,35 @@ const Profile = () => {
                 alt="profile"
               />
             )}
-            <form onSubmit={uploadPicture} encType="multipart/form-data" className="flex flex-col">
+            <form
+              onSubmit={uploadPicture}
+              encType="multipart/form-data"
+              className="flex flex-col"
+            >
               <input
                 type="file"
                 name="picture"
-                // onChange={(file) => setPicture(file)}
+                onChange={(e) => setDisabled(false)}
+                accept="image/png, image/jpeg, image/jpg"
               ></input>
-              <button type="submit" className="relative mt-3 mb-5">
-                <Edit2
-                  className="absolute w-4 h-4 top-[20%] left-[25%]"
-                  style={{ color: "#7A7886" }}
-                />
-                <div className="text-[#7A7886] text-base">Upload Image</div>
+              <button
+                disabled={disabled}
+                type="submit"
+                className="relative mt-3 mb-5 btn bg-[#6379F4]"
+              >
+                <Edit2 className="absolute w-6 text-white top-2.5 left-12" />
+                <div className="text-white text-base">Upload Image</div>
               </button>
+              {loading && (
+                <div className="text-lg font-bold text-center text-blue-400">
+                  {loading}
+                </div>
+              )}
+              {success && (
+                <div className="text-lg font-bold text-center text-green-400">
+                  {success}
+                </div>
+              )}
             </form>
             <div className="text-[#4D4B57] font-bold">
               {profile?.firstName} {profile?.lastName}

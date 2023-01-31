@@ -145,7 +145,7 @@ React.useEffect (() => {
                   <button
                     type="submit"
                     disabled={!dirty ||loading}
-                    className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white"
+                    className="w-full bg-[#6379F4] btn rounded-md py-3 text-lg font-bold text-white"
                   >
                     Login
                   </button>

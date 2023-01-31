@@ -83,12 +83,26 @@ const Transfer_Input = () => {
 
   //shoemodal
   const [showModal, setShowModal] = useState(false);
-
-  const newAmount = parseInt(money)
-  
+  const [error, setError] = useState(false);
+  const newAmount = parseInt(money);
+  console.log(error);
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(transferInput ({amount:newAmount, notes:text, recipientId:pid}))
+    if (newAmount <= balanced?.balance) {
+      dispatch(
+        transferInput({ amount: newAmount, notes: text, recipientId: pid })
+      );
+      setShowModal(true)
+    } else {
+      setError(
+        `Please transfer less than Rp. ${Number(
+          balanced?.balance
+        ).toLocaleString("id")}`
+      );
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+    }
   };
   return (
     <>
@@ -181,13 +195,13 @@ const Transfer_Input = () => {
             </div>
           </div>
           <div className="text-[#7C7895] font-bold text-base block md:hidden text-center">
-            Rp{balanced?.balance} Available
+            Rp{Number(balanced?.balance).toLocaleString("id")} Available
           </div>
           <div className="text-[#7A7886] text-sm mb-5 w-1/2 md:block hidden">
             Type the amount you want to transfer and then press continue to the
             next steps.
           </div>
-          <form onSubmit={handleSubmit}>
+          <form>
             <div className="flex flex-col items-center justify-center gap-10 mt-10 mb-24">
               <input
                 type="number"
@@ -197,7 +211,7 @@ const Transfer_Input = () => {
                 className="text-center text-4xl font-bold text-[#B5BDCC] bg-[#FAFCFF] md:bg-white"
               ></input>
               <div className="text-base font-bold text-[#3A3D42] hidden md:block">
-                Rp{balanced?.balance} Available
+                Rp{Number(balanced?.balance).toLocaleString("id")} Available
               </div>
               <div className="relative md:w-1/2 w-full bg-[#FAFCFF] md:bg-white">
                 <Edit2
@@ -216,12 +230,17 @@ const Transfer_Input = () => {
             <div className="flex justify-end">
               <button
                 className="bg-[#6379F4] px-7 py-2 rounded-md text-lg font-bold text-white"
-                onClick={() => setShowModal(!showModal)}
+                onClick={handleSubmit}
                 type="submit"
               >
                 Continue
               </button>
             </div>
+            {error && (
+              <div className="font-bold text-lg text-center text-red-400">
+                {error}
+              </div>
+            )}
           </form>
         </div>
       </section>

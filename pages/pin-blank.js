@@ -7,11 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import withAuth from '../components/hoc/withAuth'
 
 const PinBlank = () => {
   const router = useRouter();
   const [pin, setNewPin] = useState([]);
-  console.log(pin);
+  // console.log(pin);
   const inputRef1 = React.useRef(null);
   const inputRef2 = React.useRef(null);
   const inputRef3 = React.useRef(null);
@@ -48,8 +49,10 @@ const PinBlank = () => {
     }
   };
   const token = useSelector((state) => state.auth.token);
+   console.log(token)
   const decode = jwt_decode(token);
   const userId = decode.id;
+  console.log(userId)
   const changeNewPin = async (e) => {
     e.preventDefault();
     //axios post have 3 parameter (endpoint, data post, token)
@@ -65,11 +68,11 @@ const PinBlank = () => {
     router.push("/pin-success");
   };
 
-  React.useEffect(() => {
-    if (token) {
-      router.replace("/home");
-    }
-  }, [token, router]);
+  // React.useEffect(() => {
+  //   if (token) {
+  //     router.replace("/home");
+  //   }
+  // }, [token, router]);
 
   return (
     <>
@@ -171,7 +174,7 @@ const PinBlank = () => {
 
               <button
                 onClick={changeNewPin}
-                className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white"
+                className="w-full bg-[#6379F4] btn rounded-md py-3 text-lg font-bold text-white"
               >
                 Confirm
               </button>

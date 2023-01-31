@@ -7,10 +7,9 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 import { Formik, Form, Field } from "formik";
-import {SignupAction} from "../redux/actions/authAction"
-import { useRouter } from 'next/router'
+import { SignupAction } from "../redux/actions/authAction";
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-
 
 YupPassword(Yup);
 
@@ -33,7 +32,7 @@ const SignUp = () => {
   const showPassword = () => {
     type === "password" ? setType("text") : setType("password");
   };
-  const router = useRouter()
+  const router = useRouter();
   const dispatch = useDispatch();
   const { error, loading, token } = useSelector((state) => state.auth);
   const handleSubmit = (value) => {
@@ -41,15 +40,21 @@ const SignUp = () => {
     const lastName = value.lastName;
     const email = value.email;
     const password = value.password;
-    dispatch(SignupAction({ firstName, lastName, email, password, cb: () => router.push("/pin-blank")
-    }));
+    dispatch(
+      SignupAction({
+        firstName,
+        lastName,
+        email,
+        password,
+        cb: () => router.replace("/pin-blank"),
+      })
+    );
   };
-  React.useEffect (() => {
-    if(token) {
-      router.replace('/home')
+  React.useEffect(() => {
+    if (token) {
+      router.replace("/pin-blank");
     }
-  },[token, router])
-  
+  }, [token]);
 
   return (
     <>
@@ -99,7 +104,8 @@ const SignUp = () => {
                 password: "",
               }}
               validationSchema={RegisterEmployeeSchema}
-              onSubmit={handleSubmit}>
+              onSubmit={handleSubmit}
+            >
               {({ errors, touched, dirty }) => (
                 <Form>
                   <div className="md:hidden block relative mb-5">
@@ -109,9 +115,7 @@ const SignUp = () => {
                       className="w-full border-b-2 focus:outline-none focus:border-[#6379F4] peer  px-12 py-3 md:bg-[#FAFCFF] bg-white"
                       placeholder="Enter your username"
                     ></Field>
-                    <User
-                      className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]"
-                    />
+                    <User className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]" />
                   </div>
 
                   <div className="md:block hidden">
@@ -158,7 +162,9 @@ const SignUp = () => {
                       placeholder="Enter your e-mail"
                     ></Field>
                     {errors.email && touched.email ? (
-                      <div className="text-[#FF5B37] font-semibold">{errors.email}</div>
+                      <div className="text-[#FF5B37] font-semibold">
+                        {errors.email}
+                      </div>
                     ) : null}
                     <Mail
                       // style={{ color: "#A9A9A999" }}
@@ -196,13 +202,15 @@ const SignUp = () => {
                     )}
                   </div>
                   {error && (
-                  <div className="text-[#FF5B37] font-semibold text-lg text-center my-3">
-                    {error}
-                  </div>
+                    <div className="text-[#FF5B37] font-semibold text-lg text-center my-3">
+                      {error}
+                    </div>
                   )}
-                  
 
-                  <button disabled={!dirty || loading} className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white">
+                  <button
+                    disabled={!dirty || loading}
+                    className="w-full bg-[#6379F4] btn rounded-md py-3 text-lg font-bold text-white"
+                  >
                     Sign Up
                   </button>
                 </Form>

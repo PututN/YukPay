@@ -2,23 +2,26 @@
 import React, { useState } from "react";
 import { X } from "react-feather";
 import { useSelector } from "react-redux";
-import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const ModalTopUp = ({ isVisible, onClose }) => {
+  const router = useRouter();
   if (!isVisible) {
     return null;
   }
   //top up
   const token = useSelector((state) => state.auth.token);
-  const decode = jwt_decode(token);
 
   const [amount, setAmount] = useState(null);
-  console.log(amount);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   const transactionTopup = async (e) => {
     e.preventDefault();
-    //axios post have 3 parameter (endpoint, data post, token)
+    setDisabled(true);
+    setLoading("Loading...");
     const { data } = await axios.post(
       `${process.env.NEXT_PUBLIC_URL}/transactions/topup`,
       { amount },
@@ -28,7 +31,12 @@ const ModalTopUp = ({ isVisible, onClose }) => {
         },
       }
     );
-    console.log(data);
+    setLoading(false);
+    setSuccess(data.message);
+    setTimeout(() => {
+      setSuccess(false);
+      router.push("/home");
+    }, 3000);
   };
 
   return (
@@ -47,18 +55,31 @@ const ModalTopUp = ({ isVisible, onClose }) => {
           <form onSubmit={transactionTopup} className="flex flex-col w-full">
             <input
               name="amount"
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) =>
+                Number(setAmount(e.target.value)).toLocaleString("id")
+              }
               type="number"
               className="bg-[#A9A9A999] text-center w-full my-10 py-3 rounded-md"
             ></input>
             <div className="flex justify-end">
               <button
+                disabled={disabled}
                 type="submit"
-                className="bg-[#6379F4] px-7 py-2 rounded-md text-lg font-bold text-white"
+                className="bg-[#6379F4] btn px-7 py-2 rounded-md text-lg font-bold text-white"
               >
                 Submit
               </button>
             </div>
+            {loading && (
+              <div className="text-lg font-bold text-center text-blue-400">
+                {loading}
+              </div>
+            )}
+            {success && (
+              <div className="text-lg font-bold text-center text-green-400">
+                {success}
+              </div>
+            )}
           </form>
         </div>
       </div>
