@@ -151,7 +151,7 @@ const New_Pin = () => {
                 </div>
               </div>
 
-              <button className="w-full bg-[#B1B2FF] rounded-xl py-3 text-lg font-bold text-white">
+              <button className="w-full bg-[#6379F4] btn rounded-xl text-lg font-bold text-white">
                 Change PIN
               </button>
             </form>

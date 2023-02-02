@@ -188,7 +188,7 @@ const Change_Password = () => {
               </div>
               <button
                 onClick={changePassword}
-                className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold text-white shadow-lg"
+                className="w-full bg-[#6379F4] btn rounded-md text-lg font-bold text-white shadow-lg"
               >
                 Change Password
               </button>

@@ -96,18 +96,18 @@ const Transfer_Success = () => {
                 <div className="text-lg font-bold	text-[#6379F4]">Transfer</div>
               </Link>
             </div>
-            <div>
+            <Link href="/topup-search">
               <div className="px-6 flex mb-16">
                 <Plus className="mr-6" />
                 <div className="text-lg font-bold	text-[#3A3D42CC]">Top Up</div>
               </div>
-            </div>
-            <div>
+            </Link>
+            <Link href="/profile">
               <div className="px-6 flex mb-16">
                 <User className="mr-6" />
                 <div className="text-lg font-bold	text-[#3A3D42CC]">Profile</div>
               </div>
-            </div>
+            </Link>
           </div>
           <div>
             <button onClick={handleLogout} className="flex px-6">
@@ -211,9 +211,12 @@ const Transfer_Success = () => {
               />
             </div>
 
-            <button className="bg-[#6379F4] px-7 py-2 rounded-md text-lg font-bold text-white">
+            <Link
+              href="/home"
+              className="bg-[#6379F4] px-7 py-2 rounded-md text-lg font-bold text-white"
+            >
               Back to Home
-            </button>
+            </Link>
           </div>
         </div>
       </section>

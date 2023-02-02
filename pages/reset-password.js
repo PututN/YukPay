@@ -102,7 +102,7 @@ const ForgotPassword = () => {
                 )}
               </div>
             </form>
-            <button className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold mt-10 text-white">
+            <button className="w-full bg-[#6379F4] btn rounded-md py-3 text-lg font-bold mt-10 text-white">
               Reset Password
             </button>
           </div>

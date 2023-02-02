@@ -21,7 +21,7 @@ import profile2 from "../assets/Images/profile2.png";
 import profile4 from "../assets/Images/profile4.png";
 import profile5 from "../assets/Images/profile5.png";
 import ModalTopUp from "../components/ModalTopUp";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
 import { useRouter } from "next/router";
@@ -32,7 +32,6 @@ import withAuth from "../components/hoc/withAuth";
 
 const Change_Pin = () => {
   const [newPin, setNewPin] = useState([]);
-  console.log(newPin);
   const inputRef1 = React.useRef(null);
   const inputRef2 = React.useRef(null);
   const inputRef3 = React.useRef(null);
@@ -75,22 +74,36 @@ const Change_Pin = () => {
     router.push("/login");
   };
   const token = useSelector((state) => state.auth.token);
+  const [success, setSuccess] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
-  console.log(newPin);
   const changeNewPin = async (e) => {
     e.preventDefault();
-    //axios post have 3 parameter (endpoint, data post, token)
-    const { data } = await axios.post(
-      `${process.env.NEXT_PUBLIC_URL}/profile/change-pin`,
-      { newPin },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    console.log(data);
+    if(newPin.length === 6) {
+      setLoading('Loading...')
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_URL}/profile/change-pin`,
+        { newPin },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setLoading(false)
+      setSuccess(data.message)
+      setTimeout(() => {
+        setSuccess(false)
+      }, 3000);  
+    } else {
+      setError('Please input 6 number')
+      setTimeout(() => {
+        setError(false)
+      }, 3000);
+    }
   };
+
 
   return (
     <>
@@ -208,10 +221,13 @@ const Change_Pin = () => {
 
               <button
                 onClick={changeNewPin}
-                className="w-full bg-[#B1B2FF] rounded-xl py-3 text-lg font-bold text-white"
+                className="w-full bg-[#6379F4] btn rounded-xl text-lg font-bold text-white"
               >
                 Continue
               </button>
+              {loading && <div className="text-blue-400 font-bold text-lg text-center">{loading}</div>}
+              {success && <div className="text-green-400 font-bold text-lg text-center">{success}</div>}
+              {error && <div className="text-red-400 font-bold text-lg text-center">{error}</div>}
             </form>
           </div>
         </div>
