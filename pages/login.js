@@ -8,9 +8,9 @@ import * as Yup from "yup";
 import YupPassword from "yup-password";
 import { Formik, Form, Field } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import {useRouter} from "next/router"
-import {LoginAction} from "../redux/actions/authAction"
-
+import { useRouter } from "next/router";
+import { LoginAction } from "../redux/actions/authAction";
+import { setError } from "../redux/reducers/authReducers";
 
 YupPassword(Yup);
 
@@ -30,7 +30,7 @@ const Login = () => {
   const showPassword = () => {
     type === "password" ? setType("text") : setType("password");
   };
-  const router = useRouter()
+  const router = useRouter();
   const dispatch = useDispatch();
   const { error, loading, token } = useSelector((state) => state.auth);
   const handleSubmit = (value) => {
@@ -38,14 +38,26 @@ const Login = () => {
     const lastName = value.lastName;
     const email = value.email;
     const password = value.password;
-    dispatch(LoginAction({ firstName, lastName, email, password, cb: () => router.push("/home")
-    }));
+    dispatch(
+      LoginAction({
+        firstName,
+        lastName,
+        email,
+        password,
+        cb: () => router.push("/home"),
+      })
+    );
   };
-React.useEffect (() => {
-  if(token) {
-    router.replace('/home')
-  }
-},[token, router])
+  React.useEffect(() => {
+    if (token) {
+      router.replace("/home");
+    }
+    if (error) {
+      setTimeout(() => {
+        dispatch(setError());
+      }, 3000);
+    }
+  }, [token, error, router]);
   return (
     <>
       <div className="flex m-0 h-screen">
@@ -102,7 +114,9 @@ React.useEffect (() => {
                       placeholder="Enter your e-mail"
                     ></Field>
                     {errors.email && touched.email ? (
-                      <div className="text-[#FF5B37] font-semibold">{errors.email}</div>
+                      <div className="text-[#FF5B37] font-semibold">
+                        {errors.email}
+                      </div>
                     ) : null}
                     <Mail className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]" />
                   </div>
@@ -114,7 +128,9 @@ React.useEffect (() => {
                       placeholder="Enter your password"
                     ></Field>
                     {errors.password && touched.password ? (
-                      <div className="text-[#FF5B37] font-semibold">{errors.password}</div>
+                      <div className="text-[#FF5B37] font-semibold">
+                        {errors.password}
+                      </div>
                     ) : null}
                     <Lock className="absolute top-[23%] peer-focus:text-[#6379F4] text-[#A9A9A999]" />
                     {type === "password" ? (
@@ -132,20 +148,25 @@ React.useEffect (() => {
                     )}
                   </div>
                   <Link
-                    href="#"
+                    href="/forgot-password"
                     className="justify-end	flex text-sm font-semibold my-6"
                   >
                     Forgot password?
                   </Link>
                   {error && (
-                  <div className="text-[#FF5B37] font-semibold text-lg text-center my-3">
-                    {error}
-                  </div>
+                    <div className="text-[#FF5B37] font-semibold text-lg text-center my-3">
+                      {error}
+                    </div>
+                  )}
+                  {loading && (
+                    <div className="text-blue-400 text-center font-bold text-lg">
+                      Loading...
+                    </div>
                   )}
                   <button
                     type="submit"
-                    disabled={!dirty ||loading}
-                    className="w-full bg-[#6379F4] btn rounded-md py-3 text-lg font-bold text-white"
+                    disabled={!dirty || loading}
+                    className="w-full bg-[#6379F4] btn rounded-md text-lg font-bold text-white"
                   >
                     Login
                   </button>

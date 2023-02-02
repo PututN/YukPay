@@ -9,13 +9,13 @@ import { useSelector } from "react-redux";
 
 
 const PinSuccess = () => {
-  const router = useRouter()
-  const token = useSelector((state)=>state.auth.token)
-  React.useEffect (() => {
-    if(token) {
-      router.replace('/home')
-    }
-  },[token, router])
+  // const router = useRouter()
+  // const token = useSelector((state)=>state.auth.token)
+  // React.useEffect (() => {
+  //   if(token) {
+  //     router.replace('/home')
+  //   }
+  // },[token, router])
   return (
     <>
       <div className="flex m-0 h-screen">
@@ -59,13 +59,13 @@ const PinSuccess = () => {
             </div>
             <Link
               href="/home"
-              className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold mt-10 text-white hidden md:block"
+              className="w-full bg-[#6379F4] btn rounded-md text-lg font-bold text-white hidden md:block"
             >
               Go To Dashboard
             </Link>
             <Link
               href="/home"
-              className="w-full bg-[#B1B2FF] rounded-md py-3 text-lg font-bold mt-10 text-white block md:hidden"
+              className="w-full bg-[#6379F4] btn rounded-md text-lg font-bold text-white block md:hidden"
             >
               Go To Dashboard
             </Link>

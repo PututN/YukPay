@@ -174,7 +174,7 @@ const PinBlank = () => {
 
               <button
                 onClick={changeNewPin}
-                className="w-full bg-[#6379F4] btn rounded-md py-3 text-lg font-bold text-white"
+                className="w-full bg-[#6379F4] btn rounded-md text-lg font-bold text-white"
               >
                 Confirm
               </button>
