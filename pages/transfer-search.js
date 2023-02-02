@@ -137,41 +137,6 @@ const Transfer_Search = () => {
             />
           </div>
           <div className="block md:hidden text-[#514F5B] text-lg font-bold mb-3">
-            Quick Access
-          </div>
-          <div className="gap-3 flex md:hidden">
-            <Link
-              href="/transfer-input"
-              className="flex mb-8 shadow-md rounded-lg p-3 w-1/3 items-center justify-center flex-col bg-white"
-            >
-              <Image width={56} height={56} src={profile3} alt="profile" />
-              <div className="flex flex-col justify-center">
-                <div className="text-[#4D4B57] text-base font-bold">Michi</div>
-                <div className="text-[#7A7886] text-sm">-9994</div>
-              </div>
-            </Link>
-            <Link
-              href="/transfer-input"
-              className="flex mb-8 shadow-md rounded-lg p-3 w-1/3 items-center justify-center flex-col bg-white"
-            >
-              <Image width={56} height={56} src={profile2} alt="profile" />
-              <div className="flex flex-col justify-center">
-                <div className="text-[#4D4B57] text-base font-bold">Dody</div>
-                <div className="text-[#7A7886] text-sm">-3561</div>
-              </div>
-            </Link>
-            <Link
-              href="/transfer-input"
-              className="flex mb-8 shadow-md rounded-lg p-3 w-1/3 items-center justify-center flex-col bg-white"
-            >
-              <Image width={56} height={56} src={profile6} alt="profile" />
-              <div className="flex flex-col justify-center">
-                <div className="text-[#4D4B57] text-base font-bold">Rian</div>
-                <div className="text-[#7A7886] text-sm">-3822</div>
-              </div>
-            </Link>
-          </div>
-          <div className="block md:hidden text-[#514F5B] text-lg font-bold mb-3">
             All Contacts{" "}
           </div>
           <div className="text-[#8F8F8F] text-sm	block md:hidden mb-3">
