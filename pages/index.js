@@ -30,48 +30,48 @@ const Index = () => {
 
   return (
     <>
-      <nav className="flex bg-[#B1B2FF] px-16 py-8">
+      <nav className="flex bg-[#6379F4] items-center px-2 sm:px-8 lg:px-16 py-8">
         <div className="font-bold	text-3xl flex-1 text-white">YukPay</div>
         <div className="flex-row">
           <Link
             href="/login"
-            className="font-bold text-lg px-4 py-3 border-2 border-white text-white rounded-lg"
+            className="font-bold text-sm sm:text-lg sm:px-4 px-2 sm:py-3 py-1 border-2 border-white text-white rounded-lg"
           >
             Login
           </Link>
           <Link
             href="/sign-up"
-            className="font-bold text-lg px-4 py-3 bg-white text-[#B1B2FF] rounded-lg ml-5"
+            className="font-bold text-sm sm:text-lg sm:px-4 px-2 sm:py-3 py-1 bg-white text-[#6379F4] rounded-lg ml-2 sm:ml-5"
           >
             Sign Up
           </Link>
         </div>
       </nav>
-      <section className="bg-[#B1B2FF] px-16 flex pt-5">
-        <div className="flex justify-center flex-col mr-7">
-          <div className="font-extrabold text-3xl text-white mb-5">
+      <section className="bg-[#6379F4] px-8 lg:px-16 flex flex-col md:flex-row pt-5">
+        <div className="flex justify-center items-center md:items-start flex-col mr-7">
+          <div className="font-extrabold text-3xl text-center md:text-left text-white mb-5">
             Awesome App For Saving Time.
           </div>
-          <div className="text-lg text-white mb-5">
+          <div className="text-lg text-white text-center md:text-left mb-5">
             We bring you a mobile app for banking problems that oftenly wasting
             much of your times.
           </div>
           <Link
             href="#"
-            className="w-1/5 text-center bg-white px-5 py-3 rounded-lg text-lg text-[#6379F4]"
+            className="md:w-1/3 sm:w-1/2 w-2/3 text-center bg-white px-5 py-3 rounded-lg text-lg text-[#6379F4]"
           >
             Try It Free
           </Link>
         </div>
         <Image src={png_phone} alt="phone"></Image>
       </section>
-      <div className="bg-[#EFF0FC] px-16 py-10 flex items-center justify-center">
+      <div className="bg-[#EFF0FC] px-8 lg:px-16 py-10 flex items-center justify-center">
         <Image src={microsoft} alt="microsoft" className="" />
-        <Image src={dropbox} alt="dropbox" className="mx-14" />
+        <Image src={dropbox} alt="dropbox" className="md:mx-14 mx-3" />
         <Image src={hm} alt="hm" className="" />
-        <Image src={airbnb} alt="airbnb" className="ml-14" />
+        <Image src={airbnb} alt="airbnb" className="md:ml-14 ml-3 sm:block hidden" />
       </div>
-      <section className="bg-[#FAFCFF] px-16 py-28">
+      <section className="bg-[#FAFCFF] px-8 lg:px-16 py-8 md:py-28">
         <div className="font-extrabold text-3xl text-center">
           <span className="text-[#6379F4]">About</span> the Application.
         </div>
@@ -79,8 +79,8 @@ const Index = () => {
           We have some great features from the application and it’s totally free
           to use by all users around the world.
         </div>
-        <div className="flex">
-          <div className="bg-white rounded-lg flex w-1/3">
+        <div className="flex flex-col md:flex-row">
+          <div className="bg-white rounded-lg flex w-full md:w-1/3">
             <div className="px-2 py-5 flex flex-col items-center text-[#3A3D42]">
               <Image src={phone_bg} alt="phone" className="text-center" />
               <div className="font-bold text-2xl my-5">24/7 Support</div>
@@ -90,7 +90,7 @@ const Index = () => {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-lg flex w-1/3 mx-5">
+          <div className="bg-white rounded-lg flex w-full md:w-1/3 mx-0 md:mx-5 my-5 md:my-0">
             <div className="px-2 py-5 flex flex-col items-center text-[#3A3D42]">
               <Image src={lock_bg} alt="phone" className="text-center" />
               <div className="font-bold text-2xl my-5">Data Privacy</div>
@@ -100,7 +100,7 @@ const Index = () => {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-lg flex w-1/3">
+          <div className="bg-white rounded-lg flex w-full md:w-1/3">
             <div className="px-2 py-5 flex flex-col items-center text-[#3A3D42]">
               <Image src={download_bg} alt="phone" className="text-center" />
               <div className="font-bold text-2xl my-5">Easy Download</div>
@@ -112,17 +112,17 @@ const Index = () => {
           </div>
         </div>
       </section>
-      <section className="bg-[#EFF0FC] px-16 flex">
-        <div className="w-1/4 mr-10">
+      <section className="bg-[#EFF0FC] px-8 lg:px-16 flex md:flex-row md:justify-start justify-end flex-col-reverse">
+        <div className="md:w-1/4 w-full mr-0 md:mr-10">
           <Image src={png_phone1} alt="phone1" />
           <Image src={png_phone2} alt="phone2" />
         </div>
-        <div className="flex-1">
-          <div className="text-[#3A3D42] text-6xl	font-extrabold my-16">
+        <div className="flex-1 flex md:block flex-col items-center">
+          <div className="text-[#3A3D42] md:text-6xl text-3xl text-center md:text-left	font-extrabold my-16">
             All The <span className="text-[#6379F4]">Great</span> YukPay
             Features.
           </div>
-          <div className="bg-white p-6 rounded-3xl w-3/4 mb-7">
+          <div className="bg-white p-6 rounded-3xl w-full md:w-3/4 mb-7">
             <div className="text-xl font-bold">
               <span className="text-[#6379F4]">1.</span> Small Fee
             </div>
@@ -130,7 +130,7 @@ const Index = () => {
               We only charge 5% of every success transaction done in YukPay app.
             </div>
           </div>
-          <div className="bg-white p-6 rounded-3xl w-3/4 mb-7">
+          <div className="bg-white p-6 rounded-3xl w-full md:w-3/4 mb-7">
             <div className="text-xl font-bold">
               <span className="text-[#6379F4]">2.</span> Data Secured
             </div>
@@ -139,7 +139,7 @@ const Index = () => {
               encrypted..
             </div>
           </div>
-          <div className="bg-white p-6 rounded-3xl w-3/4 mb-7">
+          <div className="bg-white p-6 rounded-3xl w-full md:w-3/4 mb-7">
             <div className="text-xl font-bold">
               <span className="text-[#6379F4]">3.</span> User Friendly
             </div>
@@ -149,21 +149,21 @@ const Index = () => {
           </div>
         </div>
       </section>
-      <section className="bg-[#FAFCFF] px-16 py-28 flex flex-col items-center justify-center">
-        <div className="text-[#3A3D42] text-6xl	font-extrabold">
+      <section className="bg-[#FAFCFF] px-8 lg:px-16 md:py-28 py-8 flex flex-col items-center justify-center">
+        <div className="text-[#3A3D42] md:text-6xl text-3xl	font-extrabold">
           What Users are <span className="text-[#6379F4]">Saying.</span>
         </div>
-        <div className="text-[#3A3D42E5] text-lg my-12 w-1/2 text-center">
+        <div className="text-[#3A3D42E5] text-lg my-12 md:w-1/2 w-full text-center">
           We have some great features from the application and it’s totally free
           to use by all users around the world.
         </div>
         <div className="flex-row flex">
-          <div className="flex items-center">
+          <div className="md:flex items-center hidden">
             <div className="bg-white p-3 rounded-2xl">
               <ArrowLeft />
             </div>
           </div>
-          <div className="bg-white rounded-xl p-10 flex flex-col items-center justify-center mx-5">
+          <div className="bg-white rounded-xl md:p-10 p-3 flex flex-col items-center justify-center md:mx-5 mx-0">
             <Image src={profile} alt="profile" />
             <div className="font-bold text-2xl text-[#373C46] my-5">
               Alex Hansinburg
@@ -176,14 +176,14 @@ const Index = () => {
               another person aut there. Just try this app and see the power!”
             </div>
           </div>
-          <div className="flex items-center">
+          <div className="md:flex items-center hidden">
             <div className="bg-white p-3 rounded-2xl">
               <ArrowRight />
             </div>
           </div>
         </div>
       </section>
-      <footer className="bg-[#B1B2FF] px-24 py-20 lg:px-9">
+      <footer className="bg-[#6379F4] px-8 lg:px-24 py-8 md:py-20 hidden lg:block">
         <Link href="/" className="text-white text-3xl">
           YukPay
         </Link>
