@@ -57,7 +57,7 @@ const Index = () => {
             much of your times.
           </div>
           <Link
-            href="#"
+            href="/home"
             className="md:w-1/3 sm:w-1/2 w-2/3 text-center bg-white px-5 py-3 rounded-lg text-lg text-[#6379F4]"
           >
             Try It Free
