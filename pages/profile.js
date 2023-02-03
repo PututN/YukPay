@@ -67,7 +67,6 @@ const Profile = () => {
     e.preventDefault();
     setLoading("Loading...");
     const file = e.target.picture.files[0];
-    console.log(file);
     try {
       if (file.size <= 50000) {
         const formData = new FormData();
