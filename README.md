@@ -13,7 +13,7 @@
 - [Technologies](#technologies)
 
 ## Description
-**Yukpay App** is a e-wallet application. Here, users can register, top up, transfer and update profile.
+**Yukpay App** is a e-wallet application. Here, users can register, login, top up, transfer and update profile.
 
 ## Preview
   <div>
