@@ -13,16 +13,17 @@
 - [Technologies](#technologies)
 
 ## Description
-**Yukpay App** is a e-wallet application. Here, users can register, top up, transfer and update profile.
+**Yukpay App** is a e-wallet application. Here, users can register, login, top up, transfer and update profile.
 
 ## Preview
   <div>
-   <img src="https://res.cloudinary.com/dc5ywapd9/image/upload/v1675397366/homepage_yukpay_t6yxhl.jpg" width="600">
+   <img src="https://res.cloudinary.com/dc5ywapd9/image/upload/v1675398326/homepage_yukpay_cagya8.jpg" width="600">
   </div>
  <br>
  
 
 ## Technologies
+-   [React.js](https://reactjs.org/)
 -   [Next.js](https://nextjs.org/)
 -   [TailwindCSS](https://tailwindcss.com/)
 -   [Redux](https://redux-toolkit.js.org/)
