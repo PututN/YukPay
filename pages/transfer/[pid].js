@@ -39,7 +39,6 @@ const Transfer_Input = () => {
   const decode = jwt_decode(token);
   const { pid } = router.query;
 
-  // console.log(`/transactions/recipient/${pid}`)
 
   const fetchProfile = async () => {
     try {
@@ -85,7 +84,6 @@ const Transfer_Input = () => {
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(false);
   const newAmount = parseInt(money);
-  console.log(error);
   const handleSubmit = (event) => {
     event.preventDefault();
     if (newAmount <= balanced?.balance) {

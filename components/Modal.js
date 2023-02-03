@@ -61,7 +61,6 @@ const Modal = ({ onClose }) => {
     }
   };
   const validatedPin = profile?.pin;
-  console.log(validatedPin);
   useEffect(() => {
     fetchProfile();
   }, []);

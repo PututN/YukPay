@@ -62,7 +62,6 @@ const Change_Password = () => {
         },
       }
     );
-    console.log(data);
   };
 
   return (
