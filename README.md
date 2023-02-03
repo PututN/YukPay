@@ -23,6 +23,7 @@
  
 
 ## Technologies
+-   [React.js](https://reactjs.org/)
 -   [Next.js](https://nextjs.org/)
 -   [TailwindCSS](https://tailwindcss.com/)
 -   [Redux](https://redux-toolkit.js.org/)
