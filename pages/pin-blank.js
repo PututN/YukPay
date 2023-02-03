@@ -53,7 +53,7 @@ const PinBlank = () => {
   const changeNewPin = async (e) => {
     e.preventDefault();
     //axios post have 3 parameter (endpoint, data post, token)
-    const { data } = await axios.post(
+    await axios.post(
       `${process.env.NEXT_PUBLIC_URL}/auth/set-pin`,
       { userId, pin },
       {
@@ -64,12 +64,6 @@ const PinBlank = () => {
     );
     router.push("/pin-success");
   };
-
-  // React.useEffect(() => {
-  //   if (token) {
-  //     router.replace("/home");
-  //   }
-  // }, [token, router]);
 
   return (
     <>

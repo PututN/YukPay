@@ -41,7 +41,6 @@ const Profile = () => {
   //get profile
   const [profile, setProfile] = useState({});
   const token = useSelector((state) => state.auth.token);
-  const decode = jwt_decode(token);
 
   const fetchProfile = async () => {
     try {
@@ -71,7 +70,7 @@ const Profile = () => {
       if (file.size <= 50000) {
         const formData = new FormData();
         formData.append("picture", file);
-        const { data } = await axios.post(
+        await axios.post(
           `${process.env.NEXT_PUBLIC_URL}/profile`,
           formData,
           {

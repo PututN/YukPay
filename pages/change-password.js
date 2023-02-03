@@ -30,7 +30,6 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import withAuth from "../components/hoc/withAuth";
 
-
 const Change_Password = () => {
   const [type, setType] = useState("password");
   const showPassword = () => {
@@ -44,7 +43,6 @@ const Change_Password = () => {
   };
 
   const token = useSelector((state) => state.auth.token);
-  const decode = jwt_decode(token);
 
   const [currentPassword, setCurrentPassword] = useState(null);
   const [newPassword, setNewPassword] = useState(null);
@@ -53,7 +51,7 @@ const Change_Password = () => {
   const changePassword = async (e) => {
     e.preventDefault();
     //axios post have 3 parameter (endpoint, data post, token)
-    const { data } = await axios.post(
+    await axios.post(
       `${process.env.NEXT_PUBLIC_URL}/profile/change-password`,
       { currentPassword, newPassword, confirmPassword },
       {
